@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -45,6 +46,10 @@ public class AddDetails extends AppCompatActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.add_details);
         Intent intent = getIntent();
         symptom = intent.getExtras().getString("symptom");
@@ -116,8 +121,8 @@ public class AddDetails extends AppCompatActivity{
                 editor.putString("inputText",symptom); // key,value 형식으로 저장
                 editor.commit();    //최종 커밋. 커밋을 해야 저장이 된다.
                 Log.e("증상", "증상저장2");
-                intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 finish();
             }
         });
@@ -134,10 +139,18 @@ public class AddDetails extends AppCompatActivity{
                 intent.putExtra("pattern",selected_pattern);
                 intent.putExtra("worse",selected_worse);
                 intent.putExtra("repeat",repeat);
-                intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
+
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AlertDialog;
@@ -24,6 +25,11 @@ public class SelectBody_hand extends AppCompatActivity {
     String [] select_hand; //선택한 머리 부위
     int repeat;
     public void onCreate(Bundle savedInstanceState) {
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         Intent intent = getIntent();
         symptom = intent.getExtras().getString("symptom");
         part = intent.getExtras().getInt("part");
@@ -168,8 +174,8 @@ public class SelectBody_hand extends AppCompatActivity {
                 intent.putExtra("bparts",select_hand);
                 for(int i = 0; i< select_hand.length; i++)
                     Log.e("jj", select_hand[i]);
-                intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 finish();
             }
         });
@@ -181,11 +187,17 @@ public class SelectBody_hand extends AppCompatActivity {
                 Intent intent = new Intent(SelectBody_hand.this, SearchList.class);
                 intent.putExtra("symptom",symptom);
                 intent.putExtra("repeat",repeat);
-                intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 finish();
             }
         });
 
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
     }
 }

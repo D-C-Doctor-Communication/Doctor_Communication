@@ -3,6 +3,7 @@ package com.dc.doctor_communication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -41,6 +42,11 @@ public class SignActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in);
 
@@ -69,6 +75,7 @@ public class SignActivity extends AppCompatActivity{
             public void onClick(View view) {
                 Intent signInIntent = googleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
             }
         });
 
@@ -76,7 +83,9 @@ public class SignActivity extends AppCompatActivity{
         mResigettxt.setOnClickListener(v -> {
             // register 액티비티 함수 호출
             Intent in = new Intent(getApplicationContext(), RegisterActivity.class);
+
             startActivity(in);
+            overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
         });
 
         // 로그인 버튼
@@ -93,7 +102,7 @@ public class SignActivity extends AppCompatActivity{
                                     Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
                                     Intent in = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(in);
-
+                                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                                     finish();
                                 }
                                 else{
@@ -134,7 +143,7 @@ public class SignActivity extends AppCompatActivity{
                             Toast.makeText(SignActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                             Intent in = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(in);
-
+                            overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                             finish();
                         }
                         else {
@@ -158,6 +167,7 @@ public class SignActivity extends AppCompatActivity{
         if (user != null) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
             finish();
         }
     }

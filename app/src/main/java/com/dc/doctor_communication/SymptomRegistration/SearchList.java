@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,6 +58,9 @@ public class SearchList extends AppCompatActivity {
     String todayDate; //key값
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_list);
@@ -132,8 +136,9 @@ public class SearchList extends AppCompatActivity {
                     intent.putExtra("symptom", symptom_Nm[position]); //선택한 증상
                     intent.putExtra("part", part_num[position]);
                     intent.putExtra("repeat",repeat);
-                    intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
+
                     break;
                 }
                 case 2 : {  //얼굴
@@ -142,8 +147,8 @@ public class SearchList extends AppCompatActivity {
                     intent.putExtra("symptom", symptom_Nm[position]); //선택한 증상
                     intent.putExtra("part", part_num[position]);
                     intent.putExtra("repeat",repeat);
-                    intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                     break;
                 }
                 case 3 : {  //팔
@@ -152,8 +157,8 @@ public class SearchList extends AppCompatActivity {
                     intent.putExtra("symptom", symptom_Nm[position]); //선택한 증상
                     intent.putExtra("part", part_num[position]);
                     intent.putExtra("repeat",repeat);
-                    intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                     break;
                 }
                 case 4 : {  //다리
@@ -162,8 +167,8 @@ public class SearchList extends AppCompatActivity {
                     intent.putExtra("symptom", symptom_Nm[position]); //선택한 증상
                     intent.putExtra("part", part_num[position]);
                     intent.putExtra("repeat",repeat);
-                    intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                     break;
                 }
                 case 5 : {  //등
@@ -172,8 +177,8 @@ public class SearchList extends AppCompatActivity {
                     intent.putExtra("symptom", symptom_Nm[position]); //선택한 증상
                     intent.putExtra("part", part_num[position]);
                     intent.putExtra("repeat",repeat);
-                    intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                     break;
                 }
                 case 6 : {  //허리
@@ -182,8 +187,8 @@ public class SearchList extends AppCompatActivity {
                     intent.putExtra("symptom", symptom_Nm[position]);
                     intent.putExtra("part", part_num[position]);
                     intent.putExtra("repeat",repeat);
-                    intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                     break;
                 }
                 case 7 : {  //가슴
@@ -192,8 +197,8 @@ public class SearchList extends AppCompatActivity {
                     intent.putExtra("symptom", symptom_Nm[position]); //선택한 증상
                     intent.putExtra("part", part_num[position]);
                     intent.putExtra("repeat",repeat);
-                    intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                     break;
                 }
                 case 8 : {//복부
@@ -202,8 +207,8 @@ public class SearchList extends AppCompatActivity {
                     intent.putExtra("symptom", symptom_Nm[position]);
                     intent.putExtra("part", part_num[position]);
                     intent.putExtra("repeat",repeat);
-                    intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                     break;
                 }
                 case 9 : {  //엉덩이
@@ -212,8 +217,8 @@ public class SearchList extends AppCompatActivity {
                     intent.putExtra("symptom", symptom_Nm[position]); //선택한 증상
                     intent.putExtra("part", part_num[position]);
                     intent.putExtra("repeat",repeat);
-                    intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                     break;
                 }
                 case 11 : {  //전신
@@ -222,8 +227,8 @@ public class SearchList extends AppCompatActivity {
                     intent.putExtra("symptom", symptom_Nm[position]); //선택한 증상
                     intent.putExtra("part",part_num[position]);
                     intent.putExtra("repeat",repeat);
-                    intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                     break;
                 }
                 case 12 : {  //손
@@ -232,8 +237,8 @@ public class SearchList extends AppCompatActivity {
                     intent.putExtra("symptom", symptom_Nm[position]); //선택한 증상
                     intent.putExtra("part", part_num[position]);
                     intent.putExtra("repeat",repeat);
-                    intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                     break;
                 }
                 case 13 : {  //발
@@ -242,8 +247,8 @@ public class SearchList extends AppCompatActivity {
                     intent.putExtra("symptom", symptom_Nm[position]); //선택한 증상
                     intent.putExtra("part", part_num[position]);
                     intent.putExtra("repeat",repeat);
-                    intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                     break;
                 }
             }
@@ -334,5 +339,12 @@ public class SearchList extends AppCompatActivity {
         repeat++;
         editor.putInt(todayDate,repeat);
         editor.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
     }
 }

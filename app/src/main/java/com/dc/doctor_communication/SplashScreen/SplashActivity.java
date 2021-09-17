@@ -25,6 +25,7 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
                 Intent in = new Intent(getApplicationContext(), SignActivity.class);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 startActivity(in);
 
                 finish();
@@ -36,6 +37,13 @@ public class SplashActivity extends Activity {
     @Override
     protected void onPause(){
         super.onPause();
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
         finish();
     }
 }
