@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFFFFF"
+    android:layout_marginTop="?attr/actionBarSize">
+
+    <View
+        android:id="@+id/line_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#D8D8D8"/>
+
+    <RelativeLayout
+        android:id="@+id/select_user"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/user_icon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/icon_user_blue" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/user_icon"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="회원이름"
+            android:textColor="@color/black"
+            android:textSize="19sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/user_name"
+            android:text="회원님" />
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/home_scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/select_user"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="18dp"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+           >
+
+            <!--CARD1-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card1"
+                style="@style/cards"
+                app:cardBackgroundColor="@color/card1"
+                tools:ignore="MissingConstraints">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card1_contentLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/card1_title"
+                        style="@style/cards_title"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="증상 기록"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0" />
+
+                    <TextView
+                        android:id="@+id/card1_content"
+                        style="@style/cards_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="38dp"
+                        android:text="# 어디 아파요? "
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0" />
+
+                    <Button
+                        android:id="@+id/btn_addSymptom"
+                        style="@style/cards_btn"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="11dp"
+                        android:onClick="onClick_register"
+                        android:text="기록하러 가기 >"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintVertical_bias="1" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--CARD2-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card2"
+                style="@style/cards"
+                app:cardBackgroundColor="@color/card2"
+                tools:ignore="MissingConstraints">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card2_contentLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/card2_title"
+                        style="@style/cards_title"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="의사와의 만남"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0" />
+
+                    <TextView
+                        android:id="@+id/card2_content"
+                        style="@style/cards_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="38dp"
+                        android:text="# 자세한 기록을 확인하세요. >"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0" />
+
+                    <Button
+                        android:id="@+id/btn_meetingDoc"
+                        style="@style/cards_btn"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="11dp"
+                        android:onClick="onClick_meetDC"
+                        android:radius="8dp"
+                        android:text="확인하러 가기 >"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--CARD3-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card3"
+                style="@style/cards"
+                android:layout_marginRight="20dp"
+                app:cardBackgroundColor="@color/card3"
+                tools:ignore="MissingConstraints">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card3_contentLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/card3_title"
+                        style="@style/cards_title"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="녹음"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0" />
+
+                    <TextView
+                        android:id="@+id/card3_content"
+                        style="@style/cards_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="38dp"
+                        android:text="# 진찰내용을 기록해보세요. "
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0" />
+
+                    <Button
+                        android:id="@+id/btn_recording"
+                        style="@style/cards_btn"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="11dp"
+                        android:onClick="onClick_record"
+                        android:text="녹음하러 가기 >"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/home_scrollView"
+        android:layout_marginTop="20dp"
+        android:background="#D8D8D8" />
+
+<!--제일 바깥 껍데기-->
+<!--모든 날짜와 숫자 / 요일은 임시로 넣어놓은것뿐임. 액티비티에서 날짜 받아와야함-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="412dp"
+        android:layout_height="140dp"
+        android:layout_below="@+id/line1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginEnd="0dp">
+
+        <!--0000년 00월-->
+        <!--00일 0요일-->
+
+        <TextView
+            android:id="@+id/ymTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/daysLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/daysLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.48"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ymTextView">
+
+            <!--일요일-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/wCalender_sun"
+                style="@style/wCalender"
+                app:cardElevation="0dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/wCalender_mon"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/SUN_num"
+                    style="@style/wCalender_num"
+                    android:text="13" />
+
+                <TextView
+                    android:id="@+id/SUN_txt"
+                    style="@style/wCalender_txt"
+                    android:text="SUN" />
+
+                <ImageView
+                    android:id="@+id/sun_dot"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/week_calendar_dot"
+                    android:visibility="invisible" />
+
+            </androidx.cardview.widget.CardView>
+            <!--월요일-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/wCalender_mon"
+                style="@style/wCalender"
+                android:layout_marginStart="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/wCalender_tue"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/wCalender_sun"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/MON_num"
+                    style="@style/wCalender_num"
+                    android:text="14" />
+
+                <TextView
+                    android:id="@+id/MON_txt"
+                    style="@style/wCalender_txt"
+                    android:text="MON" />
+
+                <ImageView
+                    android:id="@+id/mon_dot"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/week_calendar_dot"
+                    android:visibility="invisible" />
+
+            </androidx.cardview.widget.CardView>
+            <!--화요일-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/wCalender_tue"
+                style="@style/wCalender"
+                android:layout_marginStart="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/wCalender_wed"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/wCalender_mon"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/TUE_num"
+                    style="@style/wCalender_num"
+                    android:text="15" />
+
+                <TextView
+                    android:id="@+id/TUE_txt"
+                    style="@style/wCalender_txt"
+                    android:text="TUE" />
+
+                <ImageView
+                    android:id="@+id/tue_dot"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/week_calendar_dot"
+                    android:visibility="invisible" />
+
+            </androidx.cardview.widget.CardView>
+            <!--수요일-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/wCalender_wed"
+                style="@style/wCalender"
+                android:layout_marginStart="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/wCalender_thu"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/wCalender_tue"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/WED_num"
+                    style="@style/wCalender_num"
+                    android:text="16" />
+
+                <TextView
+                    android:id="@+id/WED_txt"
+                    style="@style/wCalender_txt"
+                    android:text="WED" />
+
+                <ImageView
+                    android:id="@+id/wed_dot"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/week_calendar_dot"
+                    android:visibility="invisible" />
+
+            </androidx.cardview.widget.CardView>
+            <!--목요일-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/wCalender_thu"
+                style="@style/wCalender"
+                android:layout_marginStart="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/wCalender_fri"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/wCalender_wed"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/THU_num"
+                    style="@style/wCalender_num"
+                    android:text="17" />
+
+                <TextView
+                    android:id="@+id/THU_txt"
+                    style="@style/wCalender_txt"
+                    android:text="THU" />
+
+                <ImageView
+                    android:id="@+id/thu_dot"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/week_calendar_dot"
+                    android:visibility="invisible" />
+
+            </androidx.cardview.widget.CardView>
+            <!--금요일-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/wCalender_fri"
+                style="@style/wCalender"
+                android:layout_marginStart="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/wCalender_sat"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/wCalender_thu"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/FRI_num"
+                    style="@style/wCalender_num"
+                    android:text="18" />
+
+                <TextView
+                    android:id="@+id/FRI_txt"
+                    style="@style/wCalender_txt"
+                    android:text="FRI" />
+
+                <ImageView
+                    android:id="@+id/fri_dot"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/week_calendar_dot"
+                    android:visibility="invisible" />
+
+            </androidx.cardview.widget.CardView>
+            <!--토요일-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/wCalender_sat"
+                style="@style/wCalender"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="16dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@+id/wCalender_fri"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/SAT_num"
+                    style="@style/wCalender_num"
+                    android:text="19" />
+
+                <TextView
+                    android:id="@+id/SAT_txt"
+                    style="@style/wCalender_txt"
+                    android:text="SAT" />
+
+                <ImageView
+                    android:id="@+id/sat_dot"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/week_calendar_dot"
+                    android:visibility="invisible" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/constraintLayout"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="날짜를 선택해주세요"
+                android:layout_centerInParent="true"
+                android:textSize="15sp"/>
+        </RelativeLayout>
+
+        <ListView
+            android:dividerHeight="0px"
+            android:divider="#FFFFFF"
+            android:id="@+id/home_listView"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/constraintLayout"
+            android:scrollbars="none"
+            android:layout_marginBottom="?attr/actionBarSize"/>
+
+
+    </FrameLayout>
+</RelativeLayout>

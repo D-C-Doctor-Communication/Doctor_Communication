@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="320dp"
+    android:layout_gravity="center"
+    android:layout_marginLeft="55dp"
+    android:layout_marginRight="55dp"
+    android:gravity="center">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="330dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="60dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="15dp">
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="17dp"
+            android:layout_width="90dp"
+            android:layout_height="20dp"
+            android:layout_alignParentTop="true"
+            android:text="증상별 심각도"
+            android:textColor="#80000000"
+            android:textSize="14sp"
+            android:fontFamily="@font/nanumsquareregular"/>
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_gravity="center"
+            android:id="@+id/graph"
+            android:layout_width="296dp"
+            android:layout_height="180dp" />
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout> <!-- graph -->

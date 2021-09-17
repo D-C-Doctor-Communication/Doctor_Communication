@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="328dp"
+    android:layout_height="384dp"
+    tools:context=".MedicalChart.MC_PopupActivity"
+    android:orientation="vertical"
+    android:background="@drawable/mc_custom_dialog">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="12dp">
+        <ImageView
+            android:id="@+id/cancel_button"
+            android:src="@drawable/mc_icon_quit_modalpopup"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="132dp"
+        android:orientation="horizontal">
+        <TimePicker
+            android:id="@+id/time_picker"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:timePickerMode="spinner">
+        </TimePicker>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:paddingRight="34dp"
+        android:paddingLeft="34dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/scheduleName"
+                android:layout_width="159dp"
+                android:layout_height="56dp"
+                android:gravity="left|bottom"
+                android:hint="일정 이름"
+                android:textColorHint="#4c000000"
+                android:textColor="#88000000"
+                android:fontFamily="@font/nanumsquareregular"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="14dp"
+                android:layout_height="56dp"/>
+            <Button
+                android:id="@+id/checkup_btn"
+                android:layout_width="43.5dp"
+                android:layout_height="22dp"
+                android:text="검사"
+                android:textSize="10sp"
+                android:textColor="#29000000"
+                android:fontFamily="@font/nanumsquarebold"
+                android:background="@drawable/mc_popup_left_btn"/>
+            <Button
+                android:id="@+id/treatment_btn"
+                android:layout_width="43.5dp"
+                android:layout_height="22dp"
+                android:text="진료"
+                android:textSize="10sp"
+                android:textColor="#29000000"
+                android:fontFamily="@font/nanumsquarebold"
+                android:background="@drawable/mc_popup_right_btn"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/location"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="left|bottom"
+            android:hint="장소"
+            android:textColorHint="#4c000000"
+            android:textColor="#88000000"
+            android:fontFamily="@font/nanumsquareregular"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:layout_marginBottom="28dp"
+        android:paddingEnd="34dp">
+        <Button
+            android:layout_width="87dp"
+            android:layout_height="30dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:id="@+id/ok_btn"
+            android:background="@drawable/mc_popup_save_btn"
+            android:text="저장"
+            android:textColor="#66000000"
+            android:fontFamily="@font/nanumsquarebold"
+            android:textSize="12sp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

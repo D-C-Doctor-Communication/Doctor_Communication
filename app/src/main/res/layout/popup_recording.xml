@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/recordingText"
+        android:layout_width="210dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:text="녹음팝업입니다."
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+
+    <Button
+        android:id="@+id/no_btn"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="251dp"
+        android:text="취소버튼" />
+
+</RelativeLayout>
