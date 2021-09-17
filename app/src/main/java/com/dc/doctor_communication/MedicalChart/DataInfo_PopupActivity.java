@@ -101,7 +101,7 @@ public class DataInfo_PopupActivity extends AppCompatActivity {
             TextView condition = view.findViewById(R.id.condition);
             TextView situation = view.findViewById(R.id.situation);
             TextView with = view.findViewById(R.id.with);
-
+            ImageView right_arrow = view.findViewById(R.id.right_arrow);
             myRef.child(uid).child("date").child(selectedDate).child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -121,6 +121,10 @@ public class DataInfo_PopupActivity extends AppCompatActivity {
                             case 10 : painLevelText = "상상할 수 없는 통증"; break;
                             default: painLevelText = "알 수 없음";
                         }
+                        if(cnt<=1){
+                            right_arrow.setVisibility(View.INVISIBLE);
+                        }
+
                         //image.setImageResource(R.drawable.icon_logo);
                         title_symp.setText(popup.getSymptom());
                         part.setText(popup.getPart());

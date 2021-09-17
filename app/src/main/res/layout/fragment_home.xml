@@ -536,6 +536,7 @@
         </RelativeLayout>
 
         <ListView
+            android:overScrollMode="never"
             android:dividerHeight="0px"
             android:divider="#FFFFFF"
             android:id="@+id/home_listView"
