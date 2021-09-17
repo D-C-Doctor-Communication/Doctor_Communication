@@ -265,7 +265,7 @@ public class Fragment_home extends Fragment {
                                     adapter2.addItem(get_part, R.drawable.area_buttock_line_off , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "발열": case "피로": case "호흡곤란": case "떨림": case "근육 경련": case "부종": case "가려움":
-                                    adapter2.addItem(get_part, R.drawable.area_head_line, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
+                                    adapter2.addItem(get_part, R.drawable.area_face_body_on, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "손목 통증":
                                     adapter2.addItem(get_part, R.drawable.area_hand_line_01_off , Integer.parseInt(get_painLevel),get_characteristics, get_situation);

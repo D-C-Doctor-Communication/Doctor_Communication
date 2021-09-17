@@ -98,7 +98,7 @@ public class DataInfo_PopupActivity extends AppCompatActivity {
             Log.d("myapp","for2-"+i);
             View view = LayoutInflater.from(this).inflate(R.layout.mc_info_popup_item, container, false);
 
-            //ImageView image = view.findViewById(R.id.image);
+            ImageView image = view.findViewById(R.id.image);
             TextView title_symp = view.findViewById(R.id.title_symp);
             TextView part = view.findViewById(R.id.part);
             TextView degree = view.findViewById(R.id.degree);
@@ -131,8 +131,45 @@ public class DataInfo_PopupActivity extends AppCompatActivity {
                         if(cnt<=1){
                             right_arrow.setVisibility(View.INVISIBLE);
                         }
-
-                        //image.setImageResource(R.drawable.icon_logo);
+                        if(!(popup.getSymptom().equals("e"))) {
+                            Log.d("fire_in", popup.getSymptom());
+                            switch (popup.getSymptom()){
+                                case "두통":
+                                    image.setImageResource(R.drawable.area_head_line);
+                                    break;
+                                case "기침": case "인후통": case "콧물": case "귀 통증": case "이명": case "눈물": case "코피": case "객혈": case "가래":
+                                    image.setImageResource(R.drawable.area_face_line_off);
+                                    break;
+                                case "팔꿈치 통증":
+                                    image.setImageResource(R.drawable.area_arm_line_off);
+                                   break;
+                                case "무릎 통증":
+                                    image.setImageResource(R.drawable.area_leg_line_off);
+                                    break;
+                                case "요통":
+                                    image.setImageResource(R.drawable.area_waist_line_off);
+                                    break;
+                                case "흉통":
+                                    image.setImageResource(R.drawable.area_chest_line_off);
+                                    break;
+                                case "복통": case "속 쓰림": case "소화불량":
+                                    image.setImageResource(R.drawable.area_stomach_line_on_01);
+                                    break;
+                                case "엉덩이 통증":
+                                    image.setImageResource(R.drawable.area_buttock_line_off);
+                                    break;
+                                case "발열": case "피로": case "호흡곤란": case "떨림": case "근육 경련": case "부종": case "가려움":
+                                    image.setImageResource(R.drawable.area_face_body_on);
+                                    break;
+                                case "손목 통증":
+                                    image.setImageResource(R.drawable.area_hand_line_01_off);
+                                   break;
+                                case "발목 통증":
+                                    image.setImageResource(R.drawable.area_foot_line_off);
+                                    break;
+                                default:
+                            }
+                        }
                         title_symp.setText(popup.getSymptom());
                         part.setText(popup.getPart());
                         degree.setText(painLevelText);

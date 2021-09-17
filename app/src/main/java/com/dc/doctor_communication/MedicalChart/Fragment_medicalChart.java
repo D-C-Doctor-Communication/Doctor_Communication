@@ -343,8 +343,10 @@ public class Fragment_medicalChart extends Fragment {
                 String selectedTime = intent.getStringExtra("selected_time");
                 //진료일정인지, 검사일정인지를 MC_PopupActivity로부터 받아옴 (진료일정이라면 "진료"값 저장)
                 String typeOfSchedule = intent.getStringExtra("selected_button");
+
                 //일정이 생성될때마다 ListViewAdapter에 데이터를 추가함
                 //일정의 종류가 진료인지, 검사인지 확인하여 각 값에 맞는 이미지 코드를 add함
+
                 //listview 참조 및 adapter 연결
                 listView.setAdapter(adapter);
                 if(typeOfSchedule.equals("검사")){
@@ -357,7 +359,7 @@ public class Fragment_medicalChart extends Fragment {
                 adapter.notifyDataSetChanged();
                 btn_addAppointDoctor.setBackgroundResource(R.drawable.mc_button_nonclicked);
                 btn_addAppointDoctor.setTextColor(Color.BLACK);
-                //String [] ok = new String[5];
+
                 //파이어베이스에 등록정보 저장
                 for(int j=0; j<5; j++){
                     Log.d("ok1", j +"");
@@ -377,24 +379,6 @@ public class Fragment_medicalChart extends Fragment {
                         public void onCancelled(@NonNull DatabaseError error) { }
                     });
                 }
-                /*for(int i=0; i<5; i++){
-                    if(ok[i].equals("e")){
-                        myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(i)).child("scheduleName").setValue(scheduleName);
-                        myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(i)).child("place").setValue(location);
-                        myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(i)).child("time").setValue(selectedTime);
-                        myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(i)).child("clinic_type").setValue(typeOfSchedule);
-                        break;
-                    }
-                }*/
-                /*
-
-                if(appointments.getScheduleName().equals("e") && !(ok[0].equals("stop"))){
-                                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ[0])).child("scheduleName").setValue(scheduleName);
-                                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ[0])).child("place").setValue(location);
-                                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ[0])).child("time").setValue(selectedTime);
-                                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ[0])).child("clinic_type").setValue(typeOfSchedule);
-
-                 */
                 Log.d("myapp","일정 생성 완료 => 날짜 : "+selectedDateString+" 일정이름 : "+scheduleName+" 장소 : "+location+" 시간 : "+selectedTime+" 종류 : "+typeOfSchedule);
 
             }
@@ -472,7 +456,6 @@ public class Fragment_medicalChart extends Fragment {
             ArrayList<CalendarDay> dates = new ArrayList<>(); //점을 찍을 날짜를 저장,반환
             Calendar calendar = Calendar.getInstance();
             //Data에서 병원예약 날짜가 존재하면 해당 날짜를 위의 arrayList에 저장
-            //[FIREBASE] for문으로 돌려서 예약내용이 있으면 . . .
             /*for(int i=0;i<Person1.appointments.length;i++){
                 //병원예약날짜 받아오기
                 String dateValue = Person1.appointments[i].getDate();
