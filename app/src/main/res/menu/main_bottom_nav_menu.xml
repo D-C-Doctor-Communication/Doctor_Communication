@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_nav_home"
+        android:enabled="true"
+        android:title="HOME"
+        android:textStyle="bold"/>
+    <item
+        android:id="@+id/nav_conditionAnaly"
+        android:icon="@drawable/ic_nav_condition_analysis"
+        android:enabled="true"
+        android:checked="true"
+        android:title="상태분석"
+        android:textStyle="bold"/>
+    <item
+        android:id="@+id/nav_medicalCharts"
+        android:icon="@drawable/ic_nav_medical_records"
+        android:enabled="true"
+        android:checked="true"
+        android:title="진료기록"
+        android:textStyle="bold"/>
+</menu>

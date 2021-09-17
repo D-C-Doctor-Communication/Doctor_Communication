@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="사용자 설정"
+        app:iconSpaceReserved="false">
+        <ListPreference
+            app:iconSpaceReserved="false"
+            android:title="텍스트 크기"
+            android:summary="텍스트 크기를 설정합니다."
+            android:key="textSize"
+            android:defaultValue="ko"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"/>
+
+        <SwitchPreference
+            android:title="알림"
+            android:summary="의사:소통에 대한 알림을 받습니다."
+            android:defaultValue="false"
+            android:key="alert"
+            app:iconSpaceReserved="false"/>
+        <SeekBarPreference
+            android:dependency="alert"
+            android:key="alert_volume"
+            android:title="볼륨 설정"
+            android:summary="알림의 볼륨을 설정합니다."
+            android:defaultValue="50"
+            android:max="100"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="고객센터"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:key="notice"
+            android:title="공지사항"
+            app:iconSpaceReserved="false">
+            <intent
+                android:targetClass="whdghks913.tistory.examplepreferenceactivity.MadeByActivity"
+                android:targetPackage="whdghks913.tistory.examplepreferenceactivity" />
+        </Preference>
+        <Preference
+            android:key="feedback"
+            android:title="피드백"
+            android:summary="개발자에게 메일로 피드백을 남겨주세요"
+            app:iconSpaceReserved="false">
+            <intent
+                android:action="android.intent.action.SENDTO"
+                android:data="mailto:kimcloud52@gmail.com" />
+        </Preference>
+        <Preference
+            android:title="버전정보"
+            android:summary="@string/app_version"
+            app:iconSpaceReserved="false">
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

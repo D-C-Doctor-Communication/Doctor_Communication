@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <!-- 스플래쉬 테마 -->
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!--타이틀 바 없애기-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/splash_view</item>
+    </style>
+
+    <!--진료 일정 팝업뷰 테마-->
+    <style name="popupTheme" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
+
+
+    <!--구분선-->
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#4B000000</item>
+    </style>
+
+
+    <!--Calendar-->
+    <style name="Monthlycalendar_header">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/nanumsquareregular</item>
+    </style>
+
+
+
+    <!--HOME_CARDS-->
+    <style name="cards">
+        <item name="android:layout_width">165dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:elevation">30dp</item>
+        <item name="cardCornerRadius">10dp</item>
+    </style>
+
+    <style name="cards_title">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/nanumsquarebold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="cards_content">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:fontFamily">@font/nanumsquarel</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="cards_btn">
+        <item name="android:layout_height">21dp</item>
+        <item name="android:layout_width">76dp</item>
+        <item name="android:backgroundTint">#1AFFFFFF</item>
+        <item name="android:background">@drawable/btn_radius_ractangle</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:fontFamily">@font/nanumsquarebold</item>
+        <item name="android:textColor">@color/white</item>
+        <!--<item name="android:radius">20dp</item>-->
+    </style>
+
+
+
+    <!--HOME_CALENDER-->
+    <style name="wCalender_num">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:fontFamily">@font/nanumsquareeb</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="wCalender_txt">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:fontFamily">@font/nanumsquareregular</item>
+    </style>
+
+    <style name="wCalender">
+        <item name="android:layout_width">0dp</item>
+        <item name="percentWidth">0.11</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="cardCornerRadius">10dp</item>
+        <item name="cardBackgroundColor">#0a000000</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+
+    <!--HOME_VERTICAL_SCROLLBAR-->
+    <style name="home_vertical_scrollCard">
+        <item name="android:layout_width">328dp</item>
+        <item name="android:layout_height">132dp</item>
+        <item name="cardBackgroundColor">@color/ache_card_background</item>
+
+        <item name="cardCornerRadius">15dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+    <style name="home_vertical_scrollCard_imgView">
+        <item name="android:layout_width">96dp</item>
+        <item name="android:layout_height">96dp</item>
+        <item name="background">@drawable/image_radius_rectangle</item>
+        <item name="android:layout_marginTop">18dp</item>
+        <item name="android:layout_marginLeft">18dp</item>
+    </style>
+    <style name="home_vertical_scrollCard_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginTop">23dp</item>
+        <item name="android:layout_marginLeft">132dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/nanumsquarebold</item>
+    </style>
+    <style name="home_vertical_scrollCard_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">17dp</item>
+        <item name="android:textColor">@color/ache_card_textColor</item>
+        <item name="android:layout_marginTop">57dp</item>
+        <item name="android:layout_marginLeft">132dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/nanumsquarel</item>
+    </style>
+
+    <style name="dc_listViewItemCard">
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="cardBackgroundColor">@color/ache_card_background</item>
+        <item name="cardCornerRadius">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+
+    <!-- DOCTOR MEETING - datePicker dialog -->
+    <style name="MyDatePickerStyle" parent="Theme.MaterialComponents.Light.Dialog.Alert.Bridge">
+        <!-- 상단 바-->
+        <item name="colorAccent">#6DC6E4</item>
+        <!--선택된 날짜-->
+        <item name="colorControlActivated">#CDCDCD</item>
+        <!-- 둥글게 -->
+        <item name="android:radius">20dp</item>
+    </style>
+</resources>

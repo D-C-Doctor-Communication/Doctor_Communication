@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font
+        android:font="@font/nanumsquarel"
+        android:fontWeight="200"
+        />
+    <font
+        android:font="@font/nanumsquareregular"
+        android:fontWeight="400"/>
+
+    <font
+        android:font="@font/nanumsquarebold"
+        android:fontWeight="700"
+        />
+    <font
+        android:font="@font/nanumsquareeb"
+        android:fontWeight="900"
+        />
+</font-family>

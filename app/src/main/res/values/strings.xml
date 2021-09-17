@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">의사:소통</string>
+    <string name="app_version">1.0.0</string>
+
+    <string name="symthom_description_1">부위</string>
+    <string name="symthom_description_2">통증 정도</string>
+    <string name="symthom_description_3">통증 양상</string>
+    <string name="symthom_description_4">악화 상황</string>
+    <string name="symthom_description_5">동반 증상</string>
+    <string name="symthom_description_6">추가사항</string>
+
+
+    <array name="weekdays_custom">
+        <item>SUN</item>
+        <item>MON</item>
+        <item>TUE</item>
+        <item>WED</item>
+        <item>THU</item>
+        <item>FRI</item>
+        <item>SAT</item>
+    </array>
+
+
+    <string-array name="symptom_list">
+        <item>두통</item>
+        <item>복통</item>
+        <item>두통</item>
+        <item>요통</item>
+        <item>손목 통증</item>
+        <item>흉통</item>
+        <item>무릎 통증</item>
+        <item>속 쓰림</item>
+        <item>팔꿈치 통증</item>
+        <item>엉덩이 통증</item>
+        <item>발열</item>
+        <item>기침</item>
+        <item>인후통</item>
+        <item>콧물</item>
+        <item>귀 통증</item>
+        <item>이명</item>
+        <item>피로</item>
+        <item>호흡곤란</item>
+        <item>떨림</item>
+        <item>소화불량</item>
+        <item>발목 통증</item>
+    </string-array>
+
+</resources>
