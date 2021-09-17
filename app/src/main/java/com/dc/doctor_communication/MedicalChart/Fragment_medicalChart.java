@@ -357,32 +357,44 @@ public class Fragment_medicalChart extends Fragment {
                 adapter.notifyDataSetChanged();
                 btn_addAppointDoctor.setBackgroundResource(R.drawable.mc_button_nonclicked);
                 btn_addAppointDoctor.setTextColor(Color.BLACK);
-
+                //String [] ok = new String[5];
                 //파이어베이스에 등록정보 저장
-                final int[] j = {0};
-                for(j[0] =0; j[0] <5; j[0]++){
-                    //String finalStringDateValue = fire_date;
-                    final String[] ok = {""};
-                    int finalJ = j[0];
-                    Log.d("okj1", j[0] +"");
-                    myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(j[0])).addListenerForSingleValueEvent(new ValueEventListener() {
+                for(int j=0; j<5; j++){
+                    Log.d("ok1", j +"");
+                    int finalJ1 = j;
+                    myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ1)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Symptom2 appointments = snapshot.getValue(Symptom2.class);
-                            if(appointments.getScheduleName().equals("e")){
-                                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ)).child("scheduleName").setValue(scheduleName);
-                                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ)).child("place").setValue(location);
-                                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ)).child("time").setValue(selectedTime);
-                                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ)).child("clinic_type").setValue(typeOfSchedule);
-                                if(appointments.getScheduleName().equals("e")) j[0] +=5;
-                                Log.d("okj", j[0] +"");
-                            }
+                            Log.d("final", finalJ1+""+appointments.getScheduleName());
+                            myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ1)).child("scheduleName").setValue(scheduleName);
+                            myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ1)).child("place").setValue(location);
+                            myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ1)).child("time").setValue(selectedTime);
+                            myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ1)).child("clinic_type").setValue(typeOfSchedule);
 
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) { }
                     });
                 }
+                /*for(int i=0; i<5; i++){
+                    if(ok[i].equals("e")){
+                        myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(i)).child("scheduleName").setValue(scheduleName);
+                        myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(i)).child("place").setValue(location);
+                        myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(i)).child("time").setValue(selectedTime);
+                        myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(i)).child("clinic_type").setValue(typeOfSchedule);
+                        break;
+                    }
+                }*/
+                /*
+
+                if(appointments.getScheduleName().equals("e") && !(ok[0].equals("stop"))){
+                                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ[0])).child("scheduleName").setValue(scheduleName);
+                                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ[0])).child("place").setValue(location);
+                                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ[0])).child("time").setValue(selectedTime);
+                                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ[0])).child("clinic_type").setValue(typeOfSchedule);
+
+                 */
                 Log.d("myapp","일정 생성 완료 => 날짜 : "+selectedDateString+" 일정이름 : "+scheduleName+" 장소 : "+location+" 시간 : "+selectedTime+" 종류 : "+typeOfSchedule);
 
             }
@@ -444,7 +456,7 @@ public class Fragment_medicalChart extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Symptom2 appointments = snapshot.getValue(Symptom2.class);
                             Log.d("get_fire", appointments.getMemo());
-                            if(appointments.getMemo().equals(memo_selecteddate)){
+                            if(finalStringDateValue.equals(memo_selecteddate)){
                                 appointments.setMemo(memo);
                                 Log.d("myapp","메모기록이 수정됨!");
                             }
@@ -482,8 +494,8 @@ public class Fragment_medicalChart extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Symptom2 appointments = snapshot.getValue(Symptom2.class);
-                            Log.d("get_fire", appointments.getMemo());
-                            if(!(appointments.getMemo().equals("e"))){
+                            Log.d("get_fire", appointments.getScheduleName());
+                            if(!(appointments.getScheduleName().equals("e"))){
                                 String dateValue = finalStringDateValue;
                                 int year = Integer.parseInt(dateValue.substring(0,4));
                                 int month = Integer.parseInt(dateValue.substring(4,6));
