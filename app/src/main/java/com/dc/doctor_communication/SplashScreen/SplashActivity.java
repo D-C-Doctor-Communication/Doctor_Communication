@@ -10,8 +10,8 @@ import android.os.Message;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dc.doctor_communication.SignActivity;
-import com.example.doctorcommunication.R;
-import com.example.doctorcommunication.SignActivity;
+import com.dc.doctor_communication.R;
+import com.dc.doctor_communication.SignActivity;
 
 public class SplashActivity extends Activity {
     @SuppressLint("ResourceType")

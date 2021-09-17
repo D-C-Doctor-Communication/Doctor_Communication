@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.doctorcommunication.R;
+import com.dc.doctor_communication.R;
 
 import java.util.concurrent.atomic.AtomicReference;
 

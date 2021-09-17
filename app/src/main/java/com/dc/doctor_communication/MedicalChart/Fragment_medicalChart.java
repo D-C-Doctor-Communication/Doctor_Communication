@@ -23,9 +23,9 @@ import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.format.TextStyle;
 
-import com.example.doctorcommunication.DataManagement.Person1;
-import com.example.doctorcommunication.DataManagement.Symptom2;
-import com.example.doctorcommunication.R;
+import com.dc.doctor_communication.DataManagement.Person1;
+import com.dc.doctor_communication.DataManagement.Symptom2;
+import com.dc.doctor_communication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

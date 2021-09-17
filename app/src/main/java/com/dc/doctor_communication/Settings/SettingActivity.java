@@ -21,7 +21,7 @@ import androidx.preference.SeekBarPreference;
 import androidx.preference.SwitchPreference;
 import android.widget.Switch;
 
-import com.example.doctorcommunication.R;
+import com.dc.doctor_communication.R;
 
 public class SettingActivity extends PreferenceActivity {
 

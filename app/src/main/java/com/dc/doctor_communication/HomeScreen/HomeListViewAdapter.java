@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.doctorcommunication.R;
+import com.dc.doctor_communication.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;

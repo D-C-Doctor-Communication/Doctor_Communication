@@ -1,7 +1,7 @@
 package com.dc.doctor_communication.DataManagement;
 
-import com.example.doctorcommunication.DataManagement.Symptom;
-import com.example.doctorcommunication.DataManagement.memo;
+import com.dc.doctor_communication.DataManagement.Symptom;
+import com.dc.doctor_communication.DataManagement.memo;
 
 //임의의 데이터 저장
 public class Person1{

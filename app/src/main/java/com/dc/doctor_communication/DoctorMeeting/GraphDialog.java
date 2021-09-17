@@ -9,8 +9,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.doctorcommunication.DataManagement.Person1;
-import com.example.doctorcommunication.R;
+import com.dc.doctor_communication.DataManagement.Person1;
+import com.dc.doctor_communication.R;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;

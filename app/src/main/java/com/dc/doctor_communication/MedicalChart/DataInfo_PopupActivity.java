@@ -21,8 +21,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.doctorcommunication.DataManagement.Person1;
-import com.example.doctorcommunication.R;
+import com.dc.doctor_communication.DataManagement.Person1;
+import com.dc.doctor_communication.R;
 
 import org.w3c.dom.Text;
 

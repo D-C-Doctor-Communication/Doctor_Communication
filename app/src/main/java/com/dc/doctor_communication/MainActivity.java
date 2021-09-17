@@ -21,11 +21,11 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.example.doctorcommunication.ConditionAnalysis.Fragment_conditionAnalysis;
-import com.example.doctorcommunication.DataManagement.Symptom2;
-import com.example.doctorcommunication.HomeScreen.Fragment_home;
-import com.example.doctorcommunication.MedicalChart.Fragment_medicalChart;
-import com.example.doctorcommunication.Settings.SettingActivity;
+import com.dc.doctor_communication.ConditionAnalysis.Fragment_conditionAnalysis;
+import com.dc.doctor_communication.DataManagement.Symptom2;
+import com.dc.doctor_communication.HomeScreen.Fragment_home;
+import com.dc.doctor_communication.MedicalChart.Fragment_medicalChart;
+import com.dc.doctor_communication.Settings.SettingActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;

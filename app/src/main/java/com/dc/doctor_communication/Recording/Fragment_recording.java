@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.doctorcommunication.R;
+import com.dc.doctor_communication.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class Fragment_recording extends BottomSheetDialogFragment {
