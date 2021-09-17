@@ -86,8 +86,9 @@ public class MainActivity extends AppCompatActivity {
         ImageView setting = findViewById(R.id.to_setting);
         setting.setOnClickListener(v -> {
             Intent intent = new Intent(this, SettingActivity.class);
-            overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
             startActivity(intent);
+            overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
+
             Log.d("myapp","설정 버튼 눌림");
         });
 

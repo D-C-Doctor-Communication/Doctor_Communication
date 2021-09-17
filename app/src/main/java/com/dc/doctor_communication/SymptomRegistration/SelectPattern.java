@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -49,6 +50,11 @@ public class SelectPattern extends AppCompatActivity {
     @SuppressLint("WrongViewCast")
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         Intent intent = getIntent();
         symptom = intent.getExtras().getString("symptom");
         selected_body = intent.getStringArrayExtra("bparts");
@@ -116,8 +122,9 @@ public class SelectPattern extends AppCompatActivity {
                             .show();
                     return;
                 }
-                intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 finish();
 
             }
@@ -132,8 +139,9 @@ public class SelectPattern extends AppCompatActivity {
                 intent.putExtra("part",part);
                 intent.putExtra("bparts",selected_body);
                 intent.putExtra("repeat",repeat);
-                intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 finish();
             }
         });
@@ -192,5 +200,12 @@ public class SelectPattern extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
     }
 }

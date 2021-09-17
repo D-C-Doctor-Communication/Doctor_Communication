@@ -109,17 +109,19 @@ public class Fragment_home extends Fragment {
             Intent addSymptom = new Intent(getContext(), Search.class);
             addSymptom.putExtra("count",count);
             startActivity(addSymptom);
+            getActivity().overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
         });
 
 //카드2 - 의사와의 만남으로 이동
         btn_meetingDoc.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), MeetingDoc.class);
             startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
         });
 
 //카드3 - 녹음하기 팝업 띄움
         btn_recording.setOnClickListener(v -> {
-
+            //overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
             InfoDialog infoDialog = new InfoDialog();
             infoDialog.showDialog(getActivity());
 

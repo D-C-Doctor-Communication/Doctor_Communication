@@ -148,32 +148,29 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <ImageButton
-    android:id="@+id/nextpage"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:layout_margin="0dp"
-    android:background="@android:color/transparent"
-    android:src="@drawable/gotonext"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:scaleType="fitCenter"
-    app:layout_constraintHeight_percent="0.13"
-    app:layout_constraintHorizontal_bias="1.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintWidth_percent="0.29" />
-<ImageButton
-    android:id="@+id/backpage"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:layout_margin="0dp"
-    android:background="@android:color/transparent"
-    android:src="@drawable/gotoback"
-    android:scaleType="fitCenter"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHeight_percent="0.13"
-    app:layout_constraintHorizontal_bias="0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintWidth_percent="0.29" />
+        android:id="@+id/nextpage"
+        android:layout_width="76dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="32dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/gotonext"
+        android:scaleType="fitEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/backpage"
+        android:layout_width="76dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="32dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/gotoback"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

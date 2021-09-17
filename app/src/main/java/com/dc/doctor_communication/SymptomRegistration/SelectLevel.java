@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -26,6 +27,11 @@ public class SelectLevel extends AppCompatActivity {
     int repeat;
 
     public void onCreate(Bundle savedInstanceState) {
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         Intent intent = getIntent();
         symptom = intent.getExtras().getString("symptom"); //선택한 증상 받아오기
         part =intent.getExtras().getInt("part");
@@ -74,8 +80,9 @@ public class SelectLevel extends AppCompatActivity {
                 intent.putExtra("bparts",selected_body);
                 intent.putExtra("levelNm",num);
                 intent.putExtra("repeat",repeat);
-                intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 finish();
             }
         });
@@ -94,8 +101,9 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
-                        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                         startActivity(intent);
+                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                         break;
                     }
                     case 2: {  //얼굴
@@ -104,8 +112,9 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
-                        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                         startActivity(intent);
+                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                         break;
                     }
                     case 3: {  //팔
@@ -114,8 +123,9 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
-                        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                         startActivity(intent);
+                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                         break;
                     }
                     case 4: {  //다리
@@ -124,8 +134,9 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
-                        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                         startActivity(intent);
+                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                         break;
                     }
                     case 5: {  //등
@@ -134,8 +145,9 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
-                        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                         startActivity(intent);
+                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                         break;
                     }
                     case 6: {  //허리
@@ -144,8 +156,9 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
-                        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                         startActivity(intent);
+                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                         break;
                     }
                     case 7: {  //가슴
@@ -154,8 +167,9 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
-                        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                         startActivity(intent);
+                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                         break;
                     }
                     case 8: {  //복부
@@ -164,8 +178,9 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
-                        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                         startActivity(intent);
+                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                         break;
                     }
                     case 9: {  //엉덩이
@@ -174,8 +189,9 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
-                        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                         startActivity(intent);
+                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                         break;
                     }
                     case 11: {  //전신
@@ -184,8 +200,9 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
-                        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                         startActivity(intent);
+                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                         break;
                     }
                     case 12: {  //손
@@ -194,8 +211,9 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
-                        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                         startActivity(intent);
+                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                         break;
                     }
                     case 13: {  //발
@@ -204,8 +222,9 @@ public class SelectLevel extends AppCompatActivity {
                         intent.putExtra("symptom", symptom);
                         intent.putExtra("part", part);
                         intent.putExtra("repeat",repeat);
-                        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                         startActivity(intent);
+                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                         break;
                     }
                 }
@@ -221,6 +240,13 @@ public class SelectLevel extends AppCompatActivity {
         select_level=change_level.toString();
         level_text1.setText(select_level);
         level_text2.setText(new StringBuilder().append(num));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
     }
 
 }

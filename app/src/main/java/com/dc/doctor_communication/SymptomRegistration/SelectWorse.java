@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -50,6 +51,11 @@ public class SelectWorse extends AppCompatActivity {
     @SuppressLint("WrongViewCast")
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         Intent intent = getIntent();
         symptom = intent.getExtras().getString("symptom");
         selected_body = intent.getStringArrayExtra("bparts");
@@ -114,8 +120,9 @@ public class SelectWorse extends AppCompatActivity {
                 intent.putExtra("pattern", selected_pattern);
                 intent.putExtra("worse",select_worse);
                 intent.putExtra("repeat",repeat);
-                intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 finish();
             }
         });
@@ -130,8 +137,9 @@ public class SelectWorse extends AppCompatActivity {
                 intent.putExtra("part",part);
                 intent.putExtra("levelNm",selected_levelNm);
                 intent.putExtra("repeat",repeat);
-                intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 finish();
             }
         });
@@ -190,5 +198,12 @@ public class SelectWorse extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
     }
 }

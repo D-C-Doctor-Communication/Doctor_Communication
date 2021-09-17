@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -77,6 +78,9 @@ public class OtherSymptom extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.other_symptom);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Intent intent = getIntent();
         selected_symptom = intent.getExtras().getString("symptom");
@@ -192,8 +196,9 @@ public class OtherSymptom extends AppCompatActivity {
                 intent.putExtra("worse",selected_worse);
                 intent.putExtra("osymptom", select_osymptom);
                 intent.putExtra("repeat",repeat);
-                intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
+
 
                 finish();
             }
@@ -210,8 +215,9 @@ public class OtherSymptom extends AppCompatActivity {
                 intent.putExtra("levelNm",selected_levelNm);
                 intent.putExtra("pattern",selected_pattern);
                 intent.putExtra("repeat",repeat);
-                intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
+
                 finish();
             }
         });
@@ -281,5 +287,13 @@ public class OtherSymptom extends AppCompatActivity {
         }
         super.onDestroy();
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
     }
 }

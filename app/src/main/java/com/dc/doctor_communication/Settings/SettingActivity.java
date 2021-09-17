@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.dc.doctor_communication.R;
@@ -16,6 +17,11 @@ import com.dc.doctor_communication.R;
 public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         Log.d("myapp","설정열림");
@@ -42,14 +48,9 @@ public class SettingActivity extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = getIntent();
         finish();
-        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
         startActivity(intent);
-    }
+        overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Toast.makeText(this,"의견 주셔서 감사합니다!",Toast.LENGTH_SHORT).show();
     }
 
     @Override

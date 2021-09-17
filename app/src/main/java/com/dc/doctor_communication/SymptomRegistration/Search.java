@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +34,9 @@ public class Search extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         LinearLayout View = (LinearLayout) findViewById(R.id.lately_layout);
         TextView Search_click = (TextView) findViewById(R.id.search_text02);
@@ -86,8 +90,9 @@ public class Search extends AppCompatActivity {
                 Log.e("시작", "서치 페이지");
                 Intent intent = new Intent(Search.this, SearchList.class);
                 intent.putExtra("repeat", repeat);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
                 finish();
             }
         });
@@ -104,4 +109,10 @@ public class Search extends AppCompatActivity {
     }
 
  */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
+    }
 }
