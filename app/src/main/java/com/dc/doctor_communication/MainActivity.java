@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView setting = findViewById(R.id.to_setting);
         setting.setOnClickListener(v -> {
             Intent intent = new Intent(this, SettingActivity.class);
+            overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
             startActivity(intent);
             Log.d("myapp","설정 버튼 눌림");
         });
@@ -140,22 +141,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-    //툴바 기능
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main_toolbar_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("myapp","메뉴 작동함");
-        Intent intent = new Intent(this,SettingActivity.class);
-        startActivity(intent);
-        return true;
-    }
-     */
 
 }

@@ -17,7 +17,7 @@
         <item name="windowNoTitle">true</item>
 
         <!--기본 배경색-->
-        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowBackground">#FFFFFF</item>
 
     </style>
 </resources>

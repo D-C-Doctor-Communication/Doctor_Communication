@@ -45,11 +45,11 @@
         <Preference
             android:key="feedback"
             android:title="피드백"
-            android:summary="개발자에게 메일로 피드백을 남겨주세요"
+            android:summary="개발자에게 메일로 피드백을 남겨주세요\nkimcloud52@gmail.com"
             app:iconSpaceReserved="false">
-            <intent
+            <!--<intent
                 android:action="android.intent.action.SENDTO"
-                android:data="mailto:kimcloud52@gmail.com" />
+                android:data="mailto:kimcloud52@gmail.com" />-->
         </Preference>
         <Preference
             android:title="버전정보"
