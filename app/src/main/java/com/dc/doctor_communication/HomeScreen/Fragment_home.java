@@ -201,7 +201,7 @@ public class Fragment_home extends Fragment {
 
     static class WeekCalendar{
         static void createDataListToday(TextView ymTextView, TextView[] wDate, ListView listView){
-            Calendar calendar = Calendar.getInstance(Locale.KOREA);
+            Calendar calendar = Calendar.getInstance();
             createDataList(ymTextView,wDate,calendar.get(Calendar.DAY_OF_WEEK)-1,listView);
         }
         static void setCardColor(int index, CardView[] wCalender){
@@ -225,46 +225,51 @@ public class Fragment_home extends Fragment {
                 myRef.child(uid).child("date").child(clickedDate).child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Symptom2 frag = snapshot.getValue(Symptom2.class);
-                        //Log.d("get_fire", frag.getSymptom()+","+frag.getPart()+","+frag.getPainLevel()+","+frag.getPain_characteristics()+","+frag.getPain_situation());
-                        if(!(frag.getSymptom().equals("e"))) {
-                            Log.d("fire_in", frag.getSymptom());
-                            switch (frag.getSymptom()){
-                                case "두통":
-                                    Log.d("ee",frag.getPart());
-                                          //   adapter2.addItem(Person1.symptom[0].getPart(),R.drawable.img_pain_sym1,Integer.parseInt(Person1.symptom[0].getPain_level()),Person1.symptom[0].getPain_characteristics(),Person1.symptom[0].getPain_situation());
+                        String get_symptom = snapshot.child("symptom").getValue(String.class);
+                        String get_part = snapshot.child("part").getValue(String.class);
+                        String get_painLevel = snapshot.child("painLevel").getValue(String.class);
+                        String get_characteristics = snapshot.child("pain_characteristics").getValue(String.class);
+                        String get_situation = snapshot.child("pain_situation").getValue(String.class);
 
-                                    adapter2.addItem(frag.getPart(), R.drawable.area_head_line, Integer.parseInt(frag.getPainLevel()),frag.getPain_characteristics(), frag.getPain_situation());
+                        Log.d("get_fire", get_symptom+","+get_part+","+get_painLevel+","+get_characteristics+","+get_situation);
+                        if(!get_part.equals("e")) {
+                            Log.d("fire_in", get_symptom);
+                            switch (get_symptom){
+                                case "두통":
+                                    Log.d("ee",get_part);
+                                    //   adapter2.addItem(Person1.symptom[0].getPart(),R.drawable.img_pain_sym1,Integer.parseInt(Person1.symptom[0].getPain_level()),Person1.symptom[0].getPain_characteristics(),Person1.symptom[0].getPain_situation());
+
+                                    adapter2.addItem(get_part, R.drawable.area_head_line, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "기침": case "인후통": case "콧물": case "귀 통증": case "이명": case "눈물": case "코피": case "객혈": case "가래":
-                                    adapter2.addItem(frag.getPart(), R.drawable.area_face_line_off, Integer.parseInt(frag.getPainLevel()),frag.getPain_characteristics(), frag.getPain_situation());
+                                    adapter2.addItem(get_part, R.drawable.area_face_line_off, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
-                                    case "팔꿈치 통증":
-                                    adapter2.addItem(frag.getPart(), R.drawable.area_arm_line_off , Integer.parseInt(frag.getPainLevel()),frag.getPain_characteristics(), frag.getPain_situation());
-                                        break;
+                                case "팔꿈치 통증":
+                                    adapter2.addItem(get_part, R.drawable.area_arm_line_off , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
+                                    break;
                                 case "무릎 통증":
-                                    adapter2.addItem(frag.getPart(), R.drawable.area_leg_line_off, Integer.parseInt(frag.getPainLevel()),frag.getPain_characteristics(), frag.getPain_situation());
+                                    adapter2.addItem(get_part, R.drawable.area_leg_line_off, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "요통":
-                                    adapter2.addItem(frag.getPart(), R.drawable.area_waist_line_off , Integer.parseInt(frag.getPainLevel()),frag.getPain_characteristics(), frag.getPain_situation());
+                                    adapter2.addItem(get_part, R.drawable.area_waist_line_off , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "흉통":
-                                    adapter2.addItem(frag.getPart(), R.drawable.area_chest_line_off , Integer.parseInt(frag.getPainLevel()),frag.getPain_characteristics(), frag.getPain_situation());
+                                    adapter2.addItem(get_part, R.drawable.area_chest_line_off , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "복통": case "속 쓰림": case "소화불량":
-                                    adapter2.addItem(frag.getPart(), R.drawable.area_stomach_line_on_01 , Integer.parseInt(frag.getPainLevel()),frag.getPain_characteristics(), frag.getPain_situation());
+                                    adapter2.addItem(get_part, R.drawable.area_stomach_line_on_01 , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "엉덩이 통증":
-                                    adapter2.addItem(frag.getPart(), R.drawable.area_buttock_line_off , Integer.parseInt(frag.getPainLevel()),frag.getPain_characteristics(), frag.getPain_situation());
+                                    adapter2.addItem(get_part, R.drawable.area_buttock_line_off , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "발열": case "피로": case "호흡곤란": case "떨림": case "근육 경련": case "부종": case "가려움":
-                                    adapter2.addItem(frag.getPart(), R.drawable.area_head_line, Integer.parseInt(frag.getPainLevel()),frag.getPain_characteristics(), frag.getPain_situation());
+                                    adapter2.addItem(get_part, R.drawable.area_head_line, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "손목 통증":
-                                    adapter2.addItem(frag.getPart(), R.drawable.area_hand_line_01_off , Integer.parseInt(frag.getPainLevel()),frag.getPain_characteristics(), frag.getPain_situation());
+                                    adapter2.addItem(get_part, R.drawable.area_hand_line_01_off , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "발목 통증":
-                                    adapter2.addItem(frag.getPart(), R.drawable.area_foot_line_off, Integer.parseInt(frag.getPainLevel()),frag.getPain_characteristics(), frag.getPain_situation());
+                                    adapter2.addItem(get_part, R.drawable.area_foot_line_off, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 default:
                             }
@@ -302,7 +307,7 @@ public class Fragment_home extends Fragment {
             todaySdf.format(date); //한국 시간 적용
 
             //시작 날짜를 일요일로 고정
-            Calendar cal = Calendar.getInstance(Locale.KOREA);
+            Calendar cal = Calendar.getInstance();
             cal.setFirstDayOfWeek(Calendar.SUNDAY);
 
             int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
@@ -329,22 +334,23 @@ public class Fragment_home extends Fragment {
             //일 ~ 토
             for(int i=0;i<=6;i++){
                 isDataExist = false;
-                String checkDate = todaySdf.format(cal.getTime()).substring(0,4)+""+todaySdf.format(cal.getTime()).substring(5,7)+""+wDate[i].getText();                for(int j = 1; j <= 30; j++){
+                String checkDate = todaySdf.format(cal.getTime()).substring(0,4)+""+todaySdf.format(cal.getTime()).substring(5,7)+""+wDate[i].getText();
+                for(int j = 1; j <= 30; j++){
                     fire_date = String.valueOf(j);
                     if((int)(Math.log10(j)+1) == 1) fire_date = "0"+fire_date;
                     fire_date = "202109" +  fire_date;
                     Log.d("myapp","fire_date : "+fire_date);
                     for(int k=0; k<5; k++){
-                        String finalStringDateValue = fire_date;
-                        myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(k)).addValueEventListener(new ValueEventListener() {
+                        myRef.child(uid).child("date").child(fire_date).child(String.valueOf(k)).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 String get_symptom = snapshot.child("symptom").getValue(String.class);
-                                Log.d("myappp",finalStringDateValue+" 와 "+checkDate+" 비교");
-                                    if(!(get_symptom.equals("e")) && finalStringDateValue.equals(checkDate)){
-                                        isDataExist = true;
-                                        //Log.d("trrr", String.valueOf(isDataExist));
-                                    }
+                                Log.d("myappp",fire_date+" 와 "+checkDate+" 비교");
+
+                                if(!get_symptom.equals("e") && fire_date.equals(checkDate)){
+                                    isDataExist = true;
+                                    Log.d("trrr", String.valueOf(isDataExist));
+                                }
 
                             }
                             @Override
@@ -363,7 +369,7 @@ public class Fragment_home extends Fragment {
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             //dialog.setContentView(R.layout.info_popup);
             dialog.setContentView(R.layout.info_popup);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
             dialog.show();
         }
