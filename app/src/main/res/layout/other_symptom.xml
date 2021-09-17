@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/pattern_text1"
+        android:layout_width="0dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="40dp"
+        android:gravity="left"
+        android:text="통증과 동반되는 증상을 알려주세요"
+        android:fontFamily="@font/nanumsquareregular"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+    <EditText
+        android:id="@+id/add_osymptom"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:background="#F7F8FA"
+        android:hint="텍스트를 입력해주세요"
+        android:fontFamily="@font/nanumsquareregular"
+        android:paddingLeft="15dp"
+        android:textSize="15sp"
+        android:textColor="#707070"
+        android:layout_marginTop="43dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/osymptom_list"
+        app:layout_constraintEnd_toStartOf="@+id/osymptom_btn"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pattern_text1" />
+
+    <Button
+        android:id="@+id/osymptom_btn"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginRight="32dp"
+        android:background="#00ff0000"
+        android:onClick="Click_search_btn"
+        android:text="추가"
+        android:fontFamily="@font/nanumsquareregular"
+        android:textColor="#0C6FFF"
+        app:layout_constraintBottom_toTopOf="@+id/osymptom_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/add_osymptom"
+        app:layout_constraintTop_toBottomOf="@+id/pattern_text1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D8D5D5"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_osymptom"
+        app:layout_constraintBottom_toTopOf="@+id/osymptom_list"
+        />
+
+    <ListView
+        android:id="@+id/osymptom_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:choiceMode="multipleChoice"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="34dp"
+        app:layout_constraintBottom_toTopOf="@+id/nextpage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line" />
+
+    <ImageButton
+        android:id="@+id/nextpage"
+        android:layout_width="76dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="32dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/gotonext"
+        android:scaleType="fitEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/backpage"
+        android:layout_width="76dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="32dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/gotoback"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

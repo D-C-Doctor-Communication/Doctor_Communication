@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dc.doctor_communication.SymptomRegistration.CheckableLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    tools:ignore="MissingClass">
+
+    <TextView
+        android:id="@+id/select_text"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:textSize="16sp"
+        android:paddingBottom="9dp"
+        android:textColor="#000000"
+        android:fontFamily="@font/nanumsquareregular"
+        android:paddingLeft="10dp"
+        android:gravity="center|left"
+        android:layout_weight="5"/>
+
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:buttonTint="#1D92E4"
+        android:clickable="false"
+        android:focusable="false" />
+
+
+</com.dc.doctor_communication.SymptomRegistration.CheckableLinearLayout>
