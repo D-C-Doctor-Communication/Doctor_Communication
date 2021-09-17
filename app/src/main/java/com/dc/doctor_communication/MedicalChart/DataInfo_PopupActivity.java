@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -74,6 +75,7 @@ public class DataInfo_PopupActivity extends AppCompatActivity {
         Log.d("select", selectedDate);
         //for문으로 선택된 날짜에 대한 데이터 개수 구할것.
         for(int j=0; j<5; j++){
+            Log.d("myapp","for1-"+j);
                 myRef.child(uid).child("date").child(selectedDate).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -88,10 +90,12 @@ public class DataInfo_PopupActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) { }
             });
         }
-        //[FIREBASE] for문으로 기록된 증상있는만큼 layout inflate
-        for(int i=0;i<=cnt;i++) {
-            Log.d("cnt2",cnt+"");
 
+
+        //[FIREBASE] for문으로 기록된 증상있는만큼 layout inflate
+        for(int i=0;i<=cnt+1;i++) {
+            Log.d("cnt2",cnt+"");
+            Log.d("myapp","for2-"+i);
             View view = LayoutInflater.from(this).inflate(R.layout.mc_info_popup_item, container, false);
 
             //ImageView image = view.findViewById(R.id.image);
@@ -105,6 +109,9 @@ public class DataInfo_PopupActivity extends AppCompatActivity {
             myRef.child(uid).child("date").child(selectedDate).child(String.valueOf(i)).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(cnt==0){
+                        makeToast();
+                    }
                     Symptom2 popup = snapshot.getValue(Symptom2.class);
                     if(!(String.valueOf(popup.getPainLevel()).equals("e"))) {
                         switch (Integer.parseInt(popup.getPainLevel())){
@@ -138,11 +145,16 @@ public class DataInfo_PopupActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) { }
             });
-
             container.addView(view);
-        }
-    }
 
+        }
+
+
+    }
+    public void makeToast(){
+        Toast.makeText(this,"기록된 증상이 없습니다.",Toast.LENGTH_SHORT).show();
+        finish();
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {

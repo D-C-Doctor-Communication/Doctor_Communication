@@ -72,84 +72,96 @@
                     android:text="부위"
                     android:textSize="12sp" />
             </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linear_degree"
-            app:layout_constraintTop_toBottomOf="@+id/linear_part"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_bias="0.3"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:textSize="13sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/nanumsquareregular"
-                android:textStyle="bold"
+
+            <LinearLayout
+                android:id="@+id/linear_degree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="통증 정도" />
-            <TextView
-                android:layout_marginLeft="25dp"
-                android:textSize="12sp"
-                android:id="@+id/degree"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/linear_condition"
+                app:layout_constraintTop_toBottomOf="@+id/linear_part">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumsquareregular"
+                    android:text="통증 정도"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/degree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:text="통증 정도"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_condition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="통증 정도" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linear_condition"
-            app:layout_constraintTop_toBottomOf="@+id/linear_degree"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_bias="0.3"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:textSize="13sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/nanumsquareregular"
-                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/linear_situation"
+                app:layout_constraintTop_toBottomOf="@+id/linear_degree">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumsquareregular"
+                    android:text="통증 양상"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:text="통증 양상"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_situation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="통증 양상" />
-            <TextView
-                android:layout_marginLeft="25dp"
-                android:textSize="12sp"
-                android:id="@+id/condition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="통증 양상" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linear_situation"
-            app:layout_constraintTop_toBottomOf="@+id/linear_condition"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_bias="0.3"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:textSize="13sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/nanumsquareregular"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="악화 상황" />
-            <TextView
-                android:layout_marginLeft="25dp"
-                android:textSize="12sp"
-                android:id="@+id/situation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="악화 상황" />
-        </LinearLayout>
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/linear_with"
+                app:layout_constraintTop_toBottomOf="@+id/linear_condition">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanumsquareregular"
+                    android:text="악화 상황"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/situation"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:text="악화 상황"
+                    android:textSize="12sp" />
+            </LinearLayout>
         <LinearLayout
             android:id="@+id/linear_with"
             app:layout_constraintTop_toBottomOf="@+id/linear_situation"
