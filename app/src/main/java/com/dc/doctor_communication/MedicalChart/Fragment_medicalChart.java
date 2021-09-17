@@ -397,27 +397,18 @@ public class Fragment_medicalChart extends Fragment {
                     break;
                 }
             }*/
-            for(int i = 1; i <= 30; i++){
-                fire_date = String.valueOf(i);
-                if((int)(Math.log10(i)+1) == 1) fire_date = "0"+fire_date;
-                fire_date = "202109" +  fire_date;
                 for(int j=0; j<5; j++){
-                    String finalStringDateValue = fire_date;
-                    myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    myRef.child(uid).child("date").child(memo_selecteddate).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Symptom2 appointments = snapshot.getValue(Symptom2.class);
                             Log.d("get_fire", appointments.getMemo());
-                            if(appointments.getMemo().equals(memo_selecteddate)){
-                                memoContent[0] = appointments.getMemo();
-                            }
+                            memoContent[0] = appointments.getMemo();
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) { }
                     });
                 }
-            }
-            if(memoContent[0].equals("")) memoContent[0] ="진료 후기를 작성해주세요.";
             return memoContent[0];
         }
         //선택한 날짜에 저장된 메모를 찾아 메모 수정함
@@ -429,27 +420,24 @@ public class Fragment_medicalChart extends Fragment {
                     break;
                 }
             }*/
-            for(int i = 1; i <= 30; i++){
-                fire_date = String.valueOf(i);
-                if((int)(Math.log10(i)+1) == 1) fire_date = "0"+fire_date;
-                fire_date = "202109" +  fire_date;
+
                 for(int j=0; j<5; j++){
-                    String finalStringDateValue = fire_date;
-                    myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    String finalStringDateValue = memo_selecteddate;
+                    int finalJ = j;
+                    myRef.child(uid).child("date").child(memo_selecteddate).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Symptom2 appointments = snapshot.getValue(Symptom2.class);
                             Log.d("get_fire", appointments.getMemo());
-                            if(finalStringDateValue.equals(memo_selecteddate)){
-                                appointments.setMemo(memo);
-                                Log.d("myapp","메모기록이 수정됨!");
-                            }
+                            myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(finalJ)).child("memo").setValue(memo);
+                            Log.d("myapp","메모기록이 수정됨!");
+
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) { }
                     });
                 }
-            }
+
         }
         //캘린더 dot 이벤트
         public static ArrayList<CalendarDay> addDot(){
