@@ -9,8 +9,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.doctorcommunication.R;
+import com.dc.doctor_communication.R;
 
 public class SelectLevel extends AppCompatActivity {
     String symptom;

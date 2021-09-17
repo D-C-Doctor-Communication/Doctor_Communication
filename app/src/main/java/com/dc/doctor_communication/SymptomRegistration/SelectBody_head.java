@@ -11,9 +11,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.doctorcommunication.MainActivity;
-import com.example.doctorcommunication.R;
-import com.example.doctorcommunication.User;
+import com.dc.doctor_communication.MainActivity;
+import com.dc.doctor_communication.R;
+import com.dc.doctor_communication.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;

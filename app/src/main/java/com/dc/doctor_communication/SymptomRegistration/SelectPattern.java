@@ -17,7 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.doctorcommunication.R;
+import com.dc.doctor_communication.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -6,7 +6,7 @@ import android.widget.CheckBox;
 import android.widget.Checkable;
 import android.widget.LinearLayout;
 
-import com.example.doctorcommunication.R;
+import com.dc.doctor_communication.R;
 
 public class CheckableLinearLayout extends LinearLayout implements Checkable {
 

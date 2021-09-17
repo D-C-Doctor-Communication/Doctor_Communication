@@ -20,9 +20,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.doctorcommunication.DataManagement.Symptom2;
-import com.example.doctorcommunication.MainActivity;
-import com.example.doctorcommunication.R;
+import com.dc.doctor_communication.DataManagement.Symptom2;
+import com.dc.doctor_communication.MainActivity;
+import com.dc.doctor_communication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
