@@ -104,7 +104,7 @@ public class Fragment_medicalChart extends Fragment {
         //진료 일정 ListView
         listView = (ListView) view.findViewById(R.id.MC_listView);
         //리스트뷰 자동 높이조절 메소드
-        setListViewHeight(listView);
+        //setListViewHeight(listView);
         //진료 후기 작성할때 키보드가 UI 가리는것 방지
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
@@ -133,7 +133,9 @@ public class Fragment_medicalChart extends Fragment {
         ArrayList<CalendarDay> dates = monthCalendar.addDot();
         MC_DotEventDecorator dotEventDecorator = new MC_DotEventDecorator(dates);
         materialCalendarView.addDecorator(dotEventDecorator);
-
+        Calendar maxDate = Calendar.getInstance();
+        maxDate.set(2021,8,30);
+        materialCalendarView.state().edit().setMaximumDate(maxDate).commit();
 
         //진료 일정 조회 + 리스트 생성
         checkAppointment();
@@ -182,10 +184,10 @@ public class Fragment_medicalChart extends Fragment {
 
         //데이터 확인 팝업 띄움
         show_data.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(),DataInfo_PopupActivity.class);
-            Log.d("myapp","selectedDateString : "+selectedDateString+"");
-            intent.putExtra("selectedDate",selectedDateString);
-            startActivity(intent);
+//            Intent intent = new Intent(getActivity(),DataInfo_PopupActivity.class);
+//            Log.d("myapp","selectedDateString : "+selectedDateString+"");
+//            intent.putExtra("selectedDate",selectedDateString);
+//            startActivity(intent);
         });
 
 
@@ -209,6 +211,7 @@ public class Fragment_medicalChart extends Fragment {
 
         for(int i = 1; i <= 30; i++){
             fire_date = String.valueOf(i);
+            listDataCount = 0;
             if((int)(Math.log10(i)+1) == 1) fire_date = "0"+fire_date;
             fire_date = "202109" +  fire_date;
             for(int j=0; j<5; j++){
@@ -224,6 +227,7 @@ public class Fragment_medicalChart extends Fragment {
                                 noneData.setVisibility(View.INVISIBLE);
                                 btn_addAppointDoctor.setBackgroundResource(R.drawable.mc_button_nonclicked);
                                 btn_addAppointDoctor.setTextColor(Color.BLACK);
+                                listDataCount++;
                             }
                             else if(appointments.getClinic_type().equals("진료")){
                                 listViewAdapter.addItem(R.drawable.clinic_clinic,appointments.getScheduleName(),appointments.getPlace(),appointments.getTime());
@@ -231,17 +235,22 @@ public class Fragment_medicalChart extends Fragment {
                                 noneData.setVisibility(View.INVISIBLE);
                                 btn_addAppointDoctor.setBackgroundResource(R.drawable.mc_button_nonclicked);
                                 btn_addAppointDoctor.setTextColor(Color.BLACK);
+                                listDataCount++;
                             }
                             Log.d("myapp","checkAppointment 데이터 추가됨");
-                            listDataCount++;
+
                             listView.setAdapter(listViewAdapter);
-                            setListViewHeightBasedOnChildren(listView);
+                            //setListViewHeightBasedOnChildren(listView);
                             listViewAdapter.notifyDataSetChanged();
 
                             if (listDataCount ==0){
                                 noneData.setVisibility(View.VISIBLE);
                                 btn_addAppointDoctor.setBackgroundResource(R.drawable.mc_button_clicked);
                                 btn_addAppointDoctor.setTextColor(Color.WHITE);
+                            }else{
+                                noneData.setVisibility(View.INVISIBLE);
+                                btn_addAppointDoctor.setBackgroundResource(R.drawable.mc_button_nonclicked);
+                                btn_addAppointDoctor.setTextColor(Color.BLACK);
                             }
                             Log.d("myapp","Adapter added, count : "+ listDataCount);
                         }
@@ -274,7 +283,7 @@ public class Fragment_medicalChart extends Fragment {
             }
         }*/
         listView.setAdapter(listViewAdapter);
-        setListViewHeightBasedOnChildren(listView);
+        //setListViewHeightBasedOnChildren(listView);
         listViewAdapter.notifyDataSetChanged();
 
         if (listDataCount ==0){
@@ -305,26 +314,26 @@ public class Fragment_medicalChart extends Fragment {
         }
     }
     //listView의 개수에 맞춰 높이조절
-    private void setListViewHeight(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null)
-            return;
-
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
-        int totalHeight = 0;
-        View view = null;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            view = listAdapter.getView(i, view, listView);
-            if (i == 0)
-                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, WindowManager.LayoutParams.WRAP_CONTENT));
-
-            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-            totalHeight += view.getMeasuredHeight();
-        }
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
-    }
+//    private void setListViewHeight(ListView listView) {
+//        ListAdapter listAdapter = listView.getAdapter();
+//        if (listAdapter == null)
+//            return;
+//
+//        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+//        int totalHeight = 0;
+//        View view = null;
+//        for (int i = 0; i < listAdapter.getCount(); i++) {
+//            view = listAdapter.getView(i, view, listView);
+//            if (i == 0)
+//                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, WindowManager.LayoutParams.WRAP_CONTENT));
+//
+//            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+//            totalHeight += view.getMeasuredHeight();
+//        }
+//        ViewGroup.LayoutParams params = listView.getLayoutParams();
+//        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+//        listView.setLayoutParams(params);
+//    }
 
     //팝업창으로부터 입력받은 정보 저장하는 메소드
     @Override
@@ -355,7 +364,7 @@ public class Fragment_medicalChart extends Fragment {
                 else if(typeOfSchedule.equals("진료")){
                     adapter.addItem(R.drawable.clinic_clinic,scheduleName,location,selectedTime);
                 }
-                setListViewHeightBasedOnChildren(listView);
+                //setListViewHeightBasedOnChildren(listView);
                 adapter.notifyDataSetChanged();
                 btn_addAppointDoctor.setBackgroundResource(R.drawable.mc_button_nonclicked);
                 btn_addAppointDoctor.setTextColor(Color.BLACK);
@@ -402,7 +411,7 @@ public class Fragment_medicalChart extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Symptom2 appointments = snapshot.getValue(Symptom2.class);
-                            Log.d("get_fire", appointments.getMemo());
+//                            Log.d("get_fire", appointments.getMemo());
                             memoContent[0] = appointments.getMemo();
                         }
                         @Override
@@ -497,26 +506,26 @@ public class Fragment_medicalChart extends Fragment {
 
 
     //리스트뷰 높이 조절
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) return;
-
-        int totalHeight = 0;
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
-
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            View item = listAdapter.getView(i, null, listView);
-            ImageView imageView = item.findViewById(R.id.icon);
-            imageView.measure(desiredWidth,View.MeasureSpec.UNSPECIFIED);
-            totalHeight += imageView.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
-        Log.d("myapp",params.height+"로 높이 조정됨");
-        listView.requestLayout();
-    }
+//    public static void setListViewHeightBasedOnChildren(ListView listView) {
+//        ListAdapter listAdapter = listView.getAdapter();
+//        if (listAdapter == null) return;
+//
+//        int totalHeight = 0;
+//        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
+//
+//        for (int i = 0; i < listAdapter.getCount(); i++) {
+//            View item = listAdapter.getView(i, null, listView);
+//            ImageView imageView = item.findViewById(R.id.icon);
+//            imageView.measure(desiredWidth,View.MeasureSpec.UNSPECIFIED);
+//            totalHeight += imageView.getMeasuredHeight();
+//        }
+//
+//        ViewGroup.LayoutParams params = listView.getLayoutParams();
+//        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+//        listView.setLayoutParams(params);
+//        Log.d("myapp",params.height+"로 높이 조정됨");
+//        listView.requestLayout();
+//    }
 
 
 

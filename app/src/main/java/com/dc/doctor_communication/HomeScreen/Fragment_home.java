@@ -203,7 +203,7 @@ public class Fragment_home extends Fragment {
 
     static class WeekCalendar{
         static void createDataListToday(TextView ymTextView, TextView[] wDate, ListView listView){
-            Calendar calendar = Calendar.getInstance();
+            Calendar calendar = Calendar.getInstance(Locale.KOREA);
             createDataList(ymTextView,wDate,calendar.get(Calendar.DAY_OF_WEEK)-1,listView);
         }
         static void setCardColor(int index, CardView[] wCalender){
@@ -309,7 +309,7 @@ public class Fragment_home extends Fragment {
             todaySdf.format(date); //한국 시간 적용
 
             //시작 날짜를 일요일로 고정
-            Calendar cal = Calendar.getInstance();
+            Calendar cal = Calendar.getInstance(Locale.KOREA);
             cal.setFirstDayOfWeek(Calendar.SUNDAY);
 
             int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);

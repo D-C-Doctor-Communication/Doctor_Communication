@@ -20,6 +20,7 @@ import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.dc.doctor_communication.ConditionAnalysis.Fragment_conditionAnalysis;
 import com.dc.doctor_communication.DataManagement.Symptom2;
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_medicalCharts: //진료기록 프래그먼트
                         transaction.replace(R.id.fragment_container,(Fragment)(new Fragment_medicalChart()));
                         Log.d("myapp","진료기록탭 열림");
+                        Toast.makeText(getApplicationContext(),"의사:소통 데모버전은 9월 30일까지 이용 가능합니다.",Toast.LENGTH_SHORT).show();
                         break;
                 }
                 //프레그먼트 교체 내용 적용
