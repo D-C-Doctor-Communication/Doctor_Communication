@@ -6,7 +6,8 @@ import java.io.Serializable;
 
 //상태등록에서 입력되는 통증정보와 날짜정보에 대한 클래스
 public class Symptom2 implements Serializable {
-//data
+    private static int cnt = 0;
+    //data
     @PropertyName("part")
     private String part; //부위
     @PropertyName("symptom")
@@ -39,24 +40,19 @@ public class Symptom2 implements Serializable {
 
     //추가사항 없는 값 생성자
     public Symptom2(String symptom, String part, String painLevel, String pain_characteristics
-            , String pain_situation, String accompany_pain, String scheduleName, String place, String time, String clinic_type, String memo){
+            , String pain_situation){
         this.symptom = symptom;
         this.part = part;
         this.painLevel = painLevel;
         this.pain_characteristics = pain_characteristics;
         this.pain_situation = pain_situation;
-        this.accompany_pain = accompany_pain;
+        this.accompany_pain = "해당 없음";
         this.additional = "해당 없음";
-        this.scheduleName = scheduleName;
-        this.place = place;
-        this.time = time;
-        this.clinic_type = clinic_type;
 
-        this.memo = memo;
     }
     //추가사항 있는 값 생성자
     public Symptom2(String symptom, String part, String painLevel, String pain_characteristics
-            , String pain_situation, String accompany_pain, String additional, String scheduleName, String place, String time, String clinic_type, String memo){
+            , String pain_situation, String accompany_pain, String additional){
         this.symptom = symptom;
         this.part = part;
         this.painLevel = painLevel;
@@ -65,13 +61,18 @@ public class Symptom2 implements Serializable {
         this.accompany_pain = accompany_pain;
         this.additional = additional;
 
+    }
+    public Symptom2(String scheduleName, String place, String time, String clinic_type){
         this.scheduleName = scheduleName;
         this.place = place;
         this.time = time;
         this.clinic_type = clinic_type;
-
+    }
+    public Symptom2(String memo){
         this.memo = memo;
     }
+
+    public Symptom2(int cnt){ Symptom2.cnt = cnt; }
 
     public String getPart(){ return part; }
     public String getSymptom(){ return symptom; }
@@ -106,5 +107,9 @@ public class Symptom2 implements Serializable {
 
     public String getClinic_type() {
         return clinic_type;
+    }
+
+    public static int getCnt() {
+        return cnt;
     }
 }

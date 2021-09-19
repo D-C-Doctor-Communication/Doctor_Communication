@@ -65,8 +65,7 @@ public class Fragment_home extends Fragment {
     static String uid = user.getUid();
 
     //데이터가 있는 날짜에 점찍기
-    static boolean isDataExist = false;
-    static String fire_date="";
+    static String get_symptom="";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -335,32 +334,23 @@ public class Fragment_home extends Fragment {
 
             //일 ~ 토
             for(int i=0;i<=6;i++){
-                isDataExist = false;
                 String checkDate = todaySdf.format(cal.getTime()).substring(0,4)+""+todaySdf.format(cal.getTime()).substring(5,7)+""+wDate[i].getText();
-                for(int j = 1; j <= 30; j++){
-                    fire_date = String.valueOf(j);
-                    if((int)(Math.log10(j)+1) == 1) fire_date = "0"+fire_date;
-                    fire_date = "202109" +  fire_date;
-                    Log.d("myapp","fire_date : "+fire_date);
-                    for(int k=0; k<5; k++){
-                        myRef.child(uid).child("date").child(fire_date).child(String.valueOf(k)).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String get_symptom = snapshot.child("symptom").getValue(String.class);
-                                Log.d("myappp",fire_date+" 와 "+checkDate+" 비교");
 
-                                if(!get_symptom.equals("e") && fire_date.equals(checkDate)){
-                                    isDataExist = true;
-                                    Log.d("trrr", String.valueOf(isDataExist));
-                                }
-
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) { }
-                        });
+                int finalI = i;
+                myRef.child(uid).child("date").child(checkDate).child("0").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        get_symptom = snapshot.child("symptom").getValue(String.class);
+                        Log.d("myappp",checkDate+" 증상"+get_symptom);
+                        if(!(get_symptom.equals("e"))){
+                            weekCalendarDot[finalI].setVisibility(View.VISIBLE);
+                            Log.d("myappp2",get_symptom);
+                        }
                     }
-                }
-                if(isDataExist) weekCalendarDot[i].setVisibility(View.VISIBLE);
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) { }
+                });
+
             }
         }
     }

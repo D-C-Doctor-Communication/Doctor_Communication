@@ -79,6 +79,9 @@ public class Fragment_medicalChart extends Fragment {
     static FirebaseUser user = firebaseAuth.getCurrentUser();
     static String uid = user.getUid();
 
+    static ArrayList<CalendarDay> datess = new ArrayList<>(); //점을 찍을 날짜를 저장,반환
+    static Calendar calendar = Calendar.getInstance();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d("myapp", "진료기록탭 열림");
@@ -130,9 +133,37 @@ public class Fragment_medicalChart extends Fragment {
         //캘린더 기본 선택된 날짜 지정
         materialCalendarView.setDateSelected(date,true);
         //캘린더 점찍기
-        ArrayList<CalendarDay> dates = monthCalendar.addDot();
-        MC_DotEventDecorator dotEventDecorator = new MC_DotEventDecorator(dates);
-        materialCalendarView.addDecorator(dotEventDecorator);
+        for(int i = 1; i <= 30; i++){
+            fire_date = String.valueOf(i);
+            if((int)(Math.log10(i)+1) == 1) fire_date = "0"+fire_date;
+            fire_date = "202109" +  fire_date;
+            for(int j=0; j<5; j++){
+                String finalStringDateValue = fire_date;
+                myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String get_symptom = snapshot.child("symptom").getValue(String.class);
+                        if(!(get_symptom.equals("e"))){
+                            String dateValue = finalStringDateValue;
+                            Log.d("get_dateValue", dateValue);
+
+                            int year = Integer.parseInt(dateValue.substring(0,4));
+                            int month = Integer.parseInt(dateValue.substring(4,6));
+                            int dayy = Integer.parseInt(dateValue.substring(6));
+
+                            calendar.set(year,month-1,dayy);
+                            CalendarDay day = CalendarDay.from(calendar);
+                            datess.add(day);
+                            ArrayList<CalendarDay> dates = datess;
+                            MC_DotEventDecorator dotEventDecorator = new MC_DotEventDecorator(dates);
+                            materialCalendarView.addDecorator(dotEventDecorator);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) { }
+                });
+            }
+        }
         Calendar maxDate = Calendar.getInstance();
         maxDate.set(2021,8,30);
         materialCalendarView.state().edit().setMaximumDate(maxDate).commit();
@@ -184,10 +215,10 @@ public class Fragment_medicalChart extends Fragment {
 
         //데이터 확인 팝업 띄움
         show_data.setOnClickListener(v -> {
-//            Intent intent = new Intent(getActivity(),DataInfo_PopupActivity.class);
-//            Log.d("myapp","selectedDateString : "+selectedDateString+"");
-//            intent.putExtra("selectedDate",selectedDateString);
-//            startActivity(intent);
+            Intent intent = new Intent(getActivity(),DataInfo_PopupActivity.class);
+            Log.d("myapp","selectedDateString : "+selectedDateString+"");
+            intent.putExtra("selectedDate",selectedDateString);
+            startActivity(intent);
         });
 
 
@@ -262,26 +293,6 @@ public class Fragment_medicalChart extends Fragment {
 
             }
         }
-        /*for(int i=0;i<Person1.appointments.length;i++){
-            if(Person1.appointments[i].getDate().equals(selectedDateString)){
-                if(Person1.appointments[i].getSort().equals("검사")){
-                    listViewAdapter.addItem(R.drawable.clinic_checkup,Person1.appointments[i].getName(),Person1.appointments[i].getLocation(),Person1.appointments[i].getTime());
-                    listView.setVisibility(View.VISIBLE);
-                    noneData.setVisibility(View.INVISIBLE);
-                    btn_addAppointDoctor.setBackgroundResource(R.drawable.mc_button_nonclicked);
-                    btn_addAppointDoctor.setTextColor(Color.BLACK);
-                }
-                else if(Person1.appointments[i].getSort().equals("진료")){
-                    listViewAdapter.addItem(R.drawable.clinic_clinic,Person1.appointments[i].getName(),Person1.appointments[i].getLocation(),Person1.appointments[i].getTime());
-                    listView.setVisibility(View.VISIBLE);
-                    noneData.setVisibility(View.INVISIBLE);
-                    btn_addAppointDoctor.setBackgroundResource(R.drawable.mc_button_nonclicked);
-                    btn_addAppointDoctor.setTextColor(Color.BLACK);
-                }
-                Log.d("myapp","checkAppointment 데이터 추가됨");
-                listDataCount++;
-            }
-        }*/
         listView.setAdapter(listViewAdapter);
         //setListViewHeightBasedOnChildren(listView);
         listViewAdapter.notifyDataSetChanged();
@@ -378,6 +389,7 @@ public class Fragment_medicalChart extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Symptom2 appointments = snapshot.getValue(Symptom2.class);
                             Log.d("final", finalJ1+""+appointments.getScheduleName());
+                            Symptom2 ap = new Symptom2(scheduleName, location, selectedTime, typeOfSchedule);
                             myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ1)).child("scheduleName").setValue(scheduleName);
                             myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ1)).child("place").setValue(location);
                             myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(finalJ1)).child("time").setValue(selectedTime);
@@ -411,8 +423,11 @@ public class Fragment_medicalChart extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Symptom2 appointments = snapshot.getValue(Symptom2.class);
-//                            Log.d("get_fire", appointments.getMemo());
-                            memoContent[0] = appointments.getMemo();
+                            Log.d("memo_selecteddate", memo_selecteddate);
+                            //Log.d("get_fire", appointments.getMemo());
+                            if(appointments.getMemo() != null){
+                                memoContent[0] = appointments.getMemo();
+                            }
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) { }
@@ -437,7 +452,7 @@ public class Fragment_medicalChart extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Symptom2 appointments = snapshot.getValue(Symptom2.class);
-                            Log.d("get_fire", appointments.getMemo());
+                            Log.d("get_memo_selecteddate", memo_selecteddate);
                             myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(finalJ)).child("memo").setValue(memo);
                             Log.d("myapp","메모기록이 수정됨!");
 
@@ -449,50 +464,50 @@ public class Fragment_medicalChart extends Fragment {
 
         }
         //캘린더 dot 이벤트
-        public static ArrayList<CalendarDay> addDot(){
-            ArrayList<CalendarDay> dates = new ArrayList<>(); //점을 찍을 날짜를 저장,반환
-            Calendar calendar = Calendar.getInstance();
-            //Data에서 병원예약 날짜가 존재하면 해당 날짜를 위의 arrayList에 저장
-            /*for(int i=0;i<Person1.appointments.length;i++){
-                //병원예약날짜 받아오기
-                String dateValue = Person1.appointments[i].getDate();
-                int year = Integer.parseInt(dateValue.substring(0,4));
-                int month = Integer.parseInt(dateValue.substring(4,6));
-                int dayy = Integer.parseInt(dateValue.substring(6));
-
-                calendar.set(year,month-1,dayy);
-                CalendarDay day = CalendarDay.from(calendar);
-                dates.add(day);
-            }*/
-            for(int i = 1; i <= 30; i++){
-                fire_date = String.valueOf(i);
-                if((int)(Math.log10(i)+1) == 1) fire_date = "0"+fire_date;
-                fire_date = "202109" +  fire_date;
-                for(int j=0; j<5; j++){
-                    String finalStringDateValue = fire_date;
-                    myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Symptom2 appointments = snapshot.getValue(Symptom2.class);
-                            Log.d("get_fire", appointments.getScheduleName());
-                            if(!(appointments.getScheduleName().equals("e"))){
-                                String dateValue = finalStringDateValue;
-                                int year = Integer.parseInt(dateValue.substring(0,4));
-                                int month = Integer.parseInt(dateValue.substring(4,6));
-                                int dayy = Integer.parseInt(dateValue.substring(6));
-
-                                calendar.set(year,month-1,dayy);
-                                CalendarDay day = CalendarDay.from(calendar);
-                                dates.add(day);
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) { }
-                    });
-                }
-            }
-            return dates;
-        }
+//        public static ArrayList<CalendarDay> addDot(){
+//
+//            //Data에서 병원예약 날짜가 존재하면 해당 날짜를 위의 arrayList에 저장
+//            /*for(int i=0;i<Person1.appointments.length;i++){
+//                //병원예약날짜 받아오기
+//                String dateValue = Person1.appointments[i].getDate();
+//                int year = Integer.parseInt(dateValue.substring(0,4));
+//                int month = Integer.parseInt(dateValue.substring(4,6));
+//                int dayy = Integer.parseInt(dateValue.substring(6));
+//
+//                calendar.set(year,month-1,dayy);
+//                CalendarDay day = CalendarDay.from(calendar);
+//                dates.add(day);
+//            }*/
+//            for(int i = 1; i <= 30; i++){
+//                fire_date = String.valueOf(i);
+//                if((int)(Math.log10(i)+1) == 1) fire_date = "0"+fire_date;
+//                fire_date = "202109" +  fire_date;
+//                for(int j=0; j<5; j++){
+//                    String finalStringDateValue = fire_date;
+//                    myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            String get_symptom = snapshot.child("symptom").getValue(String.class);
+//                            if(!(get_symptom.equals("e"))){
+//                                String dateValue = finalStringDateValue;
+//                                Log.d("get_dateValue", dateValue);
+//
+//                                int year = Integer.parseInt(dateValue.substring(0,4));
+//                                int month = Integer.parseInt(dateValue.substring(4,6));
+//                                int dayy = Integer.parseInt(dateValue.substring(6));
+//
+//                                calendar.set(year,month-1,dayy);
+//                                CalendarDay day = CalendarDay.from(calendar);
+//                                dates.add(day);
+//                            }
+//                        }
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) { }
+//                    });
+//                }
+//            }
+//            return dates;
+//        }
 
         //00.00 (월) 텍스트 표시
         public static void setDateText(int Year, int Month, int Day,TextView selectedDate){
