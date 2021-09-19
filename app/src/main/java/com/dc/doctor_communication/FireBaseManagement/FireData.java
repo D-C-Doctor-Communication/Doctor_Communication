@@ -6,10 +6,4 @@ public class FireData {
 
     public static ArrayList<Symptom> symptoms = new ArrayList<>();
 
-
-
-
-
-
-
 }

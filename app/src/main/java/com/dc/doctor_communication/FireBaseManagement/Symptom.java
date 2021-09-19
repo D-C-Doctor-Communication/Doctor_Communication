@@ -12,19 +12,19 @@ public class Symptom {
     private String additional; //추가사항
 
     //추가사항 없는 값 생성자
-    public Symptom(String date,String part,String symptom_name,String pain_level,String pain_characteristics
-            ,String pain_situation,String accompany_pain){
+    public Symptom(String date,String symptom_name,String part,String pain_level,String pain_characteristics
+            ,String pain_situation){
         this.date = date;
         this.part = part;
         this.symptom_name = symptom_name;
         this.pain_level = pain_level;
         this.pain_characteristics = pain_characteristics;
         this.pain_situation = pain_situation;
-        this.accompany_pain = accompany_pain;
+        this.accompany_pain = "해당 없음";
         this.additional = "해당 없음";
     }
     //추가사항 있는 값 생성자
-    public Symptom(String date,String part,String symptom_name,String pain_level,String pain_characteristics
+    public Symptom(String date,String symptom_name,String part,String pain_level,String pain_characteristics
             ,String pain_situation,String accompany_pain,String additional){
         this.date = date;
         this.part = part;

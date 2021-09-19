@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.dc.doctor_communication.DataManagement.Person1;
+import com.dc.doctor_communication.FireBaseManagement.FireData;
 import com.dc.doctor_communication.R;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
@@ -104,6 +105,9 @@ public class Fragment_conditionAnalysis extends Fragment {
         lineChart = view.findViewById(R.id.condition_chart);
         //그래프 증상선택 버튼
         select_symptom = view.findViewById(R.id.select_symptom);
+
+
+        Log.d("파이어베이스",FireData.symptoms.size()+"");
 
 
         //현재 날짜를 기준으로 상단 선택 바 텍스트 기본 지정
@@ -319,35 +323,39 @@ public class Fragment_conditionAnalysis extends Fragment {
     //증상순위
     static void setRanking(String strDate,TextView one,TextView two,TextView three){
         HashMap<String,Integer> data = new HashMap<>();//new에서 타입 파라미터 생략가능
-        //각 증상을 key값으로, 증상의 개수를 value값으로 가지는 Map 생성
-        for(int i = 0; i< Person1.symptom.length; i++){
-            data.put(Person1.symptom[i].getPart(),0);
-        }
-        //증상에 따라 +1
-        for(int i=0;i<Person1.symptom.length;i++) {
-            if(isInSameMonth(Person1.symptom[i].getDate(),strDate))
-                data.put(Person1.symptom[i].getPart(), data.get(Person1.symptom[i].getPart())+1);
-        }
-        //value 개수를 기준으로 내림차순 정렬 (정렬결과에 따라 순위 지정)
-        // Map.Entry 리스트 작성
-        List<Map.Entry<String, Integer>> list_entries = new ArrayList<>(data.entrySet());
-        // 비교함수 Comparator를 사용하여 내림 차순으로 정렬
-        Collections.sort(list_entries, new Comparator<Map.Entry<String, Integer>>() {
-            // compare로 값을 비교
-            public int compare(Map.Entry<String, Integer> obj1, Map.Entry<String, Integer> obj2)
-            {   // 내림 차순으로 정렬
-                return obj2.getValue().compareTo(obj1.getValue());
+        if(FireData.symptoms.size()==0){
+            one.setText("해당없음");
+            two.setText("해당없음");
+            three.setText("해당없음");
+        }else {
+            //각 증상을 key값으로, 증상의 개수를 value값으로 가지는 Map 생성
+            for (int i = 0; i < FireData.symptoms.size(); i++) {
+                data.put(FireData.symptoms.get(i).getPart(), 0);
             }
-        });
+            //증상에 따라 +1
+            for (int i = 0; i < FireData.symptoms.size(); i++) {
+                if (isInSameMonth(FireData.symptoms.get(i).getDate(), strDate))
+                    data.put(FireData.symptoms.get(i).getPart(), data.get(FireData.symptoms.get(i).getPart()) + 1);
+            }
+            //value 개수를 기준으로 내림차순 정렬 (정렬결과에 따라 순위 지정)
+            // Map.Entry 리스트 작성
+            List<Map.Entry<String, Integer>> list_entries = new ArrayList<>(data.entrySet());
+            // 비교함수 Comparator를 사용하여 내림 차순으로 정렬
+            Collections.sort(list_entries, new Comparator<Map.Entry<String, Integer>>() {
+                // compare로 값을 비교
+                public int compare(Map.Entry<String, Integer> obj1, Map.Entry<String, Integer> obj2) {   // 내림 차순으로 정렬
+                    return obj2.getValue().compareTo(obj1.getValue());
+                }
+            });
 
-        if(list_entries.get(0).getValue()!=0) one.setText(list_entries.get(0).getKey());
-        else one.setText("해당없음");
-        if(list_entries.get(1).getValue()!=0) two.setText(list_entries.get(1).getKey());
-        else two.setText("해당없음");
-        if(list_entries.get(2).getValue()!=0) three.setText(list_entries.get(2).getKey());
-        else three.setText("해당없음");
-        //값을 받으려면 list_entries.get(i).getValue().toString();
-
+            if (list_entries.get(0).getValue() != 0) one.setText(list_entries.get(0).getKey());
+            else one.setText("해당없음");
+            if (list_entries.get(1).getValue() != 0) two.setText(list_entries.get(1).getKey());
+            else two.setText("해당없음");
+            if (list_entries.get(2).getValue() != 0) three.setText(list_entries.get(2).getKey());
+            else three.setText("해당없음");
+            //값을 받으려면 list_entries.get(i).getValue().toString();
+        }
     }
 
 
@@ -358,23 +366,23 @@ public class Fragment_conditionAnalysis extends Fragment {
         int secondWeek = 0,sNum = 0;    //2주차 심각도의 총합과 개수
         int thirdWeek = 0,tNum = 0;     //3주차 심각도의 총합과 개수
         int fourthWeek = 0,foNum = 0;   //4주차 심각도의 총합과 개수
-        for(int i=0;i<Person1.symptom.length;i++){
-            if(!Person1.symptom[i].getSymptom_name().equals(symptom)) continue; //사용자가 선택한 증상인지 확인
-            switch (isInSameWeek(Person1.symptom[i].getDate(),strDate)){ //사용자가 선택한 날짜인지 확인 (1주차면 1,2주차면 2..반환)
+        for(int i=0;i<FireData.symptoms.size();i++){
+            if(!FireData.symptoms.get(i).getSymptom_name().equals(symptom)) continue; //사용자가 선택한 증상인지 확인
+            switch (isInSameWeek(FireData.symptoms.get(i).getDate(),strDate)){ //사용자가 선택한 날짜인지 확인 (1주차면 1,2주차면 2..반환)
                 case 1 : //1주차
-                    firstWeek += Integer.parseInt(Person1.symptom[i].getPain_level());
+                    firstWeek += Integer.parseInt(FireData.symptoms.get(i).getPain_level());
                     fNum++;
                     break;
                 case 2 : //2주차
-                    secondWeek += Integer.parseInt(Person1.symptom[i].getPain_level());
+                    secondWeek += Integer.parseInt(FireData.symptoms.get(i).getPain_level());
                     sNum++;
                     break;
                 case 3 : //3주차
-                    thirdWeek += Integer.parseInt(Person1.symptom[i].getPain_level());
+                    thirdWeek += Integer.parseInt(FireData.symptoms.get(i).getPain_level());
                     tNum++;
                     break;
                 case 4 : //4주차
-                    fourthWeek += Integer.parseInt(Person1.symptom[i].getPain_level());
+                    fourthWeek += Integer.parseInt(FireData.symptoms.get(i).getPain_level());
                     foNum++;
                     break;
             }
@@ -424,9 +432,10 @@ public class Fragment_conditionAnalysis extends Fragment {
         //총 기록된 통증 수
         public static int accruedData(String strDate){
             int numberOfData = 0;
-            for(int i=0;i<Person1.symptom.length;i++){
+            for(int i=0;i<FireData.symptoms.size();i++){
                 //데이터가 기록된 날짜가 선택된 달과 일치할경우 1씩 증가
-                if(isInSameMonth(Person1.symptom[i].getDate(),strDate)) numberOfData++;
+                Log.d("총 기록된 통증 수","symptoms : "+FireData.symptoms.get(i).getDate()+", strDate : "+strDate);
+                if(isInSameMonth(FireData.symptoms.get(i).getDate(),strDate)) numberOfData++;
             }
             return numberOfData;
         }
@@ -434,10 +443,10 @@ public class Fragment_conditionAnalysis extends Fragment {
         //심각도 5 이상
         public static int moreThanFive(String strDate){
             int numberOfData = 0;
-            for(int i=0;i<Person1.symptom.length;i++){
+            for(int i=0;i<FireData.symptoms.size();i++){
                 //데이터가 기록된 날짜가 선택된 달과 일치할경우 1씩 증가
-                if(isInSameMonth(Person1.symptom[i].getDate(),strDate)){
-                    if(Integer.parseInt(Person1.symptom[i].getPain_level())>=5) numberOfData++;
+                if(isInSameMonth(FireData.symptoms.get(i).getDate(),strDate)){
+                    if(Integer.parseInt(FireData.symptoms.get(i).getPain_level())>=5) numberOfData++;
                 }
             }
             return numberOfData;
@@ -446,8 +455,7 @@ public class Fragment_conditionAnalysis extends Fragment {
         //병원 예약 횟수
         public static int appointmentDC(String strDate){
             int numberOfData = 0;
-            for(int i=0;i<
-                    Person1.memos.length;i++){
+            for(int i=0;i< Person1.memos.length;i++){
                 //데이터날짜가 선택된 달과 일치할경우 1씩 증가
                 if(isInSameMonth(Person1.memos[i].getDate(),strDate)) numberOfData++;
             }

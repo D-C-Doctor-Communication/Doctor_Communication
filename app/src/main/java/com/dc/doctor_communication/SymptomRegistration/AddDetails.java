@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dc.doctor_communication.FireBaseManagement.FireData;
+import com.dc.doctor_communication.FireBaseManagement.Symptom;
 import com.dc.doctor_communication.MainActivity;
 import com.dc.doctor_communication.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class AddDetails extends AppCompatActivity{
     EditText add_details;
@@ -115,6 +118,11 @@ public class AddDetails extends AppCompatActivity{
                 myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("pain_situation").setValue(selected_worse[0]);
                 myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("accompany_pain").setValue(selected_osymptom[0]);
                 myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("additional").setValue(select_details);
+
+                //데이터 객체 생성
+                Date today = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                FireData.symptoms.add(new Symptom(sdf.format(today),symptom,selected_body[0],selected_levelNm,selected_pattern[0],selected_worse[0],selected_osymptom[0],select_details));
 
                 SharedPreferences sharedPreferences= getSharedPreferences("symptom", MODE_PRIVATE);    // test 이름의 기본모드 설정
                 SharedPreferences.Editor editor= sharedPreferences.edit(); //sharedPreferences를 제어할 editor를 선언

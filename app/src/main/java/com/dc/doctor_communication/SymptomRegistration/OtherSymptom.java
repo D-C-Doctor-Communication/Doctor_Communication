@@ -22,6 +22,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dc.doctor_communication.DataManagement.Symptom2;
+import com.dc.doctor_communication.FireBaseManagement.FireData;
+import com.dc.doctor_communication.FireBaseManagement.Symptom;
 import com.dc.doctor_communication.MainActivity;
 import com.dc.doctor_communication.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -161,6 +163,12 @@ public class OtherSymptom extends AppCompatActivity {
                     myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("painLevel").setValue(selected_levelNm);
                     myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("pain_characteristics").setValue(selected_pattern[0]);
                     myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("pain_situation").setValue(selected_worse[0]);
+
+                    //데이터 객체 생성
+                    Date today = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                    FireData.symptoms.add(new Symptom(sdf.format(today),selected_symptom,selected_body[0],selected_levelNm,selected_pattern[0],selected_worse[0]));
+
 
                     AlertDialog.Builder Dialog_bd = new AlertDialog.Builder(OtherSymptom.this);
                     Dialog_bd.setMessage("증상이 입력되었습니다.");
