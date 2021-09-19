@@ -32,7 +32,7 @@ public class Person1{
     //날짜 이름 시간 장소 종류
     public static Appointment[] appointments = {
             new Appointment("20210806","건강검진","16:00","서울대학병원","검사"),
-            new Appointment("20210819","물리치료","18:00","정형외과","진료"),
-            new Appointment("20210819","물리치료","19:00","정형외과","검사")
+            new Appointment("20210919","물리치료","18:00","정형외과","진료"),
+            new Appointment("20210919","물리치료","19:00","정형외과","검사")
     };
 }
