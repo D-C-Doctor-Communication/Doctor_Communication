@@ -240,7 +240,7 @@ public class Fragment_home extends Fragment {
                                     Log.d("ee",get_part);
                                     //   adapter2.addItem(Person1.symptom[0].getPart(),R.drawable.img_pain_sym1,Integer.parseInt(Person1.symptom[0].getPain_level()),Person1.symptom[0].getPain_characteristics(),Person1.symptom[0].getPain_situation());
 
-                                    adapter2.addItem(get_part, R.drawable.area_head_line, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
+                                    adapter2.addItem(get_part, R.drawable.symptom_head_preview, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "기침": case "인후통": case "콧물": case "귀 통증": case "이명": case "눈물": case "코피": case "객혈": case "가래":
                                     adapter2.addItem(get_part, R.drawable.area_face_line_off, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
@@ -249,28 +249,28 @@ public class Fragment_home extends Fragment {
                                     adapter2.addItem(get_part, R.drawable.area_arm_line_off , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "무릎 통증":
-                                    adapter2.addItem(get_part, R.drawable.area_leg_line_off, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
+                                    adapter2.addItem(get_part, R.drawable.symptom_leg_preview, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "요통":
-                                    adapter2.addItem(get_part, R.drawable.area_waist_line_off , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
+                                    adapter2.addItem(get_part, R.drawable.symptom_back_preview , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "흉통":
                                     adapter2.addItem(get_part, R.drawable.area_chest_line_off , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "복통": case "속 쓰림": case "소화불량":
-                                    adapter2.addItem(get_part, R.drawable.area_stomach_line_on_01 , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
+                                    adapter2.addItem(get_part, R.drawable.symptom_stomach_preview , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "엉덩이 통증":
-                                    adapter2.addItem(get_part, R.drawable.area_buttock_line_off , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
+                                    adapter2.addItem(get_part, R.drawable.symptom_buttock_preview , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "발열": case "피로": case "호흡곤란": case "떨림": case "근육 경련": case "부종": case "가려움":
-                                    adapter2.addItem(get_part, R.drawable.area_face_body_on, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
+                                    adapter2.addItem(get_part, R.drawable.symptom_body_preview, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "손목 통증":
                                     adapter2.addItem(get_part, R.drawable.area_hand_line_01_off , Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 case "발목 통증":
-                                    adapter2.addItem(get_part, R.drawable.area_foot_line_off, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
+                                    adapter2.addItem(get_part, R.drawable.symptom_foot_preview, Integer.parseInt(get_painLevel),get_characteristics, get_situation);
                                     break;
                                 default:
                             }

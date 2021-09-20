@@ -81,6 +81,7 @@ public class Fragment_medicalChart extends Fragment {
     static FirebaseUser user = firebaseAuth.getCurrentUser();
     static String uid = user.getUid();
 
+    static String memotext1="";
     static ArrayList<CalendarDay> datess = new ArrayList<>(); //점을 찍을 날짜를 저장,반환
     static Calendar calendar = Calendar.getInstance();
 
@@ -170,9 +171,22 @@ public class Fragment_medicalChart extends Fragment {
         //진료 일정 조회 + 리스트 생성
         checkAppointment();
         //진료 후기 작성
-        String memotext = monthCalendar.getSameDateMomo(selectedDateString);
-        MC_LineTextView.setText(memotext);
-        MC_LineEditText.setText(memotext);
+        for(int j=0; j<5; j++){
+            myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String get_memo = snapshot.child("memo").getValue(String.class);
+                    Log.d("memo_selecteddate", selectedDateString);
+
+                    MC_LineTextView.setText(get_memo);
+                    MC_LineEditText.setText(get_memo);
+
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) { }
+            });
+        }
+
         //수정버튼을 눌렀을때 텍스트뷰,에디트뷰 상태에 따라 수정기능 on off
         MC_editBtn.setOnClickListener(v -> {
             changeTextEdit(selectedDateString);
@@ -203,8 +217,21 @@ public class Fragment_medicalChart extends Fragment {
             checkAppointment();
 
             //진료 후기 작성
-            String memotext1 = monthCalendar.getSameDateMomo(selectedDateString);
-            MC_LineTextView.setText(memotext1);
+            for(int j=0; j<5; j++){
+                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String get_memo = snapshot.child("memo").getValue(String.class);
+                        Log.d("memo_selecteddate", selectedDateString);
+                        if(!(get_memo.equals("e"))){
+                            MC_LineTextView.setText(get_memo);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) { }
+                });
+            }
+
             //수정버튼을 눌렀을때 텍스트뷰,에디트뷰 상태에 따라 수정기능 on off
             MC_editBtn.setOnClickListener(v -> {
                 changeTextEdit(selectedDateString);
@@ -314,7 +341,23 @@ public class Fragment_medicalChart extends Fragment {
             MC_LineTextView.setVisibility(View.VISIBLE);
             String temp = MC_LineEditText.getText().toString();
             MC_LineTextView.setText(temp);
-            monthCalendar.changeMemo(selectedDateString,temp);
+            // 메모 기록 수정
+            for(int j=0; j<5; j++){
+                String finalStringDateValue = selectedDateString;
+                int finalJ = j;
+                myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Symptom2 appointments = snapshot.getValue(Symptom2.class);
+                        Log.d("get_memo_selecteddate", selectedDateString);
+                        myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(finalJ)).child("memo").setValue(temp);
+                        Log.d("myapp","메모기록이 수정됨!");
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) { }
+                });
+            }
         }
     }
     //팝업창으로부터 입력받은 정보 저장하는 메소드
@@ -374,7 +417,7 @@ public class Fragment_medicalChart extends Fragment {
     //캘린더 관련 메소드
     static class monthCalendar{
         //선택한 날짜에 저장된 메모를 찾아 반환함
-        static public String getSameDateMomo(String memo_selecteddate){
+        /*static public String getSameDateMomo(String memo_selecteddate){
             final String[] memoContent = {""};
             for(int j=0; j<5; j++){
                 myRef.child(uid).child("date").child(memo_selecteddate).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -391,9 +434,9 @@ public class Fragment_medicalChart extends Fragment {
                 });
             }
             return memoContent[0];
-        }
+        }*/
         //선택한 날짜에 저장된 메모를 찾아 메모 수정함
-        public static void changeMemo(String memo_selecteddate, String memo) {
+        /*public static void changeMemo(String memo_selecteddate, String memo) {
                 for(int j=0; j<5; j++){
                     String finalStringDateValue = memo_selecteddate;
                     int finalJ = j;
@@ -410,7 +453,7 @@ public class Fragment_medicalChart extends Fragment {
                         public void onCancelled(@NonNull DatabaseError error) { }
                     });
                 }
-        }
+        }*/
 
         //00.00 (월) 텍스트 표시
         public static void setDateText(int Year, int Month, int Day,TextView selectedDate){
