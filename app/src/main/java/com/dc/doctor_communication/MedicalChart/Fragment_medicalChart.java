@@ -164,7 +164,7 @@ public class Fragment_medicalChart extends Fragment {
             }
         }
         Calendar maxDate = Calendar.getInstance();
-        maxDate.set(2021,8,30);
+        maxDate.set(2021,9,30);
         materialCalendarView.state().edit().setMaximumDate(maxDate).commit();
 
         //진료 일정 조회 + 리스트 생성
