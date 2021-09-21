@@ -12,7 +12,7 @@
         android:fontFamily="@font/nanumsquarebold"
         android:gravity="center"
         android:textColor="#0078ff"
-        android:text="통증이 악화되는 상황"
+        android:text="통증과 동반되는 상황"
         android:textSize="20sp"
         android:layout_marginTop="156dp"
         android:layout_marginLeft="32dp"
