@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -119,10 +121,33 @@ public class AddDetails extends AppCompatActivity{
                 myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("accompany_pain").setValue(selected_osymptom[0]);
                 myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("additional").setValue(select_details);
 
+
+                //객체 저장 인덱스값
+                SharedPreferences gsonIndexSp = getSharedPreferences("gsonIndex",MODE_PRIVATE);
+                int gsonIndex = gsonIndexSp.getInt("gsonIndex",0);
+
+
                 //데이터 객체 생성
                 Date today = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                FireData.symptoms.add(new Symptom(sdf.format(today),symptom,selected_body[0],selected_levelNm,selected_pattern[0],selected_worse[0],selected_osymptom[0],select_details));
+                SharedPreferences gsonSharedPreferences = getSharedPreferences("gsonData",MODE_PRIVATE);
+                //FireData.symptoms.add(new Symptom(sdf.format(today),symptom,selected_body[0],selected_levelNm,selected_pattern[0],selected_worse[0],selected_osymptom[0],select_details));
+                Symptom sympObj = new Symptom(sdf.format(today),symptom,selected_body[0],selected_levelNm,selected_pattern[0],selected_worse[0],selected_osymptom[0],select_details);
+                String symptomGson = "";
+                Gson gson = new GsonBuilder().create();
+                symptomGson= gson.toJson(sympObj,Symptom.class);
+                SharedPreferences.Editor gsonEditor = gsonSharedPreferences.edit();
+                gsonEditor.putString(Integer.toString(gsonIndex),symptomGson);
+                //인덱스 ++
+                SharedPreferences.Editor gsonIndexEditor = gsonIndexSp.edit();
+                gsonIndexEditor.putInt("gsonIndex",gsonIndex++);
+                gsonEditor.commit();
+
+
+
+
+
+
 
                 SharedPreferences sharedPreferences= getSharedPreferences("symptom", MODE_PRIVATE);    // test 이름의 기본모드 설정
                 SharedPreferences.Editor editor= sharedPreferences.edit(); //sharedPreferences를 제어할 editor를 선언

@@ -3,6 +3,7 @@ package com.dc.doctor_communication.ConditionAnalysis;
 //android 버전 30쓸거면 androidx.Fragment 사용할것
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,7 @@ import androidx.fragment.app.Fragment;
 
 import com.dc.doctor_communication.DataManagement.Person1;
 import com.dc.doctor_communication.FireBaseManagement.FireData;
+import com.dc.doctor_communication.FireBaseManagement.Symptom;
 import com.dc.doctor_communication.R;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
@@ -36,6 +38,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,6 +52,12 @@ import java.util.Map;
 
 
 public class Fragment_conditionAnalysis extends Fragment {
+
+
+    private SharedPreferences gsonSharedPreferences; // = getSharedPreferences("gsonData",MODE_PRIVATE);
+    private String gsonSymptom;
+    private Gson gson;
+
 
     //상단 날짜 선택 바
     private Button nextBtn,previousBtn;
@@ -86,6 +96,26 @@ public class Fragment_conditionAnalysis extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         Log.d("myapp","상태분석탭 열림");
         View view =  inflater.inflate(R.layout.fragment_condition_analysis,container,false);
+
+
+        //객체 저장 정보
+        gsonSharedPreferences = getActivity().getSharedPreferences("gsonData", Context.MODE_PRIVATE);
+        gson =new GsonBuilder().create();
+
+
+        for(int i=0;i<2;i++){
+            Log.d("myapp","---------------------------");
+            gsonSymptom = gsonSharedPreferences.getString(Integer.toString(i),"");
+            Log.d("data",gsonSymptom);
+            if(!gsonSymptom.equals("")){
+                Symptom symptom = gson.fromJson(gsonSymptom, Symptom.class);
+                Log.d("gsonSymptom",symptom.getSymptom_name());
+                Log.d("gsonSymptom",symptom.getPain_level());
+            }
+        }
+
+
+
 
         //상단 날짜 선택 바
         nextBtn = view.findViewById(R.id.next_btn);
