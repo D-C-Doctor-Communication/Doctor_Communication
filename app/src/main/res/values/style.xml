@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
+    <!-- 초기 가이드 화면 테마 -->
+    <style name="Theme.AppCompat.Transparent.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
 
     <!-- 스플래쉬 테마 -->
     <style name="SplashTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -24,6 +33,7 @@
         <item name="windowNoTitle">true</item>
 
     </style>
+
 
 
 

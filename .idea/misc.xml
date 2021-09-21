@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/drawable-v24/seekbar.xml" value="0.1" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/drawable-v24/seekbar_thumb.xml" value="0.1" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/add_details.xml" value="0.18614130434782608" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/other_symptom.xml" value="0.18614130434782608" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/search_list.xml" value="0.15443840579710144" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_body_arm.xml" value="0.15443840579710144" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_body_back.xml" value="0.1" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_body_body.xml" value="0.1" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_body_buttock.xml" value="0.1" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_body_chest.xml" value="0.1" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_body_face.xml" value="0.1" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_body_foot.xml" value="0.1" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_body_hand.xml" value="0.1" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_body_head.xml" value="0.1" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_body_leg.xml" value="0.1" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_body_stomach.xml" value="0.1" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_body_waist.xml" value="0.1" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_level.xml" value="0.22" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_pattern.xml" value="0.14175724637681159" />
+        <entry key="..\:/Summer_Android/Doctor_Communication/app/src/main/res/layout/select_worse.xml" value="0.20199275362318841" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

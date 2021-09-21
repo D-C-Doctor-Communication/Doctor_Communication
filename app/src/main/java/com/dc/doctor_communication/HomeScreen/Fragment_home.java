@@ -105,7 +105,7 @@ public class Fragment_home extends Fragment {
 
 //카드1 - 증상등록으로 이동
         btn_addSymptom.setOnClickListener(v -> { //람다형식 사용 ~ new Button.OnClickListener()와 같은 기능
-            Intent addSymptom = new Intent(getContext(), Search.class);
+            Intent addSymptom = new Intent(getContext(), SearchList.class);
             addSymptom.putExtra("count",count);
             startActivity(addSymptom);
             getActivity().overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
