@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dc.doctor_communication.DataManagement.Symptom;
 import com.dc.doctor_communication.DataManagement.Symptom2;
+import com.dc.doctor_communication.GuideScreen.GuideActivity1;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -142,7 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 // 가입이 이루어져을시 가입 화면을 빠져나감
                                 Toast.makeText(RegisterActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                Intent intent = new Intent(RegisterActivity.this, GuideActivity1.class);
 
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);

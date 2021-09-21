@@ -31,6 +31,9 @@ android {
 }
 
 dependencies {
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.8'
+
 //bottom navBar 스타일
     //noinspection GradleCompatible
     implementation 'com.android.support:design:30.0.0'
