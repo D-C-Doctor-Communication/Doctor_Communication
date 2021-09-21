@@ -262,11 +262,15 @@ public class MeetingDoc extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String uid = user.getUid();
 
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM", Locale.KOREA);
+        String today = sdf.format(date);
+
         //선택된 증상 데이터 선별
-        for(int i=1; i<=30; i++){
+        for(int i=1; i<=Integer.parseInt(EndDateOfMonth()); i++){
             fire_date = String.valueOf(i);
             if((int)(Math.log10(i)+1) == 1) fire_date = "0"+fire_date;
-            fire_date = "202109" +  fire_date;
+            fire_date = today +  fire_date;
             if(checkIsBetween(fire_date)){
                 Log.d("myapp22","checkIsBetween통과함");
                 for(int j=0; j<5; j++){
@@ -340,8 +344,17 @@ public class MeetingDoc extends AppCompatActivity {
         }
 
     }
+    public static String EndDateOfMonth(){
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int end = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd", Locale.KOREA);
+        cal.set(year, month, end);
+        String endDate = dateFormat.format(cal.getTime());
+        return endDate;
+    }
     //증상별로 데이터 넘겨주기
     public void sympOnClick(View view){
         for(int i=0;i<buttonKey.length;i++){

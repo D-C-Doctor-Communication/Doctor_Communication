@@ -41,6 +41,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -85,6 +86,7 @@ public class Fragment_medicalChart extends Fragment {
     static ArrayList<CalendarDay> datess = new ArrayList<>(); //점을 찍을 날짜를 저장,반환
     static Calendar calendar = Calendar.getInstance();
 
+    static int Year, Month, Day;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d("myapp", "진료기록탭 열림");
@@ -133,17 +135,19 @@ public class Fragment_medicalChart extends Fragment {
         //캘린더 기본 선택된 날짜 지정
         materialCalendarView.setDateSelected(date,true);
         //캘린더 점찍기
-        for(int i = 1; i <= 30; i++){
+        Log.d("End", EndDateOfMonth()+"");
+        Log.d("End", Month+"");
+        for(int i = 1; i <= EndDateOfMonth(); i++){
             fire_date = String.valueOf(i);
-            if((int)(Math.log10(i)+1) == 1) fire_date = "0"+fire_date;
-            fire_date = "202109" +  fire_date;
+            if((int)(Math.log10(i)+1) == 1) fire_date = "0" + fire_date;
+            fire_date = Year + Month +  fire_date;
             for(int j=0; j<5; j++){
                 String finalStringDateValue = fire_date;
                 myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String get_symptom = snapshot.child("symptom").getValue(String.class);
-                        if(!(get_symptom.equals("e"))){
+                        if(!(Objects.equals(get_symptom, "e")) && get_symptom != null){
                             String dateValue = finalStringDateValue;
                             Log.d("get_dateValue", dateValue);
 
@@ -195,9 +199,9 @@ public class Fragment_medicalChart extends Fragment {
         //캘린더 날짜 변경시 -
         materialCalendarView.setOnDateChangedListener((widget, date1, selected) -> {
             //선택된 날짜 저장
-            int Year = date1.getYear();
-            int Month = date1.getMonth()+1;
-            int Day = date1.getDay();
+            Year = date1.getYear();
+            Month = date1.getMonth()+1;
+            Day = date1.getDay();
             //선택된 날짜 텍스트 변경 00.00(월)
             monthCalendar.setDateText(Year,Month,Day,selectedDate);
             //00000000형식의 날짜 저장
@@ -260,11 +264,11 @@ public class Fragment_medicalChart extends Fragment {
         //listview 참조 및 adapter 연결
         MCListViewAdapter listViewAdapter = new MCListViewAdapter();
 
-        for(int i = 1; i <= 30; i++){
+        for(int i = 1; i <= EndDateOfMonth(); i++){
             fire_date = String.valueOf(i);
             listDataCount = 0;
             if((int)(Math.log10(i)+1) == 1) fire_date = "0"+fire_date;
-            fire_date = "202109" +  fire_date;
+            fire_date = Year + Month + fire_date;
             for(int j=0; j<5; j++){
                 String finalStringDateValue = fire_date;
                 if (finalStringDateValue.equals(selectedDateString)) {
@@ -413,48 +417,18 @@ public class Fragment_medicalChart extends Fragment {
             }
         }
     }
+    // 해당 달의 말일 구하기
+    public static int EndDateOfMonth(){
+        Calendar cal = Calendar.getInstance();
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd", Locale.KOREA);
+        cal.set(Year, Month-1, Day);
+
+        int endDate = cal.getMaximum(Calendar.DAY_OF_MONTH);
+        return endDate;
+    }
     //캘린더 관련 메소드
     static class monthCalendar{
-        //선택한 날짜에 저장된 메모를 찾아 반환함
-        /*static public String getSameDateMomo(String memo_selecteddate){
-            final String[] memoContent = {""};
-            for(int j=0; j<5; j++){
-                myRef.child(uid).child("date").child(memo_selecteddate).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String get_memo = snapshot.child("memo").getValue(String.class);
-                        Log.d("memo_selecteddate", memo_selecteddate);
-                        if(!(get_memo.equals("e"))){
-                            memoContent[0] = get_memo;
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) { }
-                });
-            }
-            return memoContent[0];
-        }*/
-        //선택한 날짜에 저장된 메모를 찾아 메모 수정함
-        /*public static void changeMemo(String memo_selecteddate, String memo) {
-                for(int j=0; j<5; j++){
-                    String finalStringDateValue = memo_selecteddate;
-                    int finalJ = j;
-                    myRef.child(uid).child("date").child(memo_selecteddate).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Symptom2 appointments = snapshot.getValue(Symptom2.class);
-                            Log.d("get_memo_selecteddate", memo_selecteddate);
-                            myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(finalJ)).child("memo").setValue(memo);
-                            Log.d("myapp","메모기록이 수정됨!");
-
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) { }
-                    });
-                }
-        }*/
-
         //00.00 (월) 텍스트 표시
         public static void setDateText(int Year, int Month, int Day,TextView selectedDate){
             CalendarDay date = CalendarDay.from(Year,Month,Day);

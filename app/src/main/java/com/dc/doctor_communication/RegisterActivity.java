@@ -126,7 +126,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 myRef.child(uid).child("name").setValue(name);
 
                                 String date="";
-                                String schedule="";
                                 for(int i=1; i<=30; i++) {
                                     int length = (int) (Math.log10(i) + 1);
                                     if (length == 1) {
@@ -134,6 +133,16 @@ public class RegisterActivity extends AppCompatActivity {
                                     } else {
                                         date = "202109" + i;
                                     }
+                                    for(int j=0;j<5;j++){
+                                        String jj = j+"";
+                                        myRef.child(uid).child("date").child(date).child(jj).setValue(hashMap);
+                                    }
+                                }
+                                for(int i=1; i<=31; i++) {
+                                    int length = (int) (Math.log10(i) + 1);
+                                    if (length == 1) {
+                                        date = "2021100" + i;
+                                    } else date = "202110" + i;
                                     for(int j=0;j<5;j++){
                                         String jj = j+"";
                                         myRef.child(uid).child("date").child(date).child(jj).setValue(hashMap);
