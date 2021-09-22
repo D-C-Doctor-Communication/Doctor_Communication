@@ -45,7 +45,11 @@ public class GraphDialog extends Dialog {
     }
     public GraphDialog(@NonNull Context context,String startDate,String buttonValue) {
         super(context);
-        this.startDate = startDate;
+        if(startDate.length()==5){
+            this.startDate = startDate.substring(0,4)+"0"+startDate.substring(4);
+        } else {
+            this.startDate = startDate;
+        }
         this.buttonValue = buttonValue;
     }
     public GraphDialog(@NonNull Context context, int themeResId) {
@@ -67,7 +71,7 @@ public class GraphDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dc_graph_popup);
 
-        Log.d("myapp","심각도 그래프 들어옴");
+        Log.d("myapp","심각도 그래프 들어옴"+startDate);
 
         /* SharedPreference 사용한 객체 정보 사용 */
         Gson gson =new GsonBuilder().create();

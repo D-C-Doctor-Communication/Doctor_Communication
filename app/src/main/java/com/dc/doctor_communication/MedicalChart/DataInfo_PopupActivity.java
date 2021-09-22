@@ -1,5 +1,6 @@
 package com.dc.doctor_communication.MedicalChart;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Person;
@@ -90,81 +91,59 @@ public class DataInfo_PopupActivity extends AppCompatActivity {
 
                     if(get_symptom.equals("e") && finalJ == 0){
                         Log.d("no_index_J", finalJ+"");
-
+                        InfoDialog infoDialog = new InfoDialog();
+                        infoDialog.showDialog(DataInfo_PopupActivity.this);
                     }
                     else if(!(get_symptom.equals("e"))){
                         Log.d("cnt_symptom", get_symptom);
                         String painLevelText = "";
                         switch (Integer.parseInt(get_painLevel)) {
-                            case 0:
-                                painLevelText = "통증이 없음";
-                                break;
-                            case 1:
-                                painLevelText = "괜찮은 통증";
-                                break;
-                            case 2:
-                                painLevelText = "조금 아픈 통증";
-                                break;
-                            case 3:
-                                painLevelText = "웬만한 통증";
-                                break;
-                            case 4:
-                                painLevelText = "괴로운 통증";
-                                break;
-                            case 5:
-                                painLevelText = "매우 괴로운 통증";
-                                break;
-                            case 6:
-                                painLevelText = "극심한 통증";
-                                break;
-                            case 7:
-                                painLevelText = "매우 극심한 통증";
-                                break;
-                            case 8:
-                                painLevelText = "끔찍한 통증";
-                                break;
-                            case 9:
-                                painLevelText = "참을 수 없는 통증";
-                                break;
-                            case 10:
-                                painLevelText = "상상할 수 없는 통증";
-                                break;
-                            default:
-                                painLevelText = "알 수 없음";
+                            case 0: painLevelText = "통증이 없음"; break;
+                            case 1: painLevelText = "괜찮은 통증"; break;
+                            case 2: painLevelText = "조금 아픈 통증"; break;
+                            case 3: painLevelText = "웬만한 통증"; break;
+                            case 4: painLevelText = "괴로운 통증"; break;
+                            case 5: painLevelText = "매우 괴로운 통증"; break;
+                            case 6: painLevelText = "극심한 통증"; break;
+                            case 7: painLevelText = "매우 극심한 통증"; break;
+                            case 8: painLevelText = "끔찍한 통증"; break;
+                            case 9: painLevelText = "참을 수 없는 통증"; break;
+                            case 10: painLevelText = "상상할 수 없는 통증"; break;
+                            default: painLevelText = "알 수 없음";
                         }
                         switch (get_symptom) {
                             case "두통":
-                                image.setImageResource(R.drawable.area_head_line);
+                                image.setImageResource(R.drawable.symptom_head_preview);
                                 break;
                             case "기침": case "인후통": case "콧물": case "귀 통증": case "이명": case "눈물": case "코피": case "객혈": case "가래":
-                                image.setImageResource(R.drawable.area_face_line_off);
+                                image.setImageResource(R.drawable.symptom_face_preview);
                                 break;
                             case "팔꿈치 통증":
-                                image.setImageResource(R.drawable.area_arm_line_off);
+                                image.setImageResource(R.drawable.symptom_arm_preview);
                                 break;
                             case "무릎 통증":
-                                image.setImageResource(R.drawable.area_leg_line_off);
+                                image.setImageResource(R.drawable.symptom_leg_preview);
                                 break;
                             case "요통":
-                                image.setImageResource(R.drawable.area_waist_line_off);
+                                image.setImageResource(R.drawable.symptom_back_preview);
                                 break;
                             case "흉통":
-                                image.setImageResource(R.drawable.area_chest_line_off);
+                                image.setImageResource(R.drawable.symptom_chest_preview);
                                 break;
                             case "복통": case "속 쓰림": case "소화불량":
-                                image.setImageResource(R.drawable.area_stomach_line_on_01);
+                                image.setImageResource(R.drawable.symptom_stomach_preview);
                                 break;
                             case "엉덩이 통증":
-                                image.setImageResource(R.drawable.area_buttock_line_off);
+                                image.setImageResource(R.drawable.symptom_buttock_preview);
                                 break;
                             case "발열": case "피로": case "호흡곤란": case "떨림": case "근육 경련": case "부종": case "가려움":
-                                image.setImageResource(R.drawable.area_face_body_on);
+                                image.setImageResource(R.drawable.symptom_body_preview);
                                 break;
                             case "손목 통증":
-                                image.setImageResource(R.drawable.area_hand_line_01_off);
+                                image.setImageResource(R.drawable.symptom_hand_preview);
                                 break;
                             case "발목 통증":
-                                image.setImageResource(R.drawable.area_foot_line_off);
+                                image.setImageResource(R.drawable.symptom_foot_preview);
                                 break;
                             default:
                         }
@@ -173,6 +152,7 @@ public class DataInfo_PopupActivity extends AppCompatActivity {
                         degree.setText(painLevelText);
                         condition.setText(get_characteristics);
                         situation.setText(get_situation);
+                        Log.d("동반증상",get_add+"");
                         if ("e".equalsIgnoreCase(get_add)) with.setText("해당없음");
                         else with.setText(get_add);
 
@@ -183,6 +163,27 @@ public class DataInfo_PopupActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
                 }
             });
+        }
+    }
+
+    //이용불가 팝업
+    public class InfoDialog{
+        public void showDialog(Activity activity) {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.info_popup);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            TextView textView = dialog.findViewById(R.id.noData);
+            textView.setText("등록된 증상기록이 없습니다.");
+            dialog.setCancelable(true);
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.setOnCancelListener(dialog1 -> {
+                finish();
+            });
+            dialog.setOnDismissListener(dialog1 -> {
+                finish();
+            });
+            dialog.show();
         }
     }
 
