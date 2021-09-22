@@ -1,64 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
+
+    <FrameLayout
+        android:id="@+id/loading"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/loading_overlay_color"
+        android:clickable="true"
+        android:elevation="3dp"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:gravity="center"
-        android:textSize="25sp"
-        android:text="회원가입"
-        android:id="@+id/txtSup" />
-    <LinearLayout
+        android:id="@+id/txtSup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:text="Sign up"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#0C64E4"/>
+
+    <EditText
+        android:background="@drawable/rounded_border"
+        android:hint="name"
+        android:id="@+id/nameEt"
+        android:layout_below="@id/txtSup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/txtSup"
-        android:padding="40dp"
-        android:layout_margin="10dp">
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="32dp"
+        android:imeOptions="actionNext"
+        android:inputType="textPersonName"
+        android:textColor="@color/background_color_reverse"
+        android:textColorHint="@color/background_color_reverse"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtSup"/>
+    <EditText
+        android:background="@drawable/rounded_border"
+        android:hint="email"
+        android:id="@+id/emailEt"
+        android:layout_below="@id/nameEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/background_color_reverse"
+        android:textColorHint="@color/background_color_reverse"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameEt"/>
+    <EditText
+        android:background="@drawable/rounded_border"
+        android:hint="password"
+        android:id="@+id/passwordEdt"
+        android:layout_below="@id/emailEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:imeOptions="actionNext"
+        android:inputType="textPassword"
+        android:textColor="@color/background_color_reverse"
+        android:textColorHint="@color/background_color_reverse"
+        android:textSize="20sp"
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/nameEt"
-            android:textSize="17sp"
-            android:hint=" 이름"
-            android:inputType="textPersonName"
-            android:gravity="left"
-            android:layout_marginTop="20dp" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/emailEt"
-            android:textSize="17sp"
-            android:hint=" 이메일"
-            android:inputType="textEmailAddress"
-            android:gravity="left"
-            android:layout_marginTop="20dp" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/passwordEdt"
-            android:textSize="17sp"
-            android:hint=" 비밀번호"
-            android:inputType="textPassword"
-            android:gravity="left"
-            android:layout_marginTop="20dp"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/passwordcheckEdt"
-            android:textSize="17sp"
-            android:hint=" 비밀번호 체크"
-            android:inputType="textPassword"
-            android:gravity="left"
-            android:layout_marginTop="20dp"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/register2_btn"
-            android:layout_marginTop="35dp"
-            android:text="가입하기" />
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailEt"/>
+    <EditText
+        android:background="@drawable/rounded_border"
+        android:hint="password check"
+        android:id="@+id/passwordcheckEdt"
+        android:layout_below="@id/passwordEdt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:imeOptions="actionNext"
+        android:inputType="textPassword"
+        android:textColor="@color/background_color_reverse"
+        android:textColorHint="@color/background_color_reverse"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordEdt"/>
+
+    <Button
+        android:layout_below="@id/passwordcheckEdt"
+        android:id="@+id/register2_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/blue_button"
+        android:text="회원가입"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordcheckEdt" />
+
 </RelativeLayout>

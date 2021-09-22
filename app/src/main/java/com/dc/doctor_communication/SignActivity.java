@@ -38,7 +38,7 @@ public class SignActivity extends AppCompatActivity{
     // 파이어베이스 인증 객체 생성
     private FirebaseAuth firebaseAuth;
     // 구글  로그인 버튼
-    private SignInButton buttonGoogle;
+    //private SignInButton buttonGoogle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class SignActivity extends AppCompatActivity{
         // --google
         // 파이어베이스 인증 객체 선언
         firebaseAuth = FirebaseAuth.getInstance();
-        buttonGoogle = findViewById(R.id.btn_googleSignIn);
+        //buttonGoogle = findViewById(R.id.btn_googleSignIn);
 
         // Configure Google Sign In
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -70,14 +70,14 @@ public class SignActivity extends AppCompatActivity{
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
         // 구글 버튼
-        buttonGoogle.setOnClickListener(new View.OnClickListener() {
+        /*buttonGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent signInIntent = googleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
                 overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
             }
-        });
+        });*/
 
         // 가입 버튼
         mResigettxt.setOnClickListener(v -> {
