@@ -18,9 +18,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.dc.doctor_communication.DataManagement.Person1;
+import com.dc.doctor_communication.DataManagement.Symptom2;
 import com.dc.doctor_communication.FireBaseManagement.FireData;
 import com.dc.doctor_communication.FireBaseManagement.Symptom;
 import com.dc.doctor_communication.R;
@@ -36,8 +38,11 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -48,6 +53,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -64,6 +70,7 @@ public class Fragment_conditionAnalysis extends Fragment {
     //[병원 예약 횟수, 심각도 5 이상, 총 기록된 통증 수]
     //병원 예약 횟수 텍스트
     private TextView reservation_count;
+    static int numberOfReservation;
     //심각도 5 이상 텍스트
     private TextView severity_more_5;
     //총 기록된 통증 수 텍스트
@@ -93,6 +100,8 @@ public class Fragment_conditionAnalysis extends Fragment {
     private TextView secondSymptom_count;
     private TextView thirdSymptom_count;
 
+
+
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -115,10 +124,9 @@ public class Fragment_conditionAnalysis extends Fragment {
             }
         }
 
-        for(int i=0;i<FireData.symptoms.size();i++){
-            Log.d("datadata",i+"번째 값 : "+FireData.symptoms.get(i).getSymptom_name());
-            Log.d("datadata",i+"번째 값 : "+FireData.symptoms.get(i).getPain_level());
-        }
+        /* (병원 예약 수) SharedPreference 사용한 객체 정보 사용 */
+        SharedPreferences reservationSharedPreferences = getActivity().getSharedPreferences("reservationFile",Context.MODE_PRIVATE);
+
 
 
         //상단 날짜 선택 바
@@ -127,6 +135,7 @@ public class Fragment_conditionAnalysis extends Fragment {
         monthSelect = view.findViewById(R.id.month_select);
         //병원 예약 횟수 텍스트
         reservation_count = view.findViewById(R.id.reservation_count);
+        numberOfReservation = 0;
         //심각도 5 이상 텍스트
         severity_more_5 = view.findViewById(R.id.severity_more_5);
         //총 기록된 통증 수 텍스트
@@ -157,10 +166,10 @@ public class Fragment_conditionAnalysis extends Fragment {
         //날짜 비교 위해 날짜형식을 "yyyy년 MM월" -> 000000형으로 바꿈
         String dataString = changeToString(monthSelectText);
         //기본 선택된 달의 각 텍스트 표시
-        if(OrganizedData.appointmentDC(dataString)<10)
-            reservation_count.setText("0"+OrganizedData.appointmentDC(dataString)+"");
+        if(reservationSharedPreferences.getInt("reservation_count",0)<10)
+            reservation_count.setText("0"+reservationSharedPreferences.getInt("reservation_count",0)+"");
         else
-            reservation_count.setText(OrganizedData.appointmentDC(dataString)+"");
+            reservation_count.setText(reservationSharedPreferences.getInt("reservation_count",0)+"");
         if(OrganizedData.moreThanFive(dataString)<10)
             severity_more_5.setText("0"+OrganizedData.moreThanFive(dataString)+"");
         else
@@ -182,15 +191,16 @@ public class Fragment_conditionAnalysis extends Fragment {
 
         //상단 날짜 선택 바 -> 이전 버튼 눌렀을 경우 1달씩 줄임
         previousBtn.setOnClickListener(v -> {
+            numberOfReservation = 0;
             time.add(Calendar.MONTH , -1);
             String previousMonthText = simpleFormatting.format(time.getTime());
             monthSelect.setText(previousMonthText);
             //버튼 눌릴때마다 텍스트 새로고침
             String dataStr = changeToString(previousMonthText); //날짜형식 바꿈
-            if(OrganizedData.appointmentDC(dataStr)<10)
-                reservation_count.setText("0"+OrganizedData.appointmentDC(dataStr)+"");
+            if(reservationSharedPreferences.getInt("reservation_count",0)<10)
+                reservation_count.setText("0"+reservationSharedPreferences.getInt("reservation_count",0)+"");
             else
-                reservation_count.setText(OrganizedData.appointmentDC(dataStr)+"");
+                reservation_count.setText(reservationSharedPreferences.getInt("reservation_count",0)+"");
             if(OrganizedData.moreThanFive(dataStr)<10)
                 severity_more_5.setText("0"+OrganizedData.moreThanFive(dataStr)+"");
             else
@@ -221,15 +231,16 @@ public class Fragment_conditionAnalysis extends Fragment {
 
         //상단 날짜 선택 바 -> 다음 버튼 눌렀을 경우 1달씩 늘림
         nextBtn.setOnClickListener(v -> {
+            numberOfReservation = 0;
             time.add(Calendar.MONTH , +1);
             String nextMonthText = simpleFormatting.format(time.getTime());
             monthSelect.setText(nextMonthText);
             //버튼 눌릴때마다 텍스트 새로고침
             String dataStr = changeToString(nextMonthText); //날짜형식 바꿈
-            if(OrganizedData.appointmentDC(dataStr)<10)
-                reservation_count.setText("0"+OrganizedData.appointmentDC(dataStr)+"");
+            if(reservationSharedPreferences.getInt("reservation_count",0)<10)
+                reservation_count.setText("0"+reservationSharedPreferences.getInt("reservation_count",0)+"");
             else
-                reservation_count.setText(OrganizedData.appointmentDC(dataStr)+"");
+                reservation_count.setText(reservationSharedPreferences.getInt("reservation_count",0)+"");
             if(OrganizedData.moreThanFive(dataStr)<10)
                 severity_more_5.setText("0"+OrganizedData.moreThanFive(dataStr)+"");
             else
@@ -554,14 +565,19 @@ public class Fragment_conditionAnalysis extends Fragment {
             return numberOfData;
         }
 
-        //병원 예약 횟수
-        public static int appointmentDC(String strDate){
-            int numberOfData = 0;
-            for(int i=0;i< Person1.memos.length;i++){
-                //데이터날짜가 선택된 달과 일치할경우 1씩 증가
-                if(isInSameMonth(Person1.memos[i].getDate(),strDate)) numberOfData++;
-            }
-            return numberOfData;
+
+        // 해당 달의 말일 구하기
+        public static int EndDateOfMonth(String strDate){
+            Log.d("EndDate",strDate);
+            Calendar cal = Calendar.getInstance();
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd", Locale.KOREA);
+            cal.set(Integer.parseInt(strDate.substring(0,4))
+                    , Integer.parseInt(strDate.substring(4,6))
+                    , 1);
+
+            int endDate = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+            return endDate;
         }
 
     }

@@ -87,7 +87,7 @@ public class DataInfo_PopupActivity extends AppCompatActivity {
                     String get_painLevel = snapshot.child("painLevel").getValue(String.class);
                     String get_characteristics = snapshot.child("pain_characteristics").getValue(String.class);
                     String get_situation = snapshot.child("pain_situation").getValue(String.class);
-                    String get_add = snapshot.child("additional").getValue(String.class);
+                    String get_add = snapshot.child("accompany_pain").getValue(String.class);
 
                     if(get_symptom.equals("e") && finalJ == 0){
                         Log.d("no_index_J", finalJ+"");
@@ -154,6 +154,7 @@ public class DataInfo_PopupActivity extends AppCompatActivity {
                         situation.setText(get_situation);
                         Log.d("동반증상",get_add+"");
                         if ("e".equalsIgnoreCase(get_add)) with.setText("해당없음");
+                        else if (get_add==null) with.setText("해당없음");
                         else with.setText(get_add);
 
                         container.addView(view);

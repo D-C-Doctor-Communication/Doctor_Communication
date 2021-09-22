@@ -15,11 +15,6 @@
         android:theme="@style/Theme.DoctorCommunication"
         android:usesCleartextTraffic="true">
 
-        <!-- Guide -->
-        <activity android:name=".GuideScreen.GuideActivity1"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"/>
-        <activity android:name=".GuideScreen.GuideActivity2"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"/>
 
         <!-- Splash -->
         <activity
@@ -49,6 +44,7 @@
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Recording.Recording"

@@ -1,6 +1,8 @@
 package com.dc.doctor_communication.MedicalChart;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -113,7 +115,7 @@ public class Fragment_medicalChart extends Fragment {
         //진료 일정 ListView
         listView = (ListView) view.findViewById(R.id.MC_listView);
         //진료 후기 작성할때 키보드가 UI 가리는것 방지
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.Soft_INPUT_ADJUST_PAN);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         //기본 표시 날짜(오늘)
         CalendarDay date = CalendarDay.today();
@@ -393,6 +395,13 @@ public class Fragment_medicalChart extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQ_ADD_CONTACT) {
             if (resultCode == RESULT_OK) {
+                //SharedPreference 해당 날짜(년,월) 에 대한 예약 횟수 증가
+                SharedPreferences reservationSharedPreferences = getActivity().getSharedPreferences("reservationFile", Context.MODE_PRIVATE);
+                int count = reservationSharedPreferences.getInt("reservation_count",0);
+                SharedPreferences.Editor editor = reservationSharedPreferences.edit();
+                editor.putInt("reservation_count",count+1);
+                editor.commit();
+
                 //일정이 존재하면 listView visible로 바꿈
                 noneData.setVisibility(View.INVISIBLE);
                 listView.setVisibility(View.VISIBLE);

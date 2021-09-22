@@ -152,7 +152,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 // 가입이 이루어져을시 가입 화면을 빠져나감
                                 Toast.makeText(RegisterActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(RegisterActivity.this, GuideActivity1.class);
+                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
 
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
