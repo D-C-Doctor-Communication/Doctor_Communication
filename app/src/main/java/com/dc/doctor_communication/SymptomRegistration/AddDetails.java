@@ -122,27 +122,35 @@ public class AddDetails extends AppCompatActivity{
                 myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("additional").setValue(select_details);
 
 
-                //객체 저장 인덱스값
-                SharedPreferences gsonIndexSp = getSharedPreferences("gsonIndex",MODE_PRIVATE);
+
+
+                /* SharedPreference 사용한 객체 정보 저장 */
+
+                //Shared 준비
+                SharedPreferences gsonIndexSp = getSharedPreferences("gsonIndexFile",MODE_PRIVATE);
+                SharedPreferences gsonSharedPreferences = getSharedPreferences("gsonDataFile",MODE_PRIVATE);
+                SharedPreferences.Editor gsonEditor = gsonSharedPreferences.edit();
+                SharedPreferences.Editor gsonIndexEditor = gsonIndexSp.edit();
+
+                //인덱스값
                 int gsonIndex = gsonIndexSp.getInt("gsonIndex",0);
+                Log.d("myapp","인덱스값 : "+gsonIndex);
 
-
-                //데이터 객체 생성
+                //데이터 객체 생성 + 저장
                 Date today = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                SharedPreferences gsonSharedPreferences = getSharedPreferences("gsonData",MODE_PRIVATE);
-                //FireData.symptoms.add(new Symptom(sdf.format(today),symptom,selected_body[0],selected_levelNm,selected_pattern[0],selected_worse[0],selected_osymptom[0],select_details));
                 Symptom sympObj = new Symptom(sdf.format(today),symptom,selected_body[0],selected_levelNm,selected_pattern[0],selected_worse[0],selected_osymptom[0],select_details);
                 String symptomGson = "";
                 Gson gson = new GsonBuilder().create();
                 symptomGson= gson.toJson(sympObj,Symptom.class);
-                SharedPreferences.Editor gsonEditor = gsonSharedPreferences.edit();
-                gsonEditor.putString(Integer.toString(gsonIndex),symptomGson);
-                //인덱스 ++
-                SharedPreferences.Editor gsonIndexEditor = gsonIndexSp.edit();
-                gsonIndexEditor.putInt("gsonIndex",gsonIndex++);
-                gsonEditor.commit();
 
+                //키값에 value 저장
+                gsonEditor.putString(Integer.toString(gsonIndex),symptomGson);
+                //키값 ++
+                gsonIndexEditor.putInt("gsonIndex",gsonIndex+1);
+                //변경정보 저장
+                gsonEditor.commit();
+                gsonIndexEditor.commit();
 
 
 

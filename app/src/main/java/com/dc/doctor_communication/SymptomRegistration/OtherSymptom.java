@@ -33,6 +33,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -164,10 +166,38 @@ public class OtherSymptom extends AppCompatActivity {
                     myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("pain_characteristics").setValue(selected_pattern[0]);
                     myRef.child(uid).child("date").child(date_txt).child(String.valueOf(repeat)).child("pain_situation").setValue(selected_worse[0]);
 
-                    //데이터 객체 생성
+
+
+                    /* SharedPreference 사용한 객체 정보 저장 */
+
+                    //Shared 준비
+                    SharedPreferences gsonIndexSp = getSharedPreferences("gsonIndexFile",MODE_PRIVATE);
+                    SharedPreferences gsonSharedPreferences = getSharedPreferences("gsonDataFile",MODE_PRIVATE);
+                    SharedPreferences.Editor gsonEditor = gsonSharedPreferences.edit();
+                    SharedPreferences.Editor gsonIndexEditor = gsonIndexSp.edit();
+
+                    //인덱스값
+                    int gsonIndex = gsonIndexSp.getInt("gsonIndex",0);
+                    Log.d("myapp","인덱스값 : "+gsonIndex);
+
+                    //데이터 객체 생성 + 저장
                     Date today = new Date();
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                    FireData.symptoms.add(new Symptom(sdf.format(today),selected_symptom,selected_body[0],selected_levelNm,selected_pattern[0],selected_worse[0]));
+                    Symptom sympObj = new Symptom(sdf.format(today),selected_symptom,selected_body[0],selected_levelNm,selected_pattern[0],selected_worse[0]);
+                    String symptomGson = "";
+                    Gson gson = new GsonBuilder().create();
+                    symptomGson= gson.toJson(sympObj,Symptom.class);
+
+                    //키값에 value 저장
+                    gsonEditor.putString(Integer.toString(gsonIndex),symptomGson);
+                    //키값 ++
+                    gsonIndexEditor.putInt("gsonIndex",gsonIndex+1);
+                    //변경정보 저장
+                    gsonEditor.commit();
+                    gsonIndexEditor.commit();
+
+
+
 
 
                     AlertDialog.Builder Dialog_bd = new AlertDialog.Builder(OtherSymptom.this);

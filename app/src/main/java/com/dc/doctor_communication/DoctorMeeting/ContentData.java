@@ -52,10 +52,10 @@ public class ContentData {
             case 4: value = "괴로운 통증 (4)"; break;
             case 5: value = "매우 괴로운 통증 (5)"; break;
             case 6: value = "극심한 통증 (6)"; break;
-            case 7: value = "매우 극심한 통증 (6)"; break;
-            case 8: value = "끔찍한 통증 (6)"; break;
-            case 9: value = "참을 수 없는 통증 (6)"; break;
-            case 10: value = "상상할 수 없는 통증 (6)"; break;
+            case 7: value = "매우 극심한 통증 (7)"; break;
+            case 8: value = "끔찍한 통증 (8)"; break;
+            case 9: value = "참을 수 없는 통증 (9)"; break;
+            case 10: value = "상상할 수 없는 통증 (10)"; break;
         }
         return value;
     }

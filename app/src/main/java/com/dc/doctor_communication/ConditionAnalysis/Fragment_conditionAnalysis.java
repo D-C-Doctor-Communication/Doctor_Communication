@@ -52,12 +52,10 @@ import java.util.Map;
 
 
 public class Fragment_conditionAnalysis extends Fragment {
-
-
-    private SharedPreferences gsonSharedPreferences; // = getSharedPreferences("gsonData",MODE_PRIVATE);
-    private String gsonSymptom;
+    //key값
+    private int gsonIndex;
+    //value
     private Gson gson;
-
 
     //상단 날짜 선택 바
     private Button nextBtn,previousBtn;
@@ -90,6 +88,10 @@ public class Fragment_conditionAnalysis extends Fragment {
     private TextView firstSymptom;
     private TextView secondSymptom;
     private TextView thirdSymptom;
+    //증상 순위 00회
+    private TextView firstSymptom_count;
+    private TextView secondSymptom_count;
+    private TextView thirdSymptom_count;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -98,23 +100,25 @@ public class Fragment_conditionAnalysis extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_condition_analysis,container,false);
 
 
-        //객체 저장 정보
-        gsonSharedPreferences = getActivity().getSharedPreferences("gsonData", Context.MODE_PRIVATE);
-        gson =new GsonBuilder().create();
-
-
-        for(int i=0;i<2;i++){
-            Log.d("myapp","---------------------------");
-            gsonSymptom = gsonSharedPreferences.getString(Integer.toString(i),"");
-            Log.d("data",gsonSymptom);
-            if(!gsonSymptom.equals("")){
+        /* SharedPreference 사용한 객체 정보 사용 */
+        Gson gson =new GsonBuilder().create();
+        SharedPreferences gsonSharedPreferences = getActivity().getSharedPreferences("gsonDataFile",Context.MODE_PRIVATE);
+        SharedPreferences gsonIndexSp = getActivity().getSharedPreferences("gsonIndexFile",Context.MODE_PRIVATE);
+        //저장한 객체 개수 (최댓값)
+        gsonIndex = gsonIndexSp.getInt("gsonIndex",0);
+        Log.d("gsonIndex",gsonIndex+"");
+        for (int i=0;i<gsonIndex;i++){
+            String gsonSymptom = gsonSharedPreferences.getString(Integer.toString(i),"e");
+            if(!gsonSymptom.equals("e")) {
                 Symptom symptom = gson.fromJson(gsonSymptom, Symptom.class);
-                Log.d("gsonSymptom",symptom.getSymptom_name());
-                Log.d("gsonSymptom",symptom.getPain_level());
+                FireData.symptoms.add(i, symptom);
             }
         }
 
-
+        for(int i=0;i<FireData.symptoms.size();i++){
+            Log.d("datadata",i+"번째 값 : "+FireData.symptoms.get(i).getSymptom_name());
+            Log.d("datadata",i+"번째 값 : "+FireData.symptoms.get(i).getPain_level());
+        }
 
 
         //상단 날짜 선택 바
@@ -131,6 +135,10 @@ public class Fragment_conditionAnalysis extends Fragment {
         firstSymptom = view.findViewById(R.id.first_symptom);
         secondSymptom = view.findViewById(R.id.second_symptom);
         thirdSymptom = view.findViewById(R.id.third_symptom);
+        //순위 00회
+        firstSymptom_count = view.findViewById(R.id.first_symptom_count);
+        secondSymptom_count = view.findViewById(R.id.second_symptom_count);
+        thirdSymptom_count = view.findViewById(R.id.third_symptom_count);
         //그래프
         lineChart = view.findViewById(R.id.condition_chart);
         //그래프 증상선택 버튼
@@ -146,7 +154,7 @@ public class Fragment_conditionAnalysis extends Fragment {
         String monthSelectText = simpleFormatting.format(time.getTime());
         monthSelect.setText(monthSelectText);
 
-        //날짜 비교 위해 날짜형식을 "yyyy년 MM월" -> 0000.00형으로 바꿈
+        //날짜 비교 위해 날짜형식을 "yyyy년 MM월" -> 000000형으로 바꿈
         String dataString = changeToString(monthSelectText);
         //기본 선택된 달의 각 텍스트 표시
         if(OrganizedData.appointmentDC(dataString)<10)
@@ -162,7 +170,7 @@ public class Fragment_conditionAnalysis extends Fragment {
         initGraph();
         chartEvent(dataString,"두통","복통");
         //증상 순위 (날짜에 맞춰 텍스트 지정)
-        setRanking(dataString,firstSymptom,secondSymptom,thirdSymptom);
+        setRanking(dataString,firstSymptom,secondSymptom,thirdSymptom,firstSymptom_count,secondSymptom_count,thirdSymptom_count);
         //그래프 증상선택 버튼 이벤트
         select_symptom.setOnClickListener(v -> {
             //팝업 생성 메소드
@@ -206,7 +214,7 @@ public class Fragment_conditionAnalysis extends Fragment {
                 showDialog(dataStr);
             });
             //증상 순위
-            setRanking(dataStr,firstSymptom,secondSymptom,thirdSymptom);
+            setRanking(dataStr,firstSymptom,secondSymptom,thirdSymptom,firstSymptom_count,secondSymptom_count,thirdSymptom_count);
 
         });
 
@@ -243,7 +251,7 @@ public class Fragment_conditionAnalysis extends Fragment {
                 showDialog(dataStr);
             });
             //증상 순위
-            setRanking(dataStr,firstSymptom,secondSymptom,thirdSymptom);
+            setRanking(dataStr,firstSymptom,secondSymptom,thirdSymptom,firstSymptom_count,secondSymptom_count,thirdSymptom_count);
         });
         return view;
     }
@@ -339,19 +347,20 @@ public class Fragment_conditionAnalysis extends Fragment {
 
 
     //기능별 공통사용 메소드
-    //선택한 날과 각 데이터의 달을 비교하기위해 선택한 달을 0000.00형으로 바꿈
+    //선택한 날과 각 데이터의 달을 비교하기위해 선택한 달을 000000형으로 바꿈
     public static String changeToString(String selectedMonth){
         return selectedMonth.substring(0,4)+""+selectedMonth.substring(6,8);
     }
     //데이터의 기록 날짜가 상단 바에서 선택한 달과 일치하면 true 반환
     public static boolean isInSameMonth(String recordedDate,String strDate){ //0000년 00월
-        //0000.00.00(데이터.getDate())과 선택한(0000.00) 달 비교
+        //0000.00.00(데이터.getDate())과 선택한(000000) 달 비교
+        Log.d("결과",recordedDate.substring(0, 6).equals(strDate)+"");
         return recordedDate.substring(0, 6).equals(strDate);
     }
 
 
     //증상순위
-    static void setRanking(String strDate,TextView one,TextView two,TextView three){
+    static void setRanking(String strDate,TextView one,TextView two,TextView three,TextView count1,TextView count2,TextView count3){
         HashMap<String,Integer> data = new HashMap<>();//new에서 타입 파라미터 생략가능
         if(FireData.symptoms.size()==0){
             one.setText("해당없음");
@@ -360,30 +369,93 @@ public class Fragment_conditionAnalysis extends Fragment {
         }else {
             //각 증상을 key값으로, 증상의 개수를 value값으로 가지는 Map 생성
             for (int i = 0; i < FireData.symptoms.size(); i++) {
-                data.put(FireData.symptoms.get(i).getPart(), 0);
+                data.put(FireData.symptoms.get(i).getSymptom_name(), 0);
             }
             //증상에 따라 +1
             for (int i = 0; i < FireData.symptoms.size(); i++) {
-                if (isInSameMonth(FireData.symptoms.get(i).getDate(), strDate))
-                    data.put(FireData.symptoms.get(i).getPart(), data.get(FireData.symptoms.get(i).getPart()) + 1);
+                Log.d("getDate",FireData.symptoms.get(i).getDate());
+                Log.d("strDate",strDate);
+                if (isInSameMonth(FireData.symptoms.get(i).getDate(), strDate)) {
+                    data.put(FireData.symptoms.get(i).getSymptom_name(), data.get(FireData.symptoms.get(i).getSymptom_name()) + 1);
+                }
             }
             //value 개수를 기준으로 내림차순 정렬 (정렬결과에 따라 순위 지정)
             // Map.Entry 리스트 작성
             List<Map.Entry<String, Integer>> list_entries = new ArrayList<>(data.entrySet());
             // 비교함수 Comparator를 사용하여 내림 차순으로 정렬
-            Collections.sort(list_entries, new Comparator<Map.Entry<String, Integer>>() {
-                // compare로 값을 비교
-                public int compare(Map.Entry<String, Integer> obj1, Map.Entry<String, Integer> obj2) {   // 내림 차순으로 정렬
-                    return obj2.getValue().compareTo(obj1.getValue());
-                }
+            // compare로 값을 비교
+            Collections.sort(list_entries, (obj1, obj2) -> {   // 내림 차순으로 정렬
+                return obj2.getValue().compareTo(obj1.getValue());
             });
-
-            if (list_entries.get(0).getValue() != 0) one.setText(list_entries.get(0).getKey());
-            else one.setText("해당없음");
-            if (list_entries.get(1).getValue() != 0) two.setText(list_entries.get(1).getKey());
-            else two.setText("해당없음");
-            if (list_entries.get(2).getValue() != 0) three.setText(list_entries.get(2).getKey());
-            else three.setText("해당없음");
+            TextView[] otc = {one,two,three};
+            TextView[] cnt = {count1,count2,count3};
+            Log.d("result","");
+            if(list_entries.size()==0){
+                for(int i=0;i<3;i++){
+                    otc[i].setText("해당없음");
+                    cnt[i].setText("0");
+                }
+            }else if(list_entries.size()==1){
+                if (list_entries.get(0).getValue() != 0){
+                    otc[0].setText(list_entries.get(0).getKey());
+                    cnt[0].setText(list_entries.get(0).getValue().toString());
+                }
+                else {
+                    otc[0].setText("해당없음");
+                    cnt[0].setText("0");
+                }
+                otc[1].setText("해당없음");
+                cnt[1].setText("0");
+                otc[2].setText("해당없음");
+                cnt[2].setText("0");
+            }else if (list_entries.size()==2){
+                if (list_entries.get(0).getValue() != 0){
+                    otc[0].setText(list_entries.get(0).getKey());
+                    cnt[0].setText(list_entries.get(0).getValue().toString());
+                }
+                else{
+                    otc[0].setText("해당없음");
+                    cnt[0].setText("0");
+                }
+                if (list_entries.get(1).getValue() != 0){
+                    otc[1].setText(list_entries.get(1).getKey());
+                    cnt[1].setText(list_entries.get(0).getValue().toString());
+                }
+                else{
+                    otc[1].setText("해당없음");
+                    cnt[1].setText("0");
+                }
+                otc[2].setText("해당없음");
+                cnt[2].setText("0");
+            }else if (list_entries.size()==3){
+                Log.d("datadata",list_entries.get(0).getValue().toString());
+                Log.d("datadata",list_entries.get(1).getValue().toString());
+                Log.d("datadata",list_entries.get(2).getValue().toString());
+                if (list_entries.get(0).getValue() != 0){
+                    otc[0].setText(list_entries.get(0).getKey());
+                    cnt[0].setText(list_entries.get(0).getValue().toString());
+                }
+                else{
+                    otc[0].setText("해당없음");
+                    cnt[0].setText("0");
+                }
+                if (list_entries.get(1).getValue() != 0){
+                    otc[1].setText(list_entries.get(1).getKey());
+                    cnt[1].setText(list_entries.get(1).getValue().toString());
+                }
+                else{
+                    otc[1].setText("해당없음");
+                    cnt[1].setText("0");
+                }
+                if (list_entries.get(2).getValue() != 0){
+                    otc[2].setText(list_entries.get(2).getKey());
+                    cnt[2].setText(list_entries.get(2).getValue().toString());
+                }
+                else{
+                    otc[2].setText("해당없음");
+                    cnt[2].setText("0");
+                }
+            }
             //값을 받으려면 list_entries.get(i).getValue().toString();
         }
     }
@@ -642,4 +714,9 @@ public class Fragment_conditionAnalysis extends Fragment {
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        FireData.symptoms.clear();
+    }
 }

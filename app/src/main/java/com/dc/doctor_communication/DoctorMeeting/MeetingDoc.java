@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -125,7 +126,15 @@ public class MeetingDoc extends AppCompatActivity {
         // 증상에 대한 심각도 그래프로 이동하는 버튼
         gotoGraph = findViewById(R.id.btn_gotoGraph);
         gotoGraph.setOnClickListener(v -> {
-            finish();
+            String graphDate = startDate.get(Calendar.YEAR)+""+startDate.get(Calendar.MONTH);
+            //팝업 띄우기
+            GraphDialog graphDialog = new GraphDialog(MeetingDoc.this,graphDate,buttonValue[btnClicked]);
+            graphDialog.setCancelable(true);
+            graphDialog.setCanceledOnTouchOutside(true);
+            graphDialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+            graphDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            graphDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            graphDialog.show();
         });
 
         //날짜선택 버튼 위 증상 텍스트
@@ -309,7 +318,7 @@ public class MeetingDoc extends AppCompatActivity {
                                 );
 
                                 childListDatas.add(new ArrayList<ContentData>());
-
+                                Log.d("additional",symptom.getAdditional()+"");
                                 childListDatas.get(sizeList).add(new ContentData(
                                         symptom.getPart() ,
                                         symptom.getPainLevel(),
