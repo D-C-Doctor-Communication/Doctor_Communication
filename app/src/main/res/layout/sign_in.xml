@@ -46,16 +46,16 @@
         android:textColor="#0C64E4"/>
 
     <EditText
-        android:background="@drawable/rounded_border"
-        android:hint="email"
-        android:fontFamily="@font/nanumsquarebold"
         android:id="@+id/emailEt"
-        android:layout_below="@id/textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_below="@id/textView"
         android:layout_marginStart="32dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_border"
+        android:fontFamily="@font/nanumsquarebold"
+        android:hint="email"
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
         android:textColor="@color/background_color_reverse"
@@ -63,18 +63,18 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView"/>
+        app:layout_constraintTop_toBottomOf="@id/textView" />
 
     <EditText
         android:id="@+id/et_password"
-        android:fontFamily="@font/nanumsquarebold"
-        android:layout_below="@id/emailEt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_below="@id/emailEt"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_border"
+        android:fontFamily="@font/nanumsquarebold"
         android:hint="password"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
@@ -83,7 +83,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView"/>
+        app:layout_constraintTop_toBottomOf="@id/textView" />
 
     <TextView
         android:id="@+id/loginError"
@@ -98,9 +98,9 @@
         app:layout_constraintEnd_toEndOf="@+id/et_password"
         app:layout_constraintStart_toStartOf="@+id/et_password"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
+
     <Button
         android:id="@+id/login_btn"
-        android:fontFamily="@font/nanumsquarebold"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_centerInParent="true"
@@ -108,6 +108,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/blue_button"
+        android:fontFamily="@font/nanumsquarebold"
         android:text="로그인"
         android:textAllCaps="false"
         android:textColor="@android:color/white"

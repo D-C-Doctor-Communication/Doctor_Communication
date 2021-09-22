@@ -37,24 +37,24 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:text="Sign up"
+        android:textColor="#0C64E4"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="#0C64E4"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:fontFamily="@font/nanumsquarebold"
-        android:background="@drawable/rounded_border"
-        android:hint="name"
         android:id="@+id/nameEt"
-        android:layout_below="@id/txtSup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_below="@id/txtSup"
         android:layout_marginStart="32dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_border"
+        android:fontFamily="@font/nanumsquarebold"
+        android:hint="name"
         android:imeOptions="actionNext"
         android:inputType="textPersonName"
         android:textColor="@color/background_color_reverse"
@@ -62,18 +62,19 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtSup"/>
+        app:layout_constraintTop_toBottomOf="@id/txtSup" />
+
     <EditText
-        android:background="@drawable/rounded_border"
-        android:hint="email"
-        android:fontFamily="@font/nanumsquarebold"
         android:id="@+id/emailEt"
-        android:layout_below="@id/nameEt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_below="@id/nameEt"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_border"
+        android:fontFamily="@font/nanumsquarebold"
+        android:hint="email"
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
         android:textColor="@color/background_color_reverse"
@@ -81,18 +82,19 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nameEt"/>
+        app:layout_constraintTop_toBottomOf="@id/nameEt" />
+
     <EditText
-        android:background="@drawable/rounded_border"
-        android:hint="password"
         android:id="@+id/passwordEdt"
-        android:layout_below="@id/emailEt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nanumsquarebold"
+        android:layout_height="48dp"
+        android:layout_below="@id/emailEt"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_border"
+        android:fontFamily="@font/nanumsquarebold"
+        android:hint="password"
         android:imeOptions="actionNext"
         android:inputType="textPassword"
         android:textColor="@color/background_color_reverse"
@@ -101,32 +103,33 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailEt"/>
+        app:layout_constraintTop_toBottomOf="@id/emailEt" />
+
     <EditText
-        android:background="@drawable/rounded_border"
-        android:hint="password check"
         android:id="@+id/passwordcheckEdt"
-        android:layout_below="@id/passwordEdt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_below="@id/passwordEdt"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
-        android:imeOptions="actionNext"
+        android:background="@drawable/rounded_border"
         android:fontFamily="@font/nanumsquarebold"
+        android:hint="password check"
+        android:imeOptions="actionNext"
         android:inputType="textPassword"
         android:textColor="@color/background_color_reverse"
         android:textColorHint="@color/background_color_reverse"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordEdt"/>
+        app:layout_constraintTop_toBottomOf="@id/passwordEdt" />
 
     <Button
-        android:layout_below="@id/passwordcheckEdt"
         android:id="@+id/register2_btn"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/passwordcheckEdt"
         android:layout_centerInParent="true"
         android:layout_marginStart="32dp"
         android:layout_marginTop="60dp"

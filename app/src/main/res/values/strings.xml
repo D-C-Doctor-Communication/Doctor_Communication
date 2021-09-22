@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">의사:소통</string>
-    <string name="app_version">1.0.0</string>
+    <string name="app_version">2.0.0</string>
 
     <string name="symthom_description_1">부위</string>
     <string name="symthom_description_2">통증 정도</string>
