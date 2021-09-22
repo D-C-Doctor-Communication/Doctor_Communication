@@ -85,16 +85,12 @@ public class AddDetails extends AppCompatActivity{
 
         //받아온 동반 증상을 textview에 띄우기
         osymptom.setText(selected_symptom);
-        addpage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                select_details =add_details.getText().toString();
-            }
-        });
 
         addpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                select_details =add_details.getText().toString();
+
                 Intent intent = new Intent(AddDetails.this, MainActivity.class);
 
                 intent.putExtra("symptom",symptom);
