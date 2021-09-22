@@ -48,7 +48,6 @@ public class Symptom2 implements Serializable {
         this.pain_situation = pain_situation;
         this.accompany_pain = "해당 없음";
         this.additional = "해당 없음";
-
     }
     //추가사항 있는 값 생성자
     public Symptom2(String symptom, String part, String painLevel, String pain_characteristics
@@ -60,7 +59,6 @@ public class Symptom2 implements Serializable {
         this.pain_situation = pain_situation;
         this.accompany_pain = accompany_pain;
         this.additional = additional;
-
     }
     public Symptom2(String scheduleName, String place, String time, String clinic_type){
         this.scheduleName = scheduleName;

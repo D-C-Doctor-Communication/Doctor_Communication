@@ -395,12 +395,29 @@ public class Fragment_medicalChart extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQ_ADD_CONTACT) {
             if (resultCode == RESULT_OK) {
-                //SharedPreference 해당 날짜(년,월) 에 대한 예약 횟수 증가
-                SharedPreferences reservationSharedPreferences = getActivity().getSharedPreferences("reservationFile", Context.MODE_PRIVATE);
-                int count = reservationSharedPreferences.getInt("reservation_count",0);
-                SharedPreferences.Editor editor = reservationSharedPreferences.edit();
-                editor.putInt("reservation_count",count+1);
-                editor.commit();
+
+                Log.d("onActivityResult",selectedDateString+"");
+                //SharedPreference 해당 날짜(년,월,일) 에 대한 예약 여부 확인
+                SharedPreferences detailSharedPreferences = getActivity().getSharedPreferences("detailFile",Context.MODE_PRIVATE);
+
+                Log.d("마지막 확인","detailSharedPreferences : "+detailSharedPreferences.getBoolean(selectedDateString,false));
+                if(!detailSharedPreferences.getBoolean(selectedDateString,false)){
+                    //SharedPreference 해당 날짜(년,월) 에 대한 예약 횟수 증가
+                    Log.d("마지막 확인","detailSharedPreferences2 : "+detailSharedPreferences.getBoolean(selectedDateString,false));
+                    SharedPreferences reservationSharedPreferences = getActivity().getSharedPreferences("reservationFile", Context.MODE_PRIVATE);
+                    int count = reservationSharedPreferences.getInt(selectedDateString.substring(0,6),0);
+                    SharedPreferences.Editor editor = reservationSharedPreferences.edit();
+                    editor.putInt(selectedDateString.substring(0,6),count+1);
+                    editor.commit();
+                }
+
+                SharedPreferences.Editor detailEditor = detailSharedPreferences.edit();
+                detailEditor.putBoolean(selectedDateString,true);
+                detailEditor.commit();
+                Log.d("마지막 확인","add됨");
+
+
+
 
                 //일정이 존재하면 listView visible로 바꿈
                 noneData.setVisibility(View.INVISIBLE);
@@ -429,6 +446,7 @@ public class Fragment_medicalChart extends Fragment {
                 btn_addAppointDoctor.setTextColor(Color.BLACK);
                 btn_addAppointDoctor.setText("진료 일정 변경하기");
 
+                Log.d("어댑터갯수",adapter.getCount()+"");
                 //파이어베이스에 등록정보 저장
                 myRef.child(uid).child("date").child(selectedDateString).child(String.valueOf(0)).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

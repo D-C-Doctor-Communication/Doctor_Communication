@@ -126,7 +126,7 @@ public class Fragment_conditionAnalysis extends Fragment {
 
         /* (병원 예약 수) SharedPreference 사용한 객체 정보 사용 */
         SharedPreferences reservationSharedPreferences = getActivity().getSharedPreferences("reservationFile",Context.MODE_PRIVATE);
-
+        SharedPreferences detailSharedPreferences = getActivity().getSharedPreferences("detailFile",Context.MODE_PRIVATE);
 
 
         //상단 날짜 선택 바
@@ -165,11 +165,12 @@ public class Fragment_conditionAnalysis extends Fragment {
 
         //날짜 비교 위해 날짜형식을 "yyyy년 MM월" -> 000000형으로 바꿈
         String dataString = changeToString(monthSelectText);
+        Log.d("dataStr",dataString+"");
         //기본 선택된 달의 각 텍스트 표시
-        if(reservationSharedPreferences.getInt("reservation_count",0)<10)
-            reservation_count.setText("0"+reservationSharedPreferences.getInt("reservation_count",0)+"");
+        if(reservationSharedPreferences.getInt(dataString,0)<10)
+            reservation_count.setText("0"+reservationSharedPreferences.getInt(dataString,0)+"");
         else
-            reservation_count.setText(reservationSharedPreferences.getInt("reservation_count",0)+"");
+            reservation_count.setText(reservationSharedPreferences.getInt(dataString,0)+"");
         if(OrganizedData.moreThanFive(dataString)<10)
             severity_more_5.setText("0"+OrganizedData.moreThanFive(dataString)+"");
         else
@@ -197,10 +198,11 @@ public class Fragment_conditionAnalysis extends Fragment {
             monthSelect.setText(previousMonthText);
             //버튼 눌릴때마다 텍스트 새로고침
             String dataStr = changeToString(previousMonthText); //날짜형식 바꿈
-            if(reservationSharedPreferences.getInt("reservation_count",0)<10)
-                reservation_count.setText("0"+reservationSharedPreferences.getInt("reservation_count",0)+"");
+            Log.d("dataStr",dataStr+"");
+            if(reservationSharedPreferences.getInt(dataStr,0)<10)
+                reservation_count.setText("0"+reservationSharedPreferences.getInt(dataStr,0)+"");
             else
-                reservation_count.setText(reservationSharedPreferences.getInt("reservation_count",0)+"");
+                reservation_count.setText(reservationSharedPreferences.getInt(dataStr,0)+"");
             if(OrganizedData.moreThanFive(dataStr)<10)
                 severity_more_5.setText("0"+OrganizedData.moreThanFive(dataStr)+"");
             else
@@ -235,12 +237,14 @@ public class Fragment_conditionAnalysis extends Fragment {
             time.add(Calendar.MONTH , +1);
             String nextMonthText = simpleFormatting.format(time.getTime());
             monthSelect.setText(nextMonthText);
+
             //버튼 눌릴때마다 텍스트 새로고침
             String dataStr = changeToString(nextMonthText); //날짜형식 바꿈
-            if(reservationSharedPreferences.getInt("reservation_count",0)<10)
-                reservation_count.setText("0"+reservationSharedPreferences.getInt("reservation_count",0)+"");
+            Log.d("dataStr",dataStr+"");
+            if(reservationSharedPreferences.getInt(dataStr,0)<10)
+                reservation_count.setText("0"+reservationSharedPreferences.getInt(dataStr,0)+"");
             else
-                reservation_count.setText(reservationSharedPreferences.getInt("reservation_count",0)+"");
+                reservation_count.setText(reservationSharedPreferences.getInt(dataStr,0)+"");
             if(OrganizedData.moreThanFive(dataStr)<10)
                 severity_more_5.setText("0"+OrganizedData.moreThanFive(dataStr)+"");
             else
