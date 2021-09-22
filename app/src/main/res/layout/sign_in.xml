@@ -102,7 +102,7 @@
         android:id="@+id/login_btn"
         android:fontFamily="@font/nanumsquarebold"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:layout_centerInParent="true"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
