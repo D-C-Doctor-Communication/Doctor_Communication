@@ -45,6 +45,7 @@
         android:textColor="#0C64E4"/>
 
     <EditText
+        android:fontFamily="@font/nanumsquarebold"
         android:background="@drawable/rounded_border"
         android:hint="name"
         android:id="@+id/nameEt"
@@ -58,13 +59,14 @@
         android:inputType="textPersonName"
         android:textColor="@color/background_color_reverse"
         android:textColorHint="@color/background_color_reverse"
-        android:textSize="17sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtSup"/>
     <EditText
         android:background="@drawable/rounded_border"
         android:hint="email"
+        android:fontFamily="@font/nanumsquarebold"
         android:id="@+id/emailEt"
         android:layout_below="@id/nameEt"
         android:layout_width="match_parent"
@@ -76,7 +78,7 @@
         android:inputType="textEmailAddress"
         android:textColor="@color/background_color_reverse"
         android:textColorHint="@color/background_color_reverse"
-        android:textSize="17sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nameEt"/>
@@ -87,6 +89,7 @@
         android:layout_below="@id/emailEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/nanumsquarebold"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
@@ -94,7 +97,7 @@
         android:inputType="textPassword"
         android:textColor="@color/background_color_reverse"
         android:textColorHint="@color/background_color_reverse"
-        android:textSize="17sp"
+        android:textSize="18sp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,10 +113,11 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:imeOptions="actionNext"
+        android:fontFamily="@font/nanumsquarebold"
         android:inputType="textPassword"
         android:textColor="@color/background_color_reverse"
         android:textColorHint="@color/background_color_reverse"
-        android:textSize="17sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordEdt"/>

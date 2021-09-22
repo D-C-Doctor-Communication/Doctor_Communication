@@ -48,6 +48,7 @@
     <EditText
         android:background="@drawable/rounded_border"
         android:hint="email"
+        android:fontFamily="@font/nanumsquarebold"
         android:id="@+id/emailEt"
         android:layout_below="@id/textView"
         android:layout_width="match_parent"
@@ -59,13 +60,14 @@
         android:inputType="textEmailAddress"
         android:textColor="@color/background_color_reverse"
         android:textColorHint="@color/background_color_reverse"
-        android:textSize="17sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView"/>
 
     <EditText
         android:id="@+id/et_password"
+        android:fontFamily="@font/nanumsquarebold"
         android:layout_below="@id/emailEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +80,7 @@
         android:inputType="textPassword"
         android:textColor="@color/background_color_reverse"
         android:textColorHint="@color/background_color_reverse"
-        android:textSize="17sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView"/>
@@ -98,6 +100,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
     <Button
         android:id="@+id/login_btn"
+        android:fontFamily="@font/nanumsquarebold"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerInParent="true"

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="의사와의 만남"
+        android:textSize="18sp"
         android:fontFamily="@font/nanumsquareregular"
         android:textColor="#bd000000" />
 
