@@ -26,6 +26,6 @@ public class MC_DotEventDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.addSpan(new DotSpan(5, Color.BLUE));
+        view.addSpan(new DotSpan(5, Color.parseColor("#0C6FFF")));
     }
 }
