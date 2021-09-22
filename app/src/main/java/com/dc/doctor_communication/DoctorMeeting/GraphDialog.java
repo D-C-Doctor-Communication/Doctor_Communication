@@ -2,6 +2,7 @@ package com.dc.doctor_communication.DoctorMeeting;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.dc.doctor_communication.DataManagement.Person1;
+import com.dc.doctor_communication.FireBaseManagement.FireData;
+import com.dc.doctor_communication.FireBaseManagement.Symptom;
 import com.dc.doctor_communication.R;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
@@ -21,6 +24,8 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,24 +37,27 @@ public class GraphDialog extends Dialog {
     String startDate;
     //사용자가 선택한 증상
     String buttonValue;
+    //gson index
+    int gsonIndex;
 
     public GraphDialog(@NonNull Context context) {
         super(context);
     }
-
     public GraphDialog(@NonNull Context context,String startDate,String buttonValue) {
         super(context);
         this.startDate = startDate;
         this.buttonValue = buttonValue;
     }
-
     public GraphDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
     }
-
     protected GraphDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
+
+
+
+
 
 
     //그래프
@@ -58,6 +66,27 @@ public class GraphDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dc_graph_popup);
+
+        Log.d("myapp","심각도 그래프 들어옴");
+
+        /* SharedPreference 사용한 객체 정보 사용 */
+        Gson gson =new GsonBuilder().create();
+        SharedPreferences gsonSharedPreferences = getContext().getSharedPreferences("gsonDataFile", Context.MODE_PRIVATE);
+        SharedPreferences gsonIndexSp = getContext().getSharedPreferences("gsonIndexFile",Context.MODE_PRIVATE);
+        //저장한 객체 개수 (최댓값)
+        gsonIndex = gsonIndexSp.getInt("gsonIndex",0);
+        Log.d("gsonIndex",gsonIndex+"");
+        for (int i=0;i<gsonIndex;i++){
+            String gsonSymptom = gsonSharedPreferences.getString(Integer.toString(i),"e");
+            if(!gsonSymptom.equals("e")) {
+                Symptom symptom = gson.fromJson(gsonSymptom, Symptom.class);
+                FireData.symptoms.add(i, symptom);
+            }
+        }
+        for(int i=0;i<FireData.symptoms.size();i++){
+            Log.d("datadata",i+"번째 값 : "+FireData.symptoms.get(i).getSymptom_name());
+            Log.d("datadata",i+"번째 값 : "+FireData.symptoms.get(i).getPain_level());
+        }
 
         //그래프
         lineChart = findViewById(R.id.graph);
@@ -142,33 +171,34 @@ public class GraphDialog extends Dialog {
 
     }
     //그래프의 x값(각 주별 심각도 평균) - 날짜와 증상이 사용자가 선택한 것과 일치하는지 확인
-    public int[] getAverageOfWeek(String strDate,String symptom){ //상단바에서 선택한 날짜, 증상
+    static int[] getAverageOfWeek(String strDate,String symptom){ //상단바에서 선택한 날짜, 증상
         int[] graphData = new int[4];   //그래프의 x좌표 -> 1,2,3,4주차
         int firstWeek = 0,fNum = 0;     //1주차 심각도의 총합과 개수
         int secondWeek = 0,sNum = 0;    //2주차 심각도의 총합과 개수
         int thirdWeek = 0,tNum = 0;     //3주차 심각도의 총합과 개수
         int fourthWeek = 0,foNum = 0;   //4주차 심각도의 총합과 개수
-        for(int i = 0; i< Person1.symptom.length; i++){
-            if(!Person1.symptom[i].getSymptom_name().equals(symptom)) continue; //사용자가 선택한 증상인지 확인
-            switch (isInSameWeek(Person1.symptom[i].getDate(),strDate)){ //사용자가 선택한 날짜인지 확인 (1주차면 1,2주차면 2..반환)
+        for(int i=0;i<FireData.symptoms.size();i++){
+            if(!FireData.symptoms.get(i).getSymptom_name().equals(symptom)) continue; //사용자가 선택한 증상인지 확인
+            switch (isInSameWeek(FireData.symptoms.get(i).getDate(),strDate)){ //사용자가 선택한 날짜인지 확인 (1주차면 1,2주차면 2..반환)
                 case 1 : //1주차
-                    firstWeek += Integer.parseInt(Person1.symptom[i].getPain_level());
+                    firstWeek += Integer.parseInt(FireData.symptoms.get(i).getPain_level());
                     fNum++;
                     break;
                 case 2 : //2주차
-                    secondWeek += Integer.parseInt(Person1.symptom[i].getPain_level());
+                    secondWeek += Integer.parseInt(FireData.symptoms.get(i).getPain_level());
                     sNum++;
                     break;
                 case 3 : //3주차
-                    thirdWeek += Integer.parseInt(Person1.symptom[i].getPain_level());
+                    thirdWeek += Integer.parseInt(FireData.symptoms.get(i).getPain_level());
                     tNum++;
                     break;
                 case 4 : //4주차
-                    fourthWeek += Integer.parseInt(Person1.symptom[i].getPain_level());
+                    fourthWeek += Integer.parseInt(FireData.symptoms.get(i).getPain_level());
                     foNum++;
                     break;
             }
         }
+
         //각 데이터의 값이 0일경우 그래프에도 0으로 표시
         if(fNum!=0) {
             graphData[0] = firstWeek/fNum;
@@ -186,12 +216,15 @@ public class GraphDialog extends Dialog {
             graphData[3] = fourthWeek/foNum;
             Log.d("check",fourthWeek+" / "+foNum+" : "+graphData[3]);
         }
+
+
+
         return graphData;
     }
     //각 날짜가 선택한 달과 일치하지 않으면 0 반환
     //1주차에 존재하면 1 반환
     //2주차 : 2, 3주차 : 3, 4주차 : 4
-    public int isInSameWeek(String recordedDate,String strDate){ //각각 데이터가 입력된 날짜, 상단 바에서 선택한 날짜
+    static int isInSameWeek(String recordedDate,String strDate){ //각각 데이터가 입력된 날짜, 상단 바에서 선택한 날짜
         //getDate()와 선택한 날짜 비교
         if(recordedDate.substring(0,6).equals(strDate)){
             int checkDate = Integer.parseInt(recordedDate.substring(6)); //몇일인지 저장
@@ -201,5 +234,11 @@ public class GraphDialog extends Dialog {
             else if(checkDate>=22&&checkDate<=31) return 4;
         }
         return 0;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FireData.symptoms.clear();
     }
 }
