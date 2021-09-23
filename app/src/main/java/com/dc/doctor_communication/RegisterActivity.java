@@ -84,93 +84,106 @@ public class RegisterActivity extends AppCompatActivity {
                 final String email = mEmailText.getText().toString().trim();
                 String pwd = mPasswordText.getText().toString().trim();
                 String pwdcheck = mPasswordcheckText.getText().toString().trim();
+                String userName = mName.getText().toString().trim();
 
-                if(pwd.equals(pwdcheck)) {
-                    Log.d(TAG, "등록 버튼 " + email + " , " + pwd);
-                    final ProgressDialog mDialog = new ProgressDialog(RegisterActivity.this);
-                    mDialog.setMessage("가입중입니다...");
-                    mDialog.show();
+                if(email.isEmpty() && pwd.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "이메일과 비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                }else if(userName.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "이름을 입력해주세요!", Toast.LENGTH_SHORT).show();
+                }else if(email.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "이메일을 입력해주세요!", Toast.LENGTH_SHORT).show();
+                }else if(pwd.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                }else if(pwd.length()<6){
+                    Toast.makeText(getApplicationContext(), "비밀번호는 6자 이상 입력해주세요.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (pwd.equals(pwdcheck)) {
+                        Log.d(TAG, "등록 버튼 " + email + " , " + pwd);
+                        final ProgressDialog mDialog = new ProgressDialog(RegisterActivity.this);
+                        mDialog.setMessage("가입중입니다...");
+                        mDialog.show();
 
-                    // 파이어베이스에 신규계정 등록
-                    firebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            // 가입 성공시
-                            if (task.isSuccessful()) {
-                                mDialog.dismiss();
+                        // 파이어베이스에 신규계정 등록
+                        firebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                // 가입 성공시
+                                if (task.isSuccessful()) {
+                                    mDialog.dismiss();
 
-                                FirebaseUser user = firebaseAuth.getCurrentUser();
-                                String email = user.getEmail();
-                                String uid = user.getUid();
-                                String name = mName.getText().toString().trim();
+                                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                                    String email = user.getEmail();
+                                    String uid = user.getUid();
+                                    String name = mName.getText().toString().trim();
 
-                                // 해쉬맵 테이블을 파이어베이스 데이터베이스에 저장
-                                HashMap<String,String> hashMap = new HashMap<>();
-                                hashMap.put("symptom","e");
-                                hashMap.put("part","e");
-                                hashMap.put("painLevel","e");
-                                hashMap.put("pain_characteristics","e");
-                                hashMap.put("pain_situation","e");
-                                hashMap.put("accompany_pain","e");
-                                hashMap.put("additional","e");
+                                    // 해쉬맵 테이블을 파이어베이스 데이터베이스에 저장
+                                    HashMap<String, String> hashMap = new HashMap<>();
+                                    hashMap.put("symptom", "e");
+                                    hashMap.put("part", "e");
+                                    hashMap.put("painLevel", "e");
+                                    hashMap.put("pain_characteristics", "e");
+                                    hashMap.put("pain_situation", "e");
+                                    hashMap.put("accompany_pain", "e");
+                                    hashMap.put("additional", "e");
 
-                                hashMap.put("time","e");
-                                hashMap.put("scheduleName","e");
-                                hashMap.put("place","e");
-                                hashMap.put("clinic_type", "e");
-                                hashMap.put("memo", "e");
+                                    hashMap.put("time", "e");
+                                    hashMap.put("scheduleName", "e");
+                                    hashMap.put("place", "e");
+                                    hashMap.put("clinic_type", "e");
+                                    hashMap.put("memo", "e");
 
-                                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                DatabaseReference myRef = database.getReference().child("users");
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    DatabaseReference myRef = database.getReference().child("users");
 
-                                myRef.child(uid).child("email").setValue(email);
-                                myRef.child(uid).child("name").setValue(name);
+                                    myRef.child(uid).child("email").setValue(email);
+                                    myRef.child(uid).child("name").setValue(name);
 
-                                String date="";
-                                for(int i=1; i<=30; i++) {
-                                    int length = (int) (Math.log10(i) + 1);
-                                    if (length == 1) {
-                                        date = "2021090" + i;
-                                    } else {
-                                        date = "202109" + i;
+                                    String date = "";
+                                    for (int i = 1; i <= 30; i++) {
+                                        int length = (int) (Math.log10(i) + 1);
+                                        if (length == 1) {
+                                            date = "2021090" + i;
+                                        } else {
+                                            date = "202109" + i;
+                                        }
+                                        for (int j = 0; j < 5; j++) {
+                                            String jj = j + "";
+                                            myRef.child(uid).child("date").child(date).child(jj).setValue(hashMap);
+                                        }
                                     }
-                                    for(int j=0;j<5;j++){
-                                        String jj = j+"";
-                                        myRef.child(uid).child("date").child(date).child(jj).setValue(hashMap);
+                                    for (int i = 1; i <= 31; i++) {
+                                        int length = (int) (Math.log10(i) + 1);
+                                        if (length == 1) {
+                                            date = "2021100" + i;
+                                        } else date = "202110" + i;
+                                        for (int j = 0; j < 5; j++) {
+                                            String jj = j + "";
+                                            myRef.child(uid).child("date").child(date).child(jj).setValue(hashMap);
+                                        }
                                     }
+
+                                    // 가입이 이루어져을시 가입 화면을 빠져나감
+                                    Toast.makeText(RegisterActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+
+                                    startActivity(intent);
+                                    overridePendingTransition(R.anim.translate_none, R.anim.translate_center_to_right);
+                                    finish();
+
+                                } else {
+                                    mDialog.dismiss();
+                                    Toast.makeText(RegisterActivity.this, "회원가입 양식을 다시 확인해주세요.", Toast.LENGTH_SHORT).show();
+                                    return;  // 해당 메소드 진행을 멈추고 빠져나감.
+
                                 }
-                                for(int i=1; i<=31; i++) {
-                                    int length = (int) (Math.log10(i) + 1);
-                                    if (length == 1) {
-                                        date = "2021100" + i;
-                                    } else date = "202110" + i;
-                                    for(int j=0;j<5;j++){
-                                        String jj = j+"";
-                                        myRef.child(uid).child("date").child(date).child(jj).setValue(hashMap);
-                                    }
-                                }
-
-                                // 가입이 이루어져을시 가입 화면을 빠져나감
-                                Toast.makeText(RegisterActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-
-                                startActivity(intent);
-                                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
-                                finish();
-
-                            } else {
-                                mDialog.dismiss();
-                                Toast.makeText(RegisterActivity.this, "비밀번호는 6자 이상 입력해주세요.", Toast.LENGTH_SHORT).show();
-                                return;  // 해당 메소드 진행을 멈추고 빠져나감.
 
                             }
-
-                        }
-                    });
-                    //비밀번호 오류시
-                }else{
-                    Toast.makeText(RegisterActivity.this, "비밀번호가 틀렸습니다. 다시 입력해 주세요.", Toast.LENGTH_SHORT).show();
-                    return;
+                        });
+                        //비밀번호 오류시
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "비밀번호가 일치하지 않습니다. 다시 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
             }
         });
