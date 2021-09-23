@@ -15,7 +15,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -94,22 +93,33 @@ public class SignActivity extends AppCompatActivity{
             public void onClick(View v) {
                 String email = mEmailText.getText().toString().trim();
                 String pwd = mPasswordText.getText().toString().trim();
-                firebaseAuth.signInWithEmailAndPassword(email,pwd)
-                        .addOnCompleteListener(SignActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
-                                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(in);
-                                    overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
-                                    finish();
+
+                if(email.isEmpty() && pwd.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "이메일과 비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                }
+                else if(email.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "이메일을 입력해주세요!", Toast.LENGTH_SHORT).show();
+                }else if(pwd.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                }else{
+                    firebaseAuth.signInWithEmailAndPassword(email,pwd)
+                            .addOnCompleteListener(SignActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
+                                        Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(in);
+                                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
+                                        finish();
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(),"로그인 오류",Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                                else{
-                                    Toast.makeText(getApplicationContext(),"로그인 오류",Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                            });
+
+                }
             }
         });
     }

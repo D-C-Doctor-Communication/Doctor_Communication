@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dc.doctor_communication.FireBaseManagement.FireData;
 import com.dc.doctor_communication.FireBaseManagement.Symptom;
 import com.dc.doctor_communication.MainActivity;
 import com.dc.doctor_communication.R;
@@ -25,7 +24,6 @@ import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class AddDetails extends AppCompatActivity{
     EditText add_details;
