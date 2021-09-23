@@ -55,6 +55,8 @@ import java.util.Locale;
 
 public class MeetingDoc extends AppCompatActivity {
 
+    //초기 가이드 text
+    private TextView notice_noData_text;
     //기간선택 - 시작 날짜를 표시할 TextView
     private TextView startDateText;
     //기간선택 - 종료 날짜를 표시할 TextView
@@ -144,6 +146,7 @@ public class MeetingDoc extends AppCompatActivity {
         endDateText = findViewById(R.id.endDate);
         selectedDataLayout = findViewById(R.id.selectedDataLayout);
         notice_noData = findViewById(R.id.notice_noData);
+        notice_noData_text = findViewById(R.id.notice_noData_text);
 // -> 날짜 선택 기능
         //기본날짜 오늘로 지정
         setDateText(startDate);
@@ -154,7 +157,6 @@ public class MeetingDoc extends AppCompatActivity {
             //R.style.MyDatePickerStyle,
             DatePickerDialog datePickerDialog = new DatePickerDialog(
                     this,
-                    AlertDialog.THEME_DEVICE_DEFAULT_LIGHT,
                     new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -187,7 +189,6 @@ public class MeetingDoc extends AppCompatActivity {
         endDateText.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(
                     this,
-                    AlertDialog.THEME_DEVICE_DEFAULT_LIGHT,
                     new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -366,6 +367,7 @@ public class MeetingDoc extends AppCompatActivity {
     }
     //증상별로 데이터 넘겨주기
     public void sympOnClick(View view){
+        notice_noData_text.setVisibility(View.GONE);
         for(int i=0;i<buttonKey.length;i++){
             symptomBtn[i].setTextColor(Color.BLACK);
             symptomBtn[i].setBackgroundResource(R.drawable.dc_button_nonclicked);

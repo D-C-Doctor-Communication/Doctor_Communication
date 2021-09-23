@@ -433,4 +433,15 @@
         android:layout_height="100dp"
         android:src="@drawable/notice_notification_a"/>
 
+    <TextView
+        android:id="@+id/notice_noData_text"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/nanumsquareregular"
+        android:gravity="center_horizontal"
+        android:text="기간과 통증을 선택하여\n 증상데이터를 찾아보세요!"
+        android:textSize="15sp"
+        android:visibility="visible" />
+
 </RelativeLayout>

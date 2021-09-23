@@ -75,6 +75,9 @@ public class Fragment_home extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String get_name = snapshot.child("name").getValue(String.class);
+                if(get_name==""||get_name==null){
+                    get_name = "소통님";
+                }
                 TextView helloUser = view.findViewById(R.id.user_name);
                 helloUser.setText(get_name);
             }
