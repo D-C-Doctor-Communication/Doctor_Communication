@@ -1,227 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:gyjmoble="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize">
-
     <View
-        android:id="@+id/line_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#D8D8D8"/>
-
-
-    <!--
-    <View
-        android:id="@+id/line1"
-        style="@style/Divider"
+        android:id="@+id/first_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/calendarView"
-        android:layout_marginTop="35dp"
-        tools:ignore="InvalidId" /> -->
+        android:background="#14000000"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:fillViewport="true"
         android:overScrollMode="never"
-        android:layout_marginBottom="?attr/actionBarSize">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@+id/first_line">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-
             <com.prolificinteractive.materialcalendarview.MaterialCalendarView
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
                 android:layout_height="340dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="20dp"
                 app:mcv_calendarMode="month"
                 app:mcv_headerTextAppearance="@style/Monthlycalendar_header"
                 app:mcv_leftArrowMask="@drawable/ic_calendar_previous_btn"
                 app:mcv_rightArrowMask="@drawable/ic_calendar_next_btn"
                 app:mcv_selectionColor="#1a0078ff"
-                app:mcv_showOtherDates="all" />
-
-
-            <RelativeLayout
-                android:layout_below="@id/calendarView"
+                app:mcv_showOtherDates="all"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/selectedDate"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/nanumsquarebold"
+                android:text="날짜"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                tools:ignore="UnknownId"
+                app:layout_constraintTop_toBottomOf="@+id/calendarView"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+            <Button
+                android:id="@+id/show_data"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/icon_show_data"
+                android:onClick="ShowDataOnClick"
+                app:layout_constraintBottom_toBottomOf="@+id/selectedDate"
+                app:layout_constraintRight_toRightOf="parent"/>
 
-                <TextView
-                    android:id="@+id/selectedDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="19dp"
-                    android:layout_marginTop="22dp"
-                    android:fontFamily="@font/nanumsquarebold"
-                    android:text="날짜"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    tools:ignore="UnknownId" />
+            <TextView
+                android:id="@+id/schedule"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginTop="6dp"
+                android:background="#05000000"
+                android:fontFamily="@font/nanumsquareregular"
+                android:paddingLeft="16dp"
+                android:text="진료 일정"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                app:layout_constraintTop_toBottomOf="@id/selectedDate"/>
+            <ListView
+                android:id="@+id/MC_listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@id/schedule"/>
+            <ImageView
+                android:id="@+id/noneData"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:src="@drawable/notice_notification_a"
+                android:visibility="visible"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="25dp"
+                app:layout_constraintTop_toBottomOf="@id/schedule"/>
+            <Button
+                android:id="@+id/btn_addAppointDoctor"
+                android:layout_width="312dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/mc_button_clicked"
+                android:fontFamily="@font/nanumsquareregular"
+                android:includeFontPadding="false"
+                android:text="진료 일정 추가하기"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintTop_toBottomOf="@+id/noneData"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
 
-                <Button
-                    android:id="@+id/show_data"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_above="@+id/schedu"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/icon_show_data"
-                    android:onClick="ShowDataOnClick" />
+            <TextView
+                android:id="@+id/review"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginTop="20dp"
+                android:background="#05000000"
+                android:fontFamily="@font/nanumsquareregular"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:text="진료 후기"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                app:layout_constraintTop_toBottomOf="@+id/btn_addAppointDoctor"/>
+
+            <TextView
+                android:id="@+id/MC_LineTextView"
+                android:layout_width="350dp"
+                android:layout_height="80dp"
+                android:background="#7EE6E6E6"
+                android:gravity="left"
+                android:hint="진료 후기를 작성해주세요"
+                android:lines="3"
+                android:maxLines="5"
+                android:minLines="1"
+                android:paddingStart="14dp"
+                android:paddingTop="10dp"
+                android:scrollbars="vertical"
+                android:textColor="@color/ache_card_textColor"
+                android:textSize="10sp"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/review"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="10dp"/>
+            <EditText
+                android:id="@+id/MC_LineEditText"
+                android:layout_width="350dp"
+                android:layout_height="80dp"
+                android:background="#7EE6E6E6"
+                android:gravity="left"
+                android:hint="진료 후기를 작성해주세요"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:maxLines="5"
+                android:minLines="1"
+                android:paddingStart="14dp"
+                android:paddingTop="10dp"
+                android:scrollbars="vertical"
+                android:textColor="@color/ache_card_textColor"
+                android:textSize="10sp"
+                android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@+id/review"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="10dp"/>
+
+            <ImageButton
+                android:id="@+id/MC_editBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="7dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/icon_edit_btn"
+                app:layout_constraintRight_toRightOf="@+id/MC_LineTextView"
+                app:layout_constraintBottom_toBottomOf="@+id/MC_LineTextView"/>
 
 
-                <TextView
-                    android:id="@+id/schedu"
-                    android:layout_width="match_parent"
-                    android:layout_height="24dp"
-                    android:layout_below="@+id/selectedDate"
-                    android:layout_marginTop="6dp"
-                    android:background="#05000000"
-                    android:fontFamily="@font/nanumsquareregular"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="16dp"
-                    android:text="진료 일정"
-                    android:textColor="@color/black"
-                    android:textSize="8sp" />
-
-                <ImageView
-                    android:id="@+id/noneData"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/schedu"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="90dp"
-                    android:gravity="center"
-                    android:src="@drawable/notice_notification_a"
-                    android:visibility="visible" />
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ListView
-                        android:id="@+id/MC_listView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="70dp"
-                        android:minHeight="0dp"
-                        android:scrollbars="none"
-                        android:visibility="invisible"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </ScrollView>
-
-                <Button
-                    android:id="@+id/btn_addAppointDoctor"
-                    android:layout_width="312dp"
-                    android:layout_height="30dp"
-                    android:layout_below="@+id/noneData"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/mc_button_clicked"
-                    android:fontFamily="@font/nanumsquareregular"
-                    android:includeFontPadding="false"
-                    android:minWidth="0dp"
-                    android:minHeight="0dp"
-                    android:text="진료 일정 추가하기"
-                    android:textColor="@color/white"
-                    android:textSize="10sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                <TextView
-                    android:id="@+id/review"
-                    android:layout_width="match_parent"
-                    android:layout_height="24dp"
-                    android:layout_below="@+id/btn_addAppointDoctor"
-                    android:layout_marginTop="20dp"
-                    android:background="#05000000"
-                    android:fontFamily="@font/nanumsquareregular"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="16dp"
-                    android:text="진료 후기"
-                    android:textColor="@color/black"
-                    android:textSize="8sp" />
-
-
-                <TextView
-                    android:id="@+id/MC_LineTextView"
-                    android:layout_width="312dp"
-                    android:layout_height="70dp"
-                    android:layout_below="@+id/review"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="11dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="#7EE6E6E6"
-                    android:gravity="left"
-                    android:hint="진료 후기를 작성해주세요"
-                    android:lines="3"
-                    android:maxLines="5"
-                    android:minLines="1"
-                    android:paddingStart="14dp"
-                    android:paddingTop="10dp"
-                    android:scrollbars="vertical"
-                    android:textColor="@color/ache_card_textColor"
-                    android:textSize="10sp"
-                    android:visibility="visible"
-                    android:paddingBottom="20dp"/>
-
-                <EditText
-                    android:id="@+id/MC_LineEditText"
-                    android:layout_width="312dp"
-                    android:layout_height="70dp"
-                    android:layout_below="@+id/review"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="11dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="#7EE6E6E6"
-                    android:gravity="left"
-                    android:hint="진료 후기를 작성해주세요"
-                    android:inputType="textMultiLine"
-                    android:lines="3"
-                    android:maxLines="5"
-                    android:minLines="1"
-                    android:paddingStart="14dp"
-                    android:paddingTop="10dp"
-                    android:scrollbars="vertical"
-                    android:textColor="@color/ache_card_textColor"
-                    android:textSize="10sp"
-                    android:visibility="gone"
-                    android:paddingBottom="20dp">
-
-                    <requestFocus />
-                </EditText>
-
-                <ImageButton
-                    android:id="@+id/MC_editBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/MC_LineTextView"
-                    android:layout_alignBottom="@+id/MC_LineTextView"
-                    android:layout_marginEnd="7dp"
-                    android:layout_marginBottom="7dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/icon_edit_btn" />
-            </RelativeLayout>
-        </RelativeLayout>
     </ScrollView>
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

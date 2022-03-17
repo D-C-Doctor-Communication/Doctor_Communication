@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.dc.doctor_communication.ConditionAnalysis.Fragment_conditionAnalysis;
 import com.dc.doctor_communication.DataManagement.Symptom2;
-import com.dc.doctor_communication.GuideScreen.GuideActivity1;
 import com.dc.doctor_communication.HomeScreen.Fragment_home;
 import com.dc.doctor_communication.MedicalChart.Fragment_medicalChart;
 import com.dc.doctor_communication.Settings.SettingActivity;

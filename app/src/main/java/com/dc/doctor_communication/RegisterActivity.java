@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dc.doctor_communication.DataManagement.Symptom;
 import com.dc.doctor_communication.DataManagement.Symptom2;
-import com.dc.doctor_communication.GuideScreen.GuideActivity1;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
