@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:gyjmoble="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:id="@+id/meeting_doctor">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/date_picker_layout"
+    android:layout_marginTop="?attr/actionBarSize">
+    <View
+        android:id="@+id/first_line"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="0dp">
+        android:layout_height="1dp"
+        android:background="#14000000"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="350dp"
-            android:layout_height="35dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:outlineProvider="none"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@+id/first_line">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_calendar"
+                android:layout_width="350dp"
+                android:layout_height="35dp"
                 android:background="#0a000000"
-                android:orientation="horizontal">
-
+                android:layout_marginTop="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
                 <ImageView
+                    android:id="@+id/img_calendar"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/ic_calander"
-                    app:tint="#4d000000" />
+                    app:tint="#4d000000"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <TextView
                     android:id="@+id/startDate"
@@ -47,14 +51,21 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="15dp"
-                    android:text="2021.04.05" />
+                    android:text="2021.04.05"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/img_calendar"/>
 
                 <TextView
+                    android:id="@+id/txt_line"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
-                    android:text=" - " />
+                    android:text=" - "
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/startDate"/>
 
                 <TextView
                     android:id="@+id/endDate"
@@ -62,386 +73,375 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
-                    android:text="2021.04.05" />
+                    android:text="2021.04.05"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/txt_line"/>
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/layout_calendar"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal">
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/date_picker_layout"
-        android:scrollbars="none">
+                    <Button
+                        android:id="@+id/btn_1_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="복통"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/btn_2_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="두통"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_1_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="복통"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_3_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="요통"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_2_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="두통"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_4_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="손목 통증"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_3_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="요통"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_5_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="흉통"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_4_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="손목 통증"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_6_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="무릎 통증"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_5_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="흉통"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_7_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="속 쓰림"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_6_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="무릎 통증"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_8_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="팔꿈치 통증"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_7_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="속 쓰림"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_9_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="엉덩이 통증"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_8_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="팔꿈치 통증"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_10_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="발열"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_9_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="엉덩이 통증"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_11_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="기침"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_10_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="발열"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_12_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="인후통"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_11_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="기침"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_13_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="콧물"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_12_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="인후통"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_14_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="귀 통증"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_13_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="콧물"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_15_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="이명"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_14_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="귀 통증"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_16_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="피로"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_15_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="이명"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_17_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="호흡곤란"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
-            <Button
-                android:id="@+id/btn_16_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="피로"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
-
-            <Button
-                android:id="@+id/btn_17_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="호흡곤란"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
-
-            <Button
-                android:id="@+id/btn_18_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="떨림"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
-
-
-            <Button
-                android:id="@+id/btn_19_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="소화불량"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_18_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="떨림"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
 
-            <Button
-                android:id="@+id/btn_20_symptom"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/dc_button_nonclicked"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:onClick="sympOnClick"
-                android:text="발목 통증"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                tools:ignore="HardcodedText,SmallSp" />
+                    <Button
+                        android:id="@+id/btn_19_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="소화불량"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
 
 
-        </LinearLayout>
-    </HorizontalScrollView>
+                    <Button
+                        android:id="@+id/btn_20_symptom"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:background="@drawable/dc_button_nonclicked"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:onClick="sympOnClick"
+                        android:text="발목 통증"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText,SmallSp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_explain_symptom"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
+                <TextView
+                    android:id="@+id/symptom_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="복통"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+                <TextView
+                    android:id="@+id/btn_gotoGraph"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_vertical"
+                    android:text="심각도 그래프 >"
+                    android:textColor="#155ce4"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <ExpandableListView
+                android:id="@+id/DC_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/layout_explain_symptom"
+                android:indicatorRight="?android:attr/expandableListPreferredItemIndicatorRight"
+                android:scrollbars="none"/>
+            <ImageView
+                android:id="@+id/notice_noData"
+                android:visibility="gone"
+                android:layout_width="170dp"
+                android:layout_height="100dp"
+                android:src="@drawable/notice_notification_a"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <RelativeLayout
-        android:id="@+id/selectedDataLayout"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_below="@+id/horizontalScrollView"
-        android:visibility="invisible">
-<!--        <View-->
-<!--            android:id="@+id/line1"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0.3dp"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:background="#72000000" />-->
+            <TextView
+                android:id="@+id/notice_noData_text"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/nanumsquareregular"
+                android:gravity="center_horizontal"
+                android:text="기간과 통증을 선택하여\n 증상데이터를 찾아보세요!"
+                android:textSize="15sp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/layout_explain_symptom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
 
-        <TextView
-            android:id="@+id/symptom_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="30dp"
-            android:text="복통"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
-        <TextView
-            android:id="@+id/btn_gotoGraph"
-            android:layout_width="88dp"
-            android:layout_height="35dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"
-            android:gravity="center_vertical"
-            android:text="심각도 그래프 >"
-            android:textColor="#155ce4"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/line"
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="20dp"
-            android:background="#72000000" />
-
-    </RelativeLayout>
-
-    <ExpandableListView
-        android:id="@+id/DC_listview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/selectedDataLayout"
-        android:indicatorRight="?android:attr/expandableListPreferredItemIndicatorRight"
-        android:scrollbars="none" />
-
-    <ImageView
-        android:id="@+id/notice_noData"
-        android:visibility="gone"
-        android:layout_centerInParent="true"
-        android:layout_width="170dp"
-        android:layout_height="100dp"
-        android:src="@drawable/notice_notification_a"/>
-
-    <TextView
-        android:id="@+id/notice_noData_text"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:fontFamily="@font/nanumsquareregular"
-        android:gravity="center_horizontal"
-        android:text="기간과 통증을 선택하여\n 증상데이터를 찾아보세요!"
-        android:textSize="15sp"
-        android:visibility="visible" />
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
