@@ -376,7 +376,7 @@
                 </LinearLayout>
             </HorizontalScrollView>
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_explain_symptom"
+                android:id="@+id/selectedDataLayout"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:visibility="invisible"
@@ -412,7 +412,7 @@
                 android:id="@+id/DC_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/layout_explain_symptom"
+                app:layout_constraintTop_toBottomOf="@+id/selectedDataLayout"
                 android:indicatorRight="?android:attr/expandableListPreferredItemIndicatorRight"
                 android:scrollbars="none"/>
             <ImageView
@@ -436,7 +436,7 @@
                 android:text="기간과 통증을 선택하여\n 증상데이터를 찾아보세요!"
                 android:textSize="15sp"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/layout_explain_symptom"
+                app:layout_constraintTop_toBottomOf="@+id/selectedDataLayout"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>

@@ -111,7 +111,7 @@
         android:maxLines="1"
         android:layout_marginStart="30dp"/>
     <Button
-        android:id="@+id/login_btn"
+        android:id="@+id/register2_btn"
         android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:background="@drawable/blue_button"
