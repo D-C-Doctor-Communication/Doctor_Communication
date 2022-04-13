@@ -51,6 +51,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -85,6 +86,7 @@ public class Fragment_conditionAnalysis extends Fragment {
     //사용자가 선택한 증상 목록
     List<String> selectedSymptom = new ArrayList<>();
 
+    static String fire_date;
     static FirebaseAuth firebaseAuth =  FirebaseAuth.getInstance();
     static FirebaseDatabase database = FirebaseDatabase.getInstance();
     static DatabaseReference myRef = database.getReference().child("users");
@@ -377,6 +379,15 @@ public class Fragment_conditionAnalysis extends Fragment {
     //증상순위
     static void setRanking(String strDate,TextView one,TextView two,TextView three,TextView count1,TextView count2,TextView count3){
         HashMap<String,Integer> data = new HashMap<>();//new에서 타입 파라미터 생략가능
+
+        //각 증상을 key값으로, 증상의 개수를 value값으로 가지는 Map 생성
+        Calendar cal = Calendar.getInstance();
+        long now = System.currentTimeMillis();
+        Date mDate = new Date(now);
+        SimpleDateFormat simpleDate = new SimpleDateFormat("MM");
+        String month = simpleDate.format(mDate);
+
+
         if(FireData.symptoms.size()==0){
             one.setText("해당없음");
             two.setText("해당없음");
@@ -473,6 +484,66 @@ public class Fragment_conditionAnalysis extends Fragment {
             }
             //값을 받으려면 list_entries.get(i).getValue().toString();
         }
+
+        /*for(int i = 1; i <= cal.getMaximum(Calendar.DAY_OF_MONTH); i++){
+            fire_date = String.valueOf(i);
+            if((int)(Math.log10(i)+1) == 1) fire_date = "0"+fire_date;
+            fire_date = "2022" + month +  fire_date;
+            for(int j=0; j<5; j++){
+                Log.d("myapp","3333333333333");
+                String finalStringDateValue = fire_date;
+                myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Symptom2 dataput = snapshot.getValue(Symptom2.class);
+                        Log.d("onDataChange","finalStringDateValue : "+finalStringDateValue+"  , get_symptom : "+dataput.getSymptom());
+                        if(!(dataput.getSymptom().equals("e")))
+                            data.put(dataput.getSymptom(),0);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) { }
+                });
+            }
+        }
+        for(int i = 1; i <= cal.getMaximum(Calendar.DAY_OF_MONTH); i++){
+            fire_date = String.valueOf(i);
+            if((int)(Math.log10(i)+1) == 1) fire_date = "0"+fire_date;
+            fire_date = "2022" + month +  fire_date;
+            for(int j=0; j<5; j++){
+                String finalStringDateValue = fire_date;
+                myRef.child(uid).child("date").child(finalStringDateValue).child(String.valueOf(j)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Symptom2 dataput = snapshot.getValue(Symptom2.class);
+                        Log.d("get_fire symptom", dataput.getSymptom());
+                        // && isInSameMonth(finalStringDateValue ,strDate)
+                        if(!(dataput.getSymptom().equals("e"))) {
+                            data.put(dataput.getSymptom(), (data.get(dataput.getSymptom()) + 1));
+                        }
+//value 개수를 기준으로 내림차순 정렬 (정렬결과에 따라 순위 지정)
+                        // Map.Entry 리스트 작성
+                        List<Map.Entry<String, Integer>> list_entries = new ArrayList<>(data.entrySet());
+                        // 비교함수 Comparator를 사용하여 내림 차순으로 정렬
+                        Collections.sort(list_entries, new Comparator<Map.Entry<String, Integer>>() {
+                            // compare로 값을 비교
+                            public int compare(Map.Entry<String, Integer> obj1, Map.Entry<String, Integer> obj2)
+                            {   // 내림 차순으로 정렬
+                                return obj2.getValue().compareTo(obj1.getValue());
+                            }
+                        });
+
+                        if(list_entries.get(0).getValue()!=0) one.setText(list_entries.get(0).getKey());
+                        else one.setText("해당없음");
+                        //if(list_entries.get(1).getValue()!=0) two.setText(list_entries.get(1).getKey());
+                        //else two.setText("해당없음");
+                        //if(list_entries.get(2).getValue()!=0) three.setText(list_entries.get(2).getKey());
+                        //else three.setText("해당없음");
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) { }
+                });
+            }
+        }*/
     }
 
 

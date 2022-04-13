@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String uid = user.getUid();
 
-        myRef.child(uid).child("date").child("20210901").child("0").addValueEventListener(new ValueEventListener() {
+        /*myRef.child(uid).child("date").child("20210901").child("0").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 Symptom2 symptom = snapshot.getValue(Symptom2.class);
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
 
             }
-        });
+        });*/
 
     }
 

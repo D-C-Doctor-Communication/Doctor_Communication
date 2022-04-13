@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -137,27 +138,21 @@ public class RegisterActivity extends AppCompatActivity {
                                     myRef.child(uid).child("email").setValue(email);
                                     myRef.child(uid).child("name").setValue(name);
 
-                                    String date = "";
-                                    for (int i = 1; i <= 30; i++) {
-                                        int length = (int) (Math.log10(i) + 1);
-                                        if (length == 1) {
-                                            date = "2021090" + i;
-                                        } else {
-                                            date = "202109" + i;
-                                        }
-                                        for (int j = 0; j < 5; j++) {
-                                            String jj = j + "";
-                                            myRef.child(uid).child("date").child(date).child(jj).setValue(hashMap);
-                                        }
-                                    }
-                                    for (int i = 1; i <= 31; i++) {
-                                        int length = (int) (Math.log10(i) + 1);
-                                        if (length == 1) {
-                                            date = "2021100" + i;
-                                        } else date = "202110" + i;
-                                        for (int j = 0; j < 5; j++) {
-                                            String jj = j + "";
-                                            myRef.child(uid).child("date").child(date).child(jj).setValue(hashMap);
+                                    String date="";
+
+                                    for(int m=4; m<=9; m++){
+                                        int lastDay = getLastDateOfMonth("2022" + m + "00");
+                                        for(int i=1; i<=lastDay; i++) {
+                                            int length = (int) (Math.log10(i) + 1);
+                                            if (length == 1) {
+                                                date = "20220" + m + "0" + i;
+                                            } else {
+                                                date = "20220" + m + i;
+                                            }
+                                            for(int j=0;j<5;j++){
+                                                String jj = j+"";
+                                                myRef.child(uid).child("date").child(date).child(jj).setValue(hashMap);
+                                            }
                                         }
                                     }
 
@@ -186,6 +181,14 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public int getLastDateOfMonth(String yyyyMMdd) {
+        String year = yyyyMMdd.substring(0,4);
+        String month = yyyyMMdd.substring(4,6);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Integer.parseInt(year),Integer.parseInt(month)-1,1);
+        int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        return lastDay;
     }
 
     /*private void writeNewUser(String userId){

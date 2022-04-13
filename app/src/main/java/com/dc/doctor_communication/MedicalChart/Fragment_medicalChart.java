@@ -178,8 +178,8 @@ public class Fragment_medicalChart extends Fragment {
         materialCalendarView.addDecorator(dotEventDecorator);
 
         Calendar maxDate = Calendar.getInstance();
-        //10월까지 제한
-        maxDate.set(2021,9,30);
+        //9월까지 제한
+        maxDate.set(2022,9,30);
         materialCalendarView.state().edit().setMaximumDate(maxDate).commit();
 
         //진료 일정 조회 + 리스트 생성

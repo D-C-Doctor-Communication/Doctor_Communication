@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "1058778456843",
-    "project_id": "doctor-c-aa130",
-    "storage_bucket": "doctor-c-aa130.appspot.com"
+    "project_number": "930193275398",
+    "project_id": "dcdc-f396f",
+    "storage_bucket": "dcdc-f396f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1058778456843:android:8faf1d0d3f6c8c3a86380e",
+        "mobilesdk_app_id": "1:930193275398:android:1c219c583a38a89611a187",
         "android_client_info": {
           "package_name": "com.dc.doctor_communication"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1058778456843-t4h5f7l4c1dkv480tjinckiipf472dd3.apps.googleusercontent.com",
+          "client_id": "930193275398-akdk4pd9ve94poi00obdcp1i3ccalubf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.dc.doctor_communication",
-            "certificate_hash": "affeff37ab85e8603470b577668b39cbc3309024"
+            "certificate_hash": "a8467dde0acaf03cdd456abf1d7ade8f40e2c512"
           }
         },
         {
-          "client_id": "1058778456843-7b8cfqm0l5dgkemakuhf5s78n06rc1sa.apps.googleusercontent.com",
+          "client_id": "930193275398-oajgn5u508ib8kh6up9r7plge5bulqvi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDXIEN8GB4m0yxKwVIRTXkevcIDrRZCe1M"
+          "current_key": "AIzaSyDIID7IcA4ZkRWVRNxHYJ3tH8SW_wz8fkU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1058778456843-7b8cfqm0l5dgkemakuhf5s78n06rc1sa.apps.googleusercontent.com",
+              "client_id": "930193275398-oajgn5u508ib8kh6up9r7plge5bulqvi.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
