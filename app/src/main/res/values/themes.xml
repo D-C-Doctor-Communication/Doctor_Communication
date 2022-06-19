@@ -11,13 +11,10 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
         <!--타이틀 바 없애기-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
         <!--기본 배경색-->
         <item name="android:windowBackground">#FFFFFF</item>
-
     </style>
 </resources>

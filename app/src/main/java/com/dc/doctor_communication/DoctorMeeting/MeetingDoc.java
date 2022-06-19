@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
@@ -88,7 +89,7 @@ public class MeetingDoc extends AppCompatActivity {
     int btnClicked = -1;
     String fire_date;
 
-    RelativeLayout selectedDataLayout;
+    ConstraintLayout selectedDataLayout;
     ImageView notice_noData;
 
     @Override

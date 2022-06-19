@@ -15,13 +15,13 @@ public class SelectedDayDecorator implements DayViewDecorator {
 
     private CalendarDay date;
 
-    public void SelectedDayDecorator(){
+    public SelectedDayDecorator(){
         date = CalendarDay.today();
     }
 
     @Override
     public boolean shouldDecorate(CalendarDay day) {
-        return date!=null&&day.equals(date);
+        return day.equals(date);
     }
 
     @Override

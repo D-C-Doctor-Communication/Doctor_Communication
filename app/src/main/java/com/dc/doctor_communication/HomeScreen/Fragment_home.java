@@ -120,7 +120,7 @@ public class Fragment_home extends Fragment {
             getActivity().overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
         });
 
-//카드3 - 녹음하기 팝업 띄움
+//카드3 - 빠른 작업
         btn_recording.setOnClickListener(v -> {
             //overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
             InfoDialog infoDialog = new InfoDialog();

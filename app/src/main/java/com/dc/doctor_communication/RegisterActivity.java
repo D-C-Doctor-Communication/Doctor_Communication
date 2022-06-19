@@ -40,9 +40,6 @@ public class RegisterActivity extends AppCompatActivity {
     EditText mEmailText, mPasswordText, mPasswordcheckText, mName;
     Button mregisterBtn;
     private FirebaseAuth firebaseAuth;
-    //private DatabaseReference mDatabase;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
-        //액션 바 등록하기
-        //ActionBar actionBar = getSupportActionBar();
-        // actionBar.setTitle("뒤로가기");
-        //actionBar.setDisplayHomeAsUpEnabled(true); //뒤로가기버튼
-
-        //파이어베이스 접근 설정
-        // user = firebaseAuth.getCurrentUser();
         firebaseAuth =  FirebaseAuth.getInstance();
-        // firebaseDatabase = FirebaseDatabase.getInstance().getReference();
 
         mName = (EditText)findViewById(R.id.nameEt);
         mEmailText = (EditText)findViewById(R.id.emailEt);
@@ -70,13 +59,6 @@ public class RegisterActivity extends AppCompatActivity {
         mPasswordcheckText = (EditText)findViewById(R.id.passwordcheckEdt);
         mregisterBtn = (Button)findViewById(R.id.register2_btn);
 
-        // 데이터 읽고 쓰기 // firebase 정의
-       // mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        //readUser();
-
-        // 파이어베이스 user로 접근
-        // 가입버튼 ->  firebase에 데이터 저장
         mregisterBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -165,15 +147,18 @@ public class RegisterActivity extends AppCompatActivity {
                                     finish();
 
                                 } else {
+                                    Log.e(TAG,email);
+                                    Log.e(TAG,pwd);
+                                    Log.e(TAG,pwdcheck);
+                                    Log.e(TAG,userName);
                                     mDialog.dismiss();
                                     Toast.makeText(RegisterActivity.this, "회원가입 양식을 다시 확인해주세요.", Toast.LENGTH_SHORT).show();
-                                    return;  // 해당 메소드 진행을 멈추고 빠져나감.
-
+                                    return;
                                 }
 
                             }
                         });
-                        //비밀번호 오류시
+                    //비밀번호 오류시
                     } else {
                         Toast.makeText(RegisterActivity.this, "비밀번호가 일치하지 않습니다. 다시 입력해 주세요.", Toast.LENGTH_SHORT).show();
                         return;
@@ -191,63 +176,5 @@ public class RegisterActivity extends AppCompatActivity {
         return lastDay;
     }
 
-    /*private void writeNewUser(String userId){
-        mDatabase.child("Users").child(userId).setValue("date")
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        System.out.println("회원정보 저장 완료");
-                        String date="";
-                        //HashMap<String> hashMap = new HashMap<>();
-                        String[] arr = null;
 
-                        for(int i=1; i<=30; i++){
-                            int length = (int)(Math.log10(i)+1);
-                            if(length == 1){
-                                date = "2021.09.0"+i;
-                            }
-                            else{
-                                date = "2021.09."+i;
-                            }
-                            arr[i-1] = date;
-                            //mDatabase.child("date").setValue(date);
-
-                        }
-                        List nameList = new ArrayList<String>(Arrays.asList(arr));
-
-                        mDatabase.child("Users").child(userId).child("date").setValue(nameList);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        System.out.println("회원정보 저장 실패");
-                    }
-                });
-
-    }*/
-
-    /*private void readUser(){
-        mDatabase.child("users").child("1").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue(User.class) != null){
-                    User post = snapshot.getValue(User.class);
-                    Log.w("FireBaseData", "getData"+post.toString());
-                }
-                else{
-                    Toast.makeText(RegisterActivity.this, "데이터가 없습니다.", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("FireBaseData", "loadPost:onCancelled", error.toException());
-            }
-        });
-    }*/
-    /*public boolean onSupportNavigateUp(){
-        onBackPressed();; // 뒤로가기 버튼이 눌렸을시
-        return super.onSupportNavigateUp(); // 뒤로가기 버튼
-    }*/
 }

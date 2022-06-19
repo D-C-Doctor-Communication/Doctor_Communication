@@ -37,7 +37,7 @@
             android:layout_marginStart="0dp"
             android:layout_toEndOf="@+id/user_icon"
             android:fontFamily="@font/nanumsquarebold"
-            android:text="회원이름"
+            android:text="김미림"
             android:textColor="@color/black"
             android:textSize="19sp" />
 
@@ -59,13 +59,13 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="18dp"
         android:scrollbars="none"
-        android:overScrollMode="never">
+        android:overScrollMode="never"
+        android:layout_marginEnd="50dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-           >
+            android:orientation="horizontal">
 
             <!--CARD1-->
             <androidx.cardview.widget.CardView
@@ -195,7 +195,7 @@
                         style="@style/cards_title"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:text="녹음"
+                        android:text="긴급 통증"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0"
@@ -209,7 +209,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="38dp"
                         android:textSize="11sp"
-                        android:text="# 진찰내용을 기록해보세요. "
+                        android:text="# 더 빠르고, 간단하게! "
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0"

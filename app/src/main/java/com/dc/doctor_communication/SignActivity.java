@@ -2,6 +2,7 @@ package com.dc.doctor_communication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -30,21 +31,15 @@ public class SignActivity extends AppCompatActivity{
     EditText mEmailText;
     EditText mPasswordText;
 
-    // 구글로그인 result 상수
-    private static final int RC_SIGN_IN = 900;
-    // 구글 API 클라이언트
-    private GoogleSignInClient googleSignInClient;
     // 파이어베이스 인증 객체 생성
     private FirebaseAuth firebaseAuth;
-    // 구글  로그인 버튼
-    //private SignInButton buttonGoogle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in);
@@ -55,130 +50,45 @@ public class SignActivity extends AppCompatActivity{
         mEmailText = findViewById(R.id.emailEt);
         mPasswordText = findViewById(R.id.et_password);
 
-        // --google
         // 파이어베이스 인증 객체 선언
         firebaseAuth = FirebaseAuth.getInstance();
-        //buttonGoogle = findViewById(R.id.btn_googleSignIn);
 
-        // Configure Google Sign In
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
-
-        // 구글 버튼
-        /*buttonGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent signInIntent = googleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
-            }
-        });*/
-
-        // 가입 버튼
+        // 회원가입으로 이동
         mResigettxt.setOnClickListener(v -> {
-            // register 액티비티 함수 호출
-            Intent in = new Intent(getApplicationContext(), RegisterActivity.class);
-
-            startActivity(in);
+            Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+            startActivity(intent);
             overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
         });
 
         // 로그인 버튼
-        mLoginBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                String email = mEmailText.getText().toString().trim();
-                String pwd = mPasswordText.getText().toString().trim();
+        mLoginBtn.setOnClickListener(v -> {
+            String email = mEmailText.getText().toString().trim();
+            String pwd = mPasswordText.getText().toString().trim();
 
-                if(email.isEmpty() && pwd.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "이메일과 비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
-                }
-                else if(email.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "이메일을 입력해주세요!", Toast.LENGTH_SHORT).show();
-                }else if(pwd.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
-                }else{
-                    firebaseAuth.signInWithEmailAndPassword(email,pwd)
-                            .addOnCompleteListener(SignActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if(task.isSuccessful()){
-                                        Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
-                                        Intent in = new Intent(getApplicationContext(), MainActivity.class);
-                                        startActivity(in);
-                                        overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
-                                        finish();
-                                    }
-                                    else{
-                                        Toast.makeText(getApplicationContext(),"로그인 오류",Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-
-                }
+            if(email.isEmpty() && pwd.isEmpty()){
+                Toast.makeText(getApplicationContext(), "이메일과 비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
+            }
+            else if(email.isEmpty()){
+                Toast.makeText(getApplicationContext(), "이메일을 입력해주세요!", Toast.LENGTH_SHORT).show();
+            }
+            else if(pwd.isEmpty()){
+                Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                firebaseAuth.signInWithEmailAndPassword(email,pwd)
+                        .addOnCompleteListener(SignActivity.this, task -> {
+                            if(task.isSuccessful()){
+                                Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
+                                Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(in);
+                                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
+                                finish();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(),"로그인 오류",Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // 구글로그인 버튼 응답
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // 구글 로그인 성공
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-
-            }
-        }
-    }
-
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // 로그인 성공
-                            Toast.makeText(SignActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
-                            Intent in = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(in);
-                            overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
-                            finish();
-                        }
-                        else {
-                            // 로그인 실패
-                            Toast.makeText(SignActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                });
-    }
-
-    // 구글 로그인 여부 확인 -> 자동 로그인
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
-    private void updateUI(FirebaseUser user) { //update ui code here
-        if (user != null) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
-            finish();
-        }
     }
 }

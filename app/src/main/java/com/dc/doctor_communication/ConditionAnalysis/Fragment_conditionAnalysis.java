@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,7 +109,11 @@ public class Fragment_conditionAnalysis extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         Log.d("myapp","상태분석탭 열림");
+        Context contextWrapper = new ContextThemeWrapper(getActivity(),R.style.Theme_AppCompat_Light_NoActionBar);
+        inflater.cloneInContext(contextWrapper);
         View view =  inflater.inflate(R.layout.fragment_condition_analysis,container,false);
+
+
 
 
         /* SharedPreference 사용한 객체 정보 사용 */

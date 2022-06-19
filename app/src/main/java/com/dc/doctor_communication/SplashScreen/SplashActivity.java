@@ -1,49 +1,29 @@
 package com.dc.doctor_communication.SplashScreen;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.dc.doctor_communication.SignActivity;
-import com.dc.doctor_communication.R;
-import com.dc.doctor_communication.SignActivity;
 
-public class SplashActivity extends Activity {
-    @SuppressLint("ResourceType")
+public class SplashActivity extends AppCompatActivity {
+    Handler handler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Handler handler = new Handler();
 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent in = new Intent(getApplicationContext(), SignActivity.class);
-                overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
-                startActivity(in);
+                Intent intent = new Intent(getApplicationContext(), SignActivity.class);
+                startActivity(intent); //2초 후 MainActivity를 실행해주자
 
                 finish();
             }
-        }, 3000);
-        // 3초 뒤에 Runner 객체 실행
-    }
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-        finish();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
-        finish();
+        }, 2000);
     }
 }

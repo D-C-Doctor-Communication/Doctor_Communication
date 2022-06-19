@@ -55,7 +55,7 @@
 
     <!--HOME_CARDS-->
     <style name="cards">
-        <item name="android:layout_width">165dp</item>
+        <item name="android:layout_width">170dp</item>
         <item name="android:layout_height">100dp</item>
         <item name="android:layout_marginStart">20dp</item>
         <item name="android:elevation">30dp</item>
