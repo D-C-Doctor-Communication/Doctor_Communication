@@ -34,6 +34,7 @@ import com.dc.doctor_communication.ConditionAnalysis.Fragment_conditionAnalysis;
 import com.dc.doctor_communication.DataManagement.Person1;
 import com.dc.doctor_communication.DataManagement.Symptom2;
 import com.dc.doctor_communication.DoctorMeeting.MeetingDoc;
+import com.dc.doctor_communication.Emergency.EmergencySearchList;
 import com.dc.doctor_communication.HomeScreen.HomeListViewAdapter;
 import com.dc.doctor_communication.MainActivity;
 import com.dc.doctor_communication.R;
@@ -122,10 +123,10 @@ public class Fragment_home extends Fragment {
 
 //카드3 - 빠른 작업
         btn_recording.setOnClickListener(v -> {
-            //overridePendingTransition(R.anim.translate_none,R.anim.translate_center_to_right);
-            InfoDialog infoDialog = new InfoDialog();
-            infoDialog.showDialog(getActivity());
-
+            Intent addSymptom = new Intent(getContext(), EmergencySearchList.class);
+            addSymptom.putExtra("count",count);
+            startActivity(addSymptom);
+            getActivity().overridePendingTransition(R.anim.translate_none,R.anim.translate_none);
         });
 
 

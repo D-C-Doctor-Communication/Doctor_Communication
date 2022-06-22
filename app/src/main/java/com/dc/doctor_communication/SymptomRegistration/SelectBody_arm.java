@@ -24,6 +24,7 @@ public class SelectBody_arm extends AppCompatActivity {
     List<String> BODY = new ArrayList<>();
     String [] select_arm; //선택한 팔 부위
     int repeat;
+    Boolean emergency = false;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -31,10 +32,12 @@ public class SelectBody_arm extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Intent intent = getIntent();
+
         symptom = intent.getExtras().getString("symptom");
         part = intent.getExtras().getInt("part");
         repeat = intent.getExtras().getInt("repeat");
-        Log.d("repeat", repeat+"");
+        emergency = intent.getBooleanExtra("emergency",false);
+        Log.e("emergency", emergency.toString());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_body_arm);
 

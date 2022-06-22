@@ -67,14 +67,14 @@ public class MeetingDoc extends AppCompatActivity {
     //버튼 - 심각도 그래프로 이동하는 버튼
     private TextView gotoGraph;
     //증상선택 버튼 키값
-    private final int[] buttonKey = {R.id.btn_1_symptom,R.id.btn_2_symptom,R.id.btn_3_symptom,R.id.btn_4_symptom,R.id.btn_5_symptom
+    private final int[] buttonKey = {R.id.btn_all_symptom,R.id.btn_1_symptom,R.id.btn_2_symptom,R.id.btn_3_symptom,R.id.btn_4_symptom,R.id.btn_5_symptom
             ,R.id.btn_6_symptom,R.id.btn_7_symptom,R.id.btn_8_symptom,R.id.btn_9_symptom,R.id.btn_10_symptom
             ,R.id.btn_11_symptom,R.id.btn_12_symptom,R.id.btn_13_symptom,R.id.btn_14_symptom,R.id.btn_15_symptom
             ,R.id.btn_16_symptom,R.id.btn_17_symptom,R.id.btn_18_symptom,R.id.btn_19_symptom,R.id.btn_20_symptom};
     //버튼 - 증상선택 버튼
     private final Button[] symptomBtn = new Button[buttonKey.length];
     //증상선택 버튼 내용
-    private final String[] buttonValue = {"복통", "두통", "요통","손목 통증","흉통","무릎 통증","속 쓰림","팔꿈치 통증","엉덩이 통증","발열","기침","인후통","콧물","귀 통증","이명","피로","호흡곤란","떨림","소화불량","발목 통증"};
+    private final String[] buttonValue = {"전체","복통", "두통", "요통","손목 통증","흉통","무릎 통증","속 쓰림","팔꿈치 통증","엉덩이 통증","발열","기침","인후통","콧물","귀 통증","이명","피로","호흡곤란","떨림","소화불량","발목 통증"};
     //기간선택 (시작날짜/끝날짜)
     private Calendar startDate, endDate;
     static FirebaseAuth firebaseAuth;

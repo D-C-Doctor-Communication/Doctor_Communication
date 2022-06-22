@@ -59,8 +59,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="18dp"
         android:scrollbars="none"
-        android:overScrollMode="never"
-        android:layout_marginEnd="50dp">
+        android:overScrollMode="never">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -180,8 +179,8 @@
             <!--CARD3-->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card3"
+                android:layout_marginEnd="50dp"
                 style="@style/cards"
-                android:layout_marginRight="20dp"
                 app:cardBackgroundColor="@color/card3"
                 tools:ignore="MissingConstraints">
 
